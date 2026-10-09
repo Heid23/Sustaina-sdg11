@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>SUSTAINA: SDG 11 Community Platform</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+<style>
+:root{--pr:#0d9488;--pd:#0f766e;--sk:#38bdf8;--ac:#f59e0b;--bg:#0f172a;--cd:#1e293b;--tx:#f8fafc;--mu:#a3b1c6;--ln:#334155;--r:16px;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;padding-bottom:3rem}
+h3,h4{margin:0 0 .4rem}p{margin:.3rem 0}.mu{color:var(--mu)}.sm{font-size:.82rem}
+nav{position:sticky;top:0;z-index:30;background:#0f172af2;backdrop-filter:blur(10px);border-bottom:1px solid var(--ln);padding:.6rem 1rem;padding-top:calc(.6rem + env(safe-area-inset-top,0px))}
+.nw{max-width:1100px;margin:auto;display:flex;flex-wrap:wrap;gap:.6rem;align-items:center;justify-content:space-between}
+.logo{font-weight:800;color:var(--tx);font-size:1.2rem;letter-spacing:.02em}.logo::before{content:"";display:inline-block;width:14px;height:14px;border-radius:4px;background:var(--pr);margin-right:8px}.tabs{display:flex;gap:.3rem;flex-wrap:wrap}
+.tb,.pt{border:1px solid transparent;background:none;color:var(--mu);border-radius:99px;padding:.45rem .9rem;font:inherit;font-weight:600;font-size:.85rem;cursor:pointer}
+.tb[aria-selected=true]{background:var(--pr);color:#fff}.pt{border-radius:0;border-bottom:2px solid transparent}.pt[aria-selected=true]{color:var(--sk);border-bottom-color:var(--sk)}
+:is(button,input,select,textarea):focus-visible{outline:3px solid var(--ac);outline-offset:2px}
+main{max-width:1100px;margin:1.2rem auto;padding:0 1rem}.card{background:var(--cd);border:1px solid var(--ln);border-radius:var(--r);padding:1.2rem;margin-bottom:1rem;box-shadow:0 1px 3px #0005}
+.btn{background:var(--pr);color:#fff;border:0;border-radius:99px;padding:.55rem 1.1rem;font:inherit;font-weight:700;font-size:.85rem;cursor:pointer;transition:.2s}.btn:hover{background:var(--pd)}.btn.s{background:#334155}.btn.on{background:var(--ac);color:#111}
+.in{width:100%;padding:.55rem;border-radius:10px;border:1px solid var(--ln);background:var(--bg);color:var(--tx);font:inherit;margin:.25rem 0}
+.ph{display:flex;gap:1.5rem;flex-wrap:wrap;align-items:center}.av{width:96px;height:96px;border-radius:50%;border:3px solid var(--sk);background:#334155;display:grid;place-items:center;font-size:3rem;position:relative}
+.av b{position:absolute;bottom:-6px;right:-10px;background:var(--ac);color:#111;font-size:.62rem;border-radius:99px;padding:1px 7px}
+.stats{display:flex;gap:1.4rem;flex-wrap:wrap;margin:.8rem 0}.stats b{display:block;font-size:1.25rem;color:var(--sk)}.stats span{font-size:.75rem;color:var(--mu)}
+.grid{display:grid;gap:1rem;grid-template-columns:repeat(auto-fill,minmax(210px,1fr))}
+.post{background:var(--bg);border:1px solid var(--ln);border-radius:12px;overflow:hidden;position:relative}.post img,.ban{width:100%;height:190px;object-fit:cover;display:block}.ban{display:grid;place-items:center;font-size:1.05rem;font-weight:700;color:#d6f5ee;padding:1rem;text-align:center;background:linear-gradient(135deg,#134e4a,#1e3a8a)}
+.pc{padding:.7rem}.bd{position:absolute;top:8px;right:8px;background:#0f172ad9;border-radius:6px;font-size:.7rem;font-weight:800;padding:2px 8px}.bd.public{color:#4ade80}.bd.private{color:#f43f5e}
+.row{display:flex;align-items:center;justify-content:space-between;gap:.8rem;background:var(--bg);border:1px solid var(--ln);border-radius:12px;padding:.7rem;margin-bottom:.6rem;flex-wrap:wrap}.who{display:flex;gap:.7rem;align-items:center}.sa{width:42px;height:42px;border-radius:50%;background:#334155;display:grid;place-items:center;font-size:1.4rem}
+.cols{display:grid;grid-template-columns:2fr 1fr;gap:1rem}@media(max-width:800px){.cols{grid-template-columns:1fr}}
+.cm{background:var(--bg);border-radius:8px;padding:.3rem .6rem;margin:.25rem 0;font-size:.85rem}
+.modal{position:fixed;inset:0;background:#000c;z-index:50;display:none;align-items:center;justify-content:center;padding:1rem}.modal.o{display:flex}.modal .card{max-width:480px;width:100%;max-height:90vh;overflow:auto}
+.chk{display:flex;gap:.6rem;align-items:center;margin:.55rem 0;cursor:pointer}.chk input{width:20px;height:20px;accent-color:var(--pr)}
+.ring{width:130px;height:130px;border-radius:50%;border:6px solid var(--pr);display:flex;flex-direction:column;align-items:center;justify-content:center;margin:auto}.ring b{font-size:2.3rem;color:var(--sk)}
+.bar{height:10px;border-radius:9px;background:var(--ln);overflow:hidden}.bar i{display:block;height:100%;background:var(--pr);transition:width .4s}
+#toast{position:fixed;left:50%;bottom:calc(1rem + env(safe-area-inset-bottom,0px));transform:translateX(-50%) translateY(120px);background:var(--pr);color:#fff;padding:.7rem 1.2rem;border-radius:99px;font-weight:700;z-index:99;transition:.3s;max-width:92vw}#toast.s{transform:translateX(-50%)}
+.hide{display:none}.rk{font-weight:800;width:34px}
+.wkc{display:flex;gap:.4rem;align-items:flex-end;height:150px;margin:1rem 0}.dy{flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;height:100%;gap:2px}.dy i{width:100%;max-width:46px;border-radius:8px 8px 0 0;background:linear-gradient(0deg,var(--pr),var(--sk));min-height:4px;transition:height .6s}.dy.t span:last-child{color:var(--ac);font-weight:800}
+.big{font-size:1.5rem;font-weight:800}.bg{text-align:center;padding:.8rem;border:1px dashed var(--ln);border-radius:14px;opacity:.45}.bg.e{opacity:1;border:1px solid var(--ac);background:#f59e0b14}.bg span{display:block;margin-top:.3rem;font-size:.78rem;font-weight:700;color:var(--mu)}.bg.e span{color:var(--ac)}
+details{background:var(--bg);border:1px solid var(--ln);border-radius:12px;padding:.7rem 1rem;margin:.5rem 0}summary{cursor:pointer;font-weight:700}details p{color:var(--mu)}
+.sp{display:flex;gap:.4rem;flex-wrap:wrap;margin:.4rem 0}.sp span{background:#0d948833;border-radius:8px;padding:.2rem .6rem;font-size:.82rem}
+#pav{display:grid;place-items:center;width:100%;height:100%;border-radius:50%;overflow:hidden}#pav img,.sa img{width:100%;height:100%;object-fit:cover;border-radius:50%}.sa{overflow:hidden}
+.agrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(44px,1fr));gap:6px;max-height:190px;overflow:auto;margin:.3rem 0}.agrid button{aspect-ratio:1;border-radius:12px;border:2px solid var(--ln);background:var(--bg);font-size:1.5rem;cursor:pointer;padding:0}.agrid button[aria-pressed=true]{border-color:var(--ac);background:#f59e0b22}
+.cgrid{display:flex;gap:8px;flex-wrap:wrap;margin:.3rem 0}.cgrid button{width:32px;height:32px;border-radius:50%;border:3px solid var(--ln);cursor:pointer;padding:0}.cgrid button[aria-pressed=true]{border-color:#fff}
+#mp{width:100%;height:auto;border-radius:14px;border:1px solid var(--ln);touch-action:none;cursor:crosshair;display:block;max-height:78vh;background:#0b2a4a}.mc{display:flex;gap:.4rem;flex-wrap:wrap;margin:.5rem 0}
+.cbtn{color:var(--sk);width:46px;height:46px;border-radius:50%;border:2px solid var(--sk);background:var(--cd);font-size:1.3rem;cursor:pointer;padding:0;transition:.2s;display:grid;place-items:center}.cbtn:hover{transform:scale(1.1);background:#38bdf822}.cb{display:flex;gap:.5rem}
+#cmap{display:grid;grid-template-columns:repeat(6,1fr);gap:4px;margin:.5rem 0}.lot{aspect-ratio:1;border-radius:10px;border:1px solid var(--ln);background:#0f172a;color:var(--mu);font-size:clamp(1.1rem,4.5vw,1.9rem);cursor:pointer;padding:0;transition:transform .12s}.lot:hover{transform:scale(1.08)}.lot.pb{background:#7f1d1d55;border-color:#b91c1c}.lot.ok{background:#0d948844;border-color:var(--pr)}
+.ev{padding:.5rem .7rem;border-radius:10px;background:var(--bg);margin:.35rem 0;font-size:.9rem}
+#ef label{display:block;margin-top:.8rem}#ef .in{margin-bottom:.2rem}
+.cbtn{background:var(--pr);color:#fff;border-color:var(--pr);box-shadow:0 2px 6px #0007}.cbtn:hover{background:var(--pd);transform:scale(1.06)}.cw{display:flex;flex-direction:column;align-items:center;gap:3px}.cw span{font-size:.7rem;color:var(--mu);font-weight:600}
+.seg{display:flex;background:var(--bg);border-radius:12px;padding:4px;gap:4px;margin:.8rem 0}.seg button{flex:1;border:0;background:none;color:var(--mu);padding:.55rem .3rem;border-radius:9px;font:inherit;font-weight:700;cursor:pointer;font-size:.88rem}.seg button[aria-selected=true]{background:var(--pr);color:#fff}
+.pod{display:grid;grid-template-columns:1fr 1.15fr 1fr;gap:.6rem;align-items:end;margin:.4rem 0 1rem}.pc2{background:var(--bg);border:1px solid var(--ln);border-radius:14px;padding:.8rem .3rem;text-align:center;overflow:hidden}.pc2.f{border-color:var(--ac);padding:1.2rem .3rem}
+.ini{width:48px;height:48px;border-radius:50%;display:grid;place-items:center;font-weight:800;margin:0 auto .3rem;color:#fff;overflow:hidden;font-size:1.2rem}.ini img{width:100%;height:100%;object-fit:cover}.tier{font-size:.7rem;font-weight:800;letter-spacing:.05em}
+input::-webkit-calendar-picker-indicator{filter:invert(1);opacity:.85;cursor:pointer}
+.back{width:48px;height:48px;border-radius:50%;border:0;background:transparent;color:var(--tx);cursor:pointer;display:grid;place-items:center;transition:.2s;margin-left:-8px}.back:hover{background:var(--cd);color:var(--sk);transform:translateX(-3px)}.back svg{display:block}
+#lmap{height:min(68vh,520px);border-radius:14px;position:relative;z-index:0;isolation:isolate;background:#0b2a4a}.tp{width:26px;height:26px;border-radius:50%;color:#fff;font:700 11px system-ui;display:grid;place-items:center;border:2px solid #fff;box-shadow:0 1px 4px #0008}.tp.hm{width:44px;border-radius:13px;background:#2563eb}
+.gate{position:fixed;inset:0;z-index:200;background:var(--bg);display:grid;place-items:center;padding:1rem;overflow:auto}.gate.hide{display:none}
+.msg{max-width:82%;padding:.45rem .75rem;border-radius:14px;background:#334155;align-self:flex-start;font-size:.92rem;word-break:break-word}.msg.me{background:var(--pr);align-self:flex-end}.msg small{display:block;opacity:.7;font-size:.65rem;margin-top:2px}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body>
+<nav><div class="nw"><span class="logo">SUSTAINA <small class="mu">SDG 11</small></span>
+<div class="tabs" role="tablist" id="mt"></div>
+<form id="sf" style="display:flex;gap:.3rem"><input id="si" class="in" list="bl" style="width:200px;margin:0" placeholder="Search another area" aria-label="Search another area leaderboard"><datalist id="bl"></datalist><button class="btn">Go</button></form><button class="btn s" id="so" style="display:none">Sign out</button></div></nav>
+<main>
+<section id="t-profile" class="card" style="padding:0;background:none;border:0;box-shadow:none">
+<div class="card"><div class="ph"><div class="av"><span id="pav"></span><b id="prk"></b></div><div style="flex:1;min-width:230px">
+<h3 style="font-size:1.5rem"><span id="pn"></span> <small class="sm" style="background:var(--pr);padding:2px 8px;border-radius:6px">Citizen</small></h3>
+<p class="mu sm" id="ph"></p><p class="sm" id="pb"></p>
+<div class="stats"><div><b id="se">0</b><span>EXP Points</span></div><div><b id="sc">0 kg</b><span>CO₂ avoided (est.)</span></div><div><b id="su">0</b><span>Uploads</span></div><div><b id="sf2">0</b><span>Friends</span></div></div>
+<button class="btn" data-a="up">Upload Progress Photo</button> <button class="btn s" data-a="ed">Edit Profile</button> <button class="btn s" data-go="track">My Records</button> <button class="btn s" data-a="lo2">My Location</button></div></div></div>
+<div class="card"><div role="tablist" style="border-bottom:1px solid var(--ln);margin-bottom:1rem" id="pts"></div><div class="grid" id="pg"></div></div></section>
+
+<section id="t-learn" class="hide"><div class="card"><h3>What is SDG 11?</h3>
+<p>The United Nations set 17 Sustainable Development Goals. <strong>SDG 11</strong> is about making cities and human settlements inclusive, safe, resilient and sustainable.</p>
+<p class="mu">Why it matters: more and more people live in cities, so how a city handles homes, transport, waste, air, green spaces and disasters shapes daily life for everyone.</p></div>
+<div class="grid"><div class="card" style="margin:0"><div class="big" style="color:var(--sk)">55%</div><p class="sm">of the world's people lived in urban areas in 2018 (projected 68% by 2050).</p><p class="sm mu">UN DESA, World Urbanization Prospects 2018</p></div>
+<div class="card" style="margin:0"><div class="big" style="color:var(--sk)">2.01 billion t</div><p class="sm">of municipal solid waste is produced worldwide each year.</p><p class="sm mu">World Bank, What a Waste 2.0, 2018</p></div>
+<div class="card" style="margin:0"><div class="big" style="color:var(--sk)">99%</div><p class="sm">of people breathe air above WHO guideline limits.</p><p class="sm mu">WHO, 2022</p></div></div>
+<div class="card" style="margin-top:1rem"><h3>The 6 big ideas (tap to open)</h3>
+<details><summary>Safe and affordable homes</summary><p>Everyone should have a safe home with basic services like water and electricity. Problem: fast growth makes housing costly. Solution: affordable housing, upgrading crowded neighborhoods, and building in safe locations.</p></details>
+<details><summary>Easy, clean transport</summary><p>People need safe, affordable and accessible ways to get around. Problem: traffic and fumes. Solution: reliable public transport, safe sidewalks, bike lanes and cleaner vehicles.</p></details>
+<details><summary>Inclusive city planning</summary><p>Plans work best when residents, including children, elders and people with disabilities, help shape them. Problem: some groups are left out. Solution: community consultations and accessible design.</p></details>
+<details><summary>Ready for disasters</summary><p>Typhoons, floods and earthquakes hit unprepared communities hardest. Solution: early-warning systems, hazard maps, drills, and flood-friendly drainage and green areas.</p></details>
+<details><summary>Cleaner air and less waste</summary><p>Cities should reduce their environmental harm. Problem: smoke, trash and polluted waterways. Solution: waste segregation, recycling, composting and cleaner energy.</p></details>
+<details><summary>Green and public spaces</summary><p>Parks, trees and plazas cool the city and give everyone a safe place to rest and play. Solution: protect existing green spaces and create pocket parks and community gardens.</p></details></div>
+<div class="card"><h3>Philippines Data</h3><p class="mu sm">Figures collected from published sources. Each chart shows its source and year. Different organizations measure things differently, so read the notes.</p></div>
+<div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(300px,1fr))">
+<div class="card" style="margin:0"><h4>Share of Filipinos living in urban areas</h4><div id="d1"></div><p class="sm mu">Source: Asian Development Bank, Key Indicators for Asia and the Pacific 2024 (years 2000 to 2023). <a style="color:var(--sk)" href="https://data.adb.org/media/12861/download" target="_blank" rel="noopener">link</a></p>
+<p class="sm">Note: other datasets that use UN estimates show a higher share (around 55% in recent years) because "urban" is defined differently. Always state which definition you use.</p></div>
+<div class="card" style="margin:0"><h4>Solid waste produced per year (million tons)</h4><div id="d2"></div><p class="sm mu">Sources: EMB-DENR via NICCDIES (2010) <a style="color:var(--sk)" href="https://niccdies.climate.gov.ph/mitigation/waste" target="_blank" rel="noopener">link</a>; NSWMC figure in Senate release (2014) <a style="color:var(--sk)" href="https://legacy.senate.gov.ph/press_release/2020/0901_gatchalian1.asp" target="_blank" rel="noopener">link</a>; DENR 2020 estimate <a style="color:var(--sk)" href="https://denr.gov.ph/wp-content/uploads/2023/07/DENR_News_Alerts_10_January_2021_Sunday.pdf" target="_blank" rel="noopener">link</a>.</p>
+<p class="sm">Note: the 2020 value is a DENR estimate and may use a different method than the earlier years, so compare the trend, not exact differences.</p></div>
+<div class="card" style="margin:0"><h4>World Risk Index score (Philippines)</h4><div id="d3"></div><p class="sm mu">Source: WorldRiskReport (Bündnis Entwicklung Hilft and IFHV), as reported by news: 2024 <a style="color:var(--sk)" href="https://abs-cbn.com/news/2024/9/12/philippines-is-world-s-riskiest-country-for-3rd-straight-year-1758" target="_blank" rel="noopener">ABS-CBN</a>, 2026 <a style="color:var(--sk)" href="https://tribune.net.ph/2026/09/24/philippines-again-tops-global-disaster-risk-ranking" target="_blank" rel="noopener">Daily Tribune</a>.</p>
+<p class="sm">The Philippines was ranked first of 193 countries in the 2024 and 2026 editions (and reported first in 2025). Higher score means higher disaster risk from exposure and vulnerability.</p></div>
+<div class="card" style="margin:0"><h4>Housing needs</h4><div class="stats"><div><b>6.5 million</b><span>housing units backlog (DHSUD estimate, 2022)</span></div><div><b>3.7 million</b><span>informal settler families (estimate)</span></div><div><b>22 million</b><span>housing need projected by 2040 (UN-Habitat)</span></div></div>
+<p class="sm mu">Sources: PIDS <a style="color:var(--sk)" href="https://www.pids.gov.ph/details/news/in-the-news/phl-s-worsening-housing-backlog" target="_blank" rel="noopener">link</a>; BusinessWorld <a style="color:var(--sk)" href="https://www.bworldonline.com/?p=489812" target="_blank" rel="noopener">link</a>. Estimates vary between agencies and reports, and the 2040 number is a projection.</p></div></div>
+<div class="card" style="margin-top:1rem"><h4>Learn more</h4><p class="sm"><a style="color:var(--sk)" href="https://sdgs.un.org/goals/goal11" target="_blank" rel="noopener">UN: Goal 11</a> · <a style="color:var(--sk)" href="https://unhabitat.org" target="_blank" rel="noopener">UN-Habitat</a> · <a style="color:var(--sk)" href="https://psa.gov.ph" target="_blank" rel="noopener">Philippine Statistics Authority</a></p>
+<p class="sm mu">SUSTAINA is an independent educational project and is not affiliated with the United Nations.</p></div></section>
+<section id="t-trees" class="hide"><p style="margin-bottom:.8rem"><button class="back" data-go="feed" aria-label="Back to Feed" title="Back"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 12H4"/><path d="M10 5l-7 7 7 7"/></svg></button></p><div class="card" id="mbn" style="display:none;border-color:var(--ac)"><strong>Pin your home location</strong><p class="sm mu">Tap the map where you live. Zoom in for a better spot, or use GPS. Then press Use this spot.</p><button class="btn" data-a="hs">Use this spot</button> <button class="btn s" data-a="hc">Cancel</button> <button class="btn s" data-a="gp">Use GPS</button></div><div class="card"><h3>Community Tree Map</h3>
+<p class="mu sm">Tap the map to drop a pin where you planted trees, or use your GPS spot. Drag to move the map and use + / − to zoom. Search a place, zoom in, and tap the exact spot. GPS is the most accurate.</p>
+<div class="stats"><div><b id="mt1">0</b><span>Trees I planted</span></div><div><b id="mt2">0</b><span>My pins</span></div><div><b id="mt3">0</b><span>Sample community trees</span></div></div></div>
+<div class="cols"><div class="card"><form id="mq" style="display:flex;gap:.4rem;margin-bottom:.6rem"><input id="mqi" class="in" style="margin:0" placeholder="Search a place, e.g. Urgello Street, Cebu City" aria-label="Search a place"><button class="btn">Search</button></form><div id="mres"></div><div id="lmap" role="application" aria-label="Interactive map"></div><p class="sm mu" id="mnote"></p>
+<div class="mc"><button class="btn s" data-a="z0">Reset view</button><button class="btn s" data-a="loc">Show my location</button></div>
+<p class="mu sm"><span style="color:#16a34a">●</span> My pins &nbsp; <span style="color:#f59e0b">●</span> Sample community pins (demo data) &nbsp; <span style="color:#38bdf8">●</span> My location</p></div>
+<div><div class="card"><h4>Add a planting</h4><p class="sm" id="mpend" style="color:var(--ac)">Tap the map or use GPS to choose a spot.</p>
+<form id="mf"><label class="sm" for="mn">Number of trees</label><input id="mn" class="in" type="number" min="1" max="1000" value="1" required>
+<label class="sm" for="ms">Type of tree</label><input id="ms" class="in" list="dl-t" maxlength="30" placeholder="Type or choose a tree" autocomplete="off" required><datalist id="dl-t"></datalist><label class="sm" for="md">Date planted</label><input id="md" class="in" type="date" required>
+<label class="sm" for="mo">Note (optional)</label><input id="mo" class="in" maxlength="80" placeholder="e.g. School garden">
+<p style="margin-top:.6rem"><button class="btn">Save planting (+50 EXP)</button> <button type="button" class="btn s" data-a="gp">Use GPS spot</button></p></form>
+<label class="chk"><input type="checkbox" id="mshare"> <span class="sm">Share my pins publicly (demo: only works inside this browser until the site has a server)</span></label>
+<label class="chk"><input type="checkbox" id="mdemo"> <span class="sm">Show sample community pins</span></label></div>
+<div class="card"><h4>My plantings</h4><div id="ml"></div></div></div></div></section>
+<section id="t-feed" class="hide"><div style="display:flex;justify-content:space-between;align-items:center;gap:.6rem;margin-bottom:.8rem"><h3 style="margin:0">Public Community Feed · <span id="fb"></span></h3><div class="cb"><div class="cw"><button class="cbtn" data-go="trees" aria-label="Open Tree Map" title="Tree Map"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21v-6"/><path d="M12 15a5 5 0 0 0 5-5 5 5 0 0 0-3-4.6A4 4 0 0 0 7 7a5 5 0 0 0 5 8z"/></svg></button><span>Tree Map</span></div><div class="cw"><button class="cbtn" data-go="sim" aria-label="Open City Builder" title="City Builder"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 21V4a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1v17"/><path d="M14 10h5a1 1 0 0 1 1 1v10M2 21h20M8 7h2M8 11h2M8 15h2"/></svg></button><span>City Builder</span></div></div></div><div class="cols"><div><div id="fl"></div></div>
+<div class="card" style="height:fit-content"><h4>Tip</h4><p class="mu sm">Public posts appear here and earn cheers. Private posts stay in your vault. Each upload gives +300 EXP.</p></div></div></section>
+
+<section id="t-friends" class="hide"><div class="card"><h3>Find people</h3><form id="af" style="display:flex;gap:.4rem;flex-wrap:wrap;margin-top:.5rem"><input id="ai" class="in" style="flex:1;min-width:180px;margin:0" placeholder="Search by username, e.g. ana_green" maxlength="24" aria-label="Search users"><button class="btn">Search</button></form><div id="sr" style="margin-top:.6rem"></div></div>
+<div class="card" id="rq-card" style="display:none"><h3>Friend requests</h3><div id="rq"></div></div>
+<div class="card"><h3>Friends (<span id="ft"></span>)</h3><div id="fr"></div></div></section>
+
+<section id="t-board" class="hide"><div class="card"><div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.6rem"><h3 id="bt" style="margin:0">Leaderboard</h3><button class="btn s" data-a="lo2">Edit my location</button></div><div class="seg" id="lvs" role="tablist" aria-label="Leaderboard level"></div><div id="bh"></div><div id="bc"></div></div><p class="mu sm">Other citizens are sample demo accounts, since this site has no real user database. Your uploads are self-reported and not independently verified.</p></section>
+
+<section id="t-sim" class="hide"><p style="margin-bottom:.8rem"><button class="back" data-go="feed" aria-label="Back to Feed" title="Back"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 12H4"/><path d="M10 5l-7 7 7 7"/></svg></button></p>
+<div class="card"><h3>Fix the City Challenge</h3>
+<p>This city has problems: smoky factories , traffic jams , trash piles , flood-prone streets , and crowded unsafe homes . You have <strong>100 coins</strong>. Choose a fix below, then tap a red problem (or an empty lot) to build it. When you are done, press <strong>Test my city</strong> to see how it handles real-life situations.</p>
+<p class="mu sm">Educational game: costs and scores are made up to show trade-offs. They are not real prices or official measurements.</p></div>
+<div class="cols"><div class="card"><div class="tabs" id="ct" style="margin-top:0"></div><p id="cdesc" class="sm" style="color:var(--ac);min-height:2.8em">Tap a fix, then tap the map. Tap a tile with no fix selected to learn what it is.</p><div id="cmap"></div><p style="margin-top:.6rem"><button class="btn" id="ctest">Test my city</button> <button class="btn s" id="cres">Start over</button></p></div>
+<div class="card"><div style="display:flex;justify-content:space-between;align-items:center"><h3 style="margin:0">City score: <span id="cs">0</span>/100</h3><span id="cm" style="font-size:2.2rem" aria-hidden="true"></span></div><p class="mu sm" id="cr"></p><p>Coins left: <strong id="cb2">100</strong></p><div id="cmt"></div><div id="cout" aria-live="polite" style="margin-top:.8rem"></div></div></div></section>
+
+<section id="t-track" class="hide"><p style="margin-bottom:.8rem"><button class="back" data-go="profile" aria-label="Back to Profile" title="Back"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 12H4"/><path d="M10 5l-7 7 7 7"/></svg></button></p>
+<div class="card"><h3>My Week</h3><div id="wk"></div></div>
+<div class="card"><h3 id="ft2">Log a day</h3><p class="mu sm">One record per day. Saving a date that already exists updates it.</p>
+<form id="tf" class="cols" style="margin-top:.6rem"><div><label for="td" class="sm">Date</label><input id="td" class="in" type="date" required>
+<label for="tk" class="sm">Kilometers not driven by car</label><input id="tk" class="in" type="number" min="0" max="500" step="0.1">
+<label for="tm" class="sm">How did you travel?</label><select id="tm" class="in"><option>Walked</option><option>Cycled</option><option>Public transport</option></select>
+<label for="tw" class="sm">Waste segregated (kg)</label><input id="tw" class="in" type="number" min="0" max="100" step="0.1"></div>
+<div><p class="sm" style="font-weight:700">Today's eco-actions (+10 points each)</p><div id="ta"></div>
+<p style="margin-top:.8rem"><button class="btn" id="tb">Save this day</button> <button type="button" class="btn s hide" id="tc" data-a="tc">Cancel edit</button></p></div></form>
+<p class="mu sm">CO₂ estimate uses about 0.17 kg per km for an average car: a rough rule of thumb for learning, not an exact measurement.</p></div>
+<div class="card"><h4>Badges</h4><div class="grid" id="bgs" style="grid-template-columns:repeat(auto-fill,minmax(140px,1fr))"></div></div>
+<div class="card"><h4>All my records</h4><div id="tl"></div></div>
+<div class="card"><h4>Save and backup</h4><p class="mu sm">Your data saves automatically in this browser. Use the button to save now, or make a backup code you can paste back on another device.</p>
+<p><button class="btn" data-a="sv">Save my data</button> <span class="mu sm" id="ls"></span></p>
+<p style="margin-top:.6rem"><button class="btn s" data-a="bk">Create backup code</button> <button class="btn s" data-a="rs">Restore from code</button></p>
+<textarea id="bx" class="in" rows="3" aria-label="Backup code" placeholder="Backup code appears here, or paste one to restore"></textarea></div></section>
+</main>
+
+<div class="modal" id="m-up"><div class="card"><h3>Upload Progress Photo</h3><form id="uf">
+<label class="sm" for="uc">Description</label><input id="uc" class="in" maxlength="120" required placeholder="e.g. Planted 3 native trees">
+<label class="sm" for="upv">Visibility</label><select id="upv" class="in"><option value="public">Public (community feed)</option><option value="private">Private (my vault only)</option></select>
+<label class="sm" for="uf2">Photo</label><input id="uf2" class="in" type="file" accept="image/*" required>
+<p style="margin-top:1rem"><button class="btn">Post (+300 EXP)</button> <button type="button" class="btn s" data-a="x">Cancel</button></p></form></div></div>
+<div class="modal" id="m-ed"><div class="card"><h3>Edit Profile</h3><form id="ef">
+<label class="sm" for="en">Name</label><input id="en" class="in" maxlength="30" required><label class="sm" for="eh">Handle</label><input id="eh" class="in" maxlength="24" required>
+<p class="sm" style="margin:.5rem 0 0">Choose an avatar</p><div class="agrid" id="ag" role="group" aria-label="Avatars"></div><p class="sm" style="margin:.3rem 0 0">Background color</p><div class="cgrid" id="cg" role="group" aria-label="Background colors"></div><label class="sm" for="ep">Or use a photo from your gallery</label><input id="ep" class="in" type="file" accept="image/*"><p class="sm mu" style="margin:.3rem 0 0">Choosing an avatar above replaces your photo.</p><label class="sm" for="eb">Bio</label><textarea id="eb" class="in" rows="3" maxlength="140"></textarea>
+<p><button class="btn">Save</button> <button type="button" class="btn s" data-a="x">Cancel</button></p></form></div></div>
+<div class="modal" id="m-loc"><div class="card"><h3>My location</h3><p class="mu sm">Tip: pin your location on the map and these fields fill in automatically. Your exact pin is only shown to you.</p><form id="lf">
+<label class="sm" for="lst">Street or purok (optional)</label><input id="lst" class="in" maxlength="60" placeholder="e.g. Urgello Street">
+<label class="sm" for="lb">Barangay</label><input id="lb" class="in" maxlength="40" placeholder="e.g. Sambag 1">
+<label class="sm" for="lm">Municipality (leave blank if you live in a city)</label><input id="lm" class="in" maxlength="40" placeholder="e.g. Consolacion">
+<label class="sm" for="lc">City (leave blank if you live in a municipality)</label><input id="lc" class="in" list="dl-c" maxlength="40" placeholder="e.g. Cebu City">
+<label class="sm" for="lp">Province</label><input id="lp" class="in" list="dl-p" maxlength="40" placeholder="e.g. Cebu">
+<label class="sm" for="lcn">Country</label><input id="lcn" class="in" list="dl-n" maxlength="40" placeholder="Philippines">
+<datalist id="dl-c"><option value="Cebu City"><option value="Mandaue City"><option value="Lapu-Lapu City"><option value="Talisay City"><option value="Quezon City"><option value="Manila"><option value="Davao City"><option value="Baguio City"><option value="Iloilo City"></datalist><datalist id="dl-p"><option value="Cebu"><option value="Bohol"><option value="Negros Oriental"><option value="Davao del Sur"><option value="Iloilo"><option value="Benguet"><option value="Metro Manila"></datalist><datalist id="dl-n"><option value="Philippines"></datalist>
+<p class="sm" style="margin-top:.8rem" id="lco">No map pin yet.</p>
+<p style="margin-top:.4rem"><button type="button" class="btn s" data-a="lpin">Pin on map</button> <button type="button" class="btn s" data-a="lgps">Use GPS</button></p>
+<p style="margin-top:1rem"><button class="btn">Save location</button> <button type="button" class="btn s" data-a="x">Cancel</button></p></form></div></div>
+<div class="gate" id="gate"><div class="card" style="max-width:420px;width:100%;margin:0">
+<div class="logo" style="margin-bottom:.3rem">SUSTAINA</div><p class="mu sm" id="g-sub">Loading...</p>
+<div id="g-off" class="hide"><p class="sm">Accounts are not set up yet. Add your Firebase settings to the file (see FIREBASE_SETUP.md), or continue without an account to try the app. Friends and chat need an account.</p><p style="margin-top:.8rem"><button class="btn" data-a="gg">Continue without an account</button></p></div>
+<div id="g-form" class="hide"><div class="seg" id="g-tabs"><button type="button" data-g="in" aria-selected="true">Sign in</button><button type="button" data-g="up" aria-selected="false">Create account</button></div>
+<form id="gf"><div id="g-up" class="hide"><label class="sm" for="gn">Full name</label><input id="gn" class="in" maxlength="30" autocomplete="name"><label class="sm" for="gh">Username</label><input id="gh" class="in" maxlength="20" placeholder="e.g. eco_juan" autocomplete="username"></div>
+<div id="g-em"><label class="sm" for="ge">Email</label><input id="ge" class="in" type="email" autocomplete="email"><label class="sm" for="gp">Password</label><input id="gp" class="in" type="password" minlength="6" autocomplete="current-password"></div>
+<p class="sm" id="g-err" style="color:#f87171;min-height:1.3em;margin:.4rem 0"></p><button class="btn" style="width:100%" id="g-go">Sign in</button></form>
+<div id="g-oth"><p class="mu sm" style="text-align:center;margin:.8rem 0">or</p><button class="btn s" style="width:100%" data-a="ggl">Continue with Google</button><p class="sm" style="text-align:center;margin-top:.8rem"><a href="#" data-a="gfp" style="color:var(--sk)">Forgot password?</a></p></div></div></div></div>
+<div class="modal" id="m-chat"><div class="card" style="display:flex;flex-direction:column;height:min(80vh,560px)"><div style="display:flex;justify-content:space-between;align-items:center;gap:.6rem"><h3 id="ch-t" style="margin:0"></h3><button class="btn s" data-a="x">Close</button></div><div id="ch-l" style="flex:1;overflow:auto;margin:.8rem 0;display:flex;flex-direction:column;gap:.4rem"></div><form id="ch-f" style="display:flex;gap:.4rem"><input id="ch-i" class="in" style="margin:0" maxlength="500" placeholder="Type a message" autocomplete="off" required aria-label="Message"><button class="btn">Send</button></form></div></div>
+<div id="toast" role="status" aria-live="polite"></div>
+
+<script>
+/* FIREBASE SETUP: replace the PASTE_ values with your own (see FIREBASE_SETUP.md) */
+window.SUSTAINA_FIREBASE={apiKey:"AIzaSyDyx88PL98H4gfmV8S-WPwYqzma1AYR4BI",authDomain:"sustaina-sdg11.firebaseapp.com",projectId:"sustaina-sdg11",appId:"1:641483878954:web:af8066317150cc10c30953"};
+window.FB_ON=!/^PASTE/.test(window.SUSTAINA_FIREBASE.apiKey);
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script>
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+let K="sustaina_v3";const AVS=["🧑‍🌾","👩‍🔬","🧑‍🎓","🦸","🐢","🌳","🧑‍🚒","👩‍🏫","🧑‍🍳","👨‍🔧","👩‍⚕️","🧑‍🚀","🦊","🐼","🐯","🦁","🐸","🐧","🦉","🦋","🐝","🐬","🦜","🐘","🐒","🦎","🐙","🦈","🌻","🌴","🌵","🍀","🌸","🍃","🌊","⛰️","☀️","🌈","⚡","🔥","💧","🌍","♻️","🚲","🚀","🤖","👾","🦄","🐉","🧙","🥷","🧑‍🎤","😎","🥳","🤠","👑"],PLACES=["Barangay Sambag 1, Cebu City","Barangay Poblacion","Barangay Lahug, Cebu City","Barangay Mabolo, Cebu City","Barangay Guadalupe, Cebu City","Barangay Talamban, Cebu City","Mandaue City","Lapu-Lapu City","Quezon City","Davao City"];
+const DEMO=["Mark Ramos","Sarah Lim","Ana Reyes","Paolo Cruz","Liza Tan","Ben Garcia","Rica Flores"],DEM=["🧑‍🔧","👩‍🏫","🧑‍🍳","👨‍🔬","👩‍⚕️","🧑‍🚀","👩‍🌾"];
+const DP=[{id:"d1",by:"@maria_green",cap:"Community river cleanup drive: 12 sacks of trash collected!",em:"River cleanup",c:32},{id:"d2",by:"@mark_trees",cap:"Planted 5 seedlings along our school fence.",em:"School planting",c:21},{id:"d3",by:"@sarah_recycle",cap:"Sorted and sold our household recyclables to the junk shop.",em:"Recycling",c:17}];
+const SIM=[["Electric BRT / mass transit",15],["Protected bike lanes",10],["Rooftop solar microgrids",15],["Smart waste segregation hubs",10],["IoT flood early-warning sensors",10],["Parks and street trees",10]];
+const dflt=()=>({me:{name:"Juan Dela Cruz",h:"@eco_juan",bio:"Planting trees and reducing waste every day!",av:0,exp:0,co2:0},bar:PLACES[0],posts:[],friends:[{n:"Maria Santos",h:"@maria_green",av:"👩‍🔬",exp:3920},{n:"Mark Ramos",h:"@mark_trees",av:"🧑‍🎓",exp:3100},{n:"Sarah Lim",h:"@sarah_recycle",av:"🧑‍🍳",exp:2450}],logs:[],cb:null,rec:[],trees:[],share:0,demo:1,favs:[],cheered:[],cm:{},sim:[1,1,1,0,0,0],km:0,wk:0});
+let S=dflt(),sub="public";try{const r=JSON.parse(localStorage.getItem(K));if(r&&r.me)S=Object.assign(dflt(),r)}catch(e){}
+function save(){try{localStorage.setItem(K,JSON.stringify(S))}catch(e){toast("Storage is full: this photo may not be saved after you close the page")}if(window.fbSync)fbSync({name:S.me.name,av:S.me.av,exp:S.me.exp})}
+let tt;function toast(m){const t=$("#toast");t.textContent=m;t.classList.add("s");clearTimeout(tt);tt=setTimeout(()=>t.classList.remove("s"),2600)}
+const rk=e=>e>=5000?"MYTHIC SUPREME":e>=3000?"MYTHIC":e>=1500?"LEGEND":"EPIC";
+const hash=s=>{let h=7;for(const c of s)h=(h*31+c.charCodeAt(0))>>>0;return h};
+// tabs
+const TABS=[["profile","Profile"],["learn","Learn SDG 11"],["trees","Tree Map"],["feed","Feed"],["friends","Friends"],["board","Leaderboard"],["sim","City Builder"],["track","My Records"]];
+const HID=["trees","sim","track"];TABS.filter(t=>!HID.includes(t[0])).forEach(t=>{const b=document.createElement("button");b.className="tb";b.textContent=t[1];b.dataset.t=t[0];b.setAttribute("role","tab");$("#mt").append(b)});
+function go(t){const pa={trees:"feed",sim:"feed",track:"profile"}[t]||t;$$(".tb").forEach(b=>b.setAttribute("aria-selected",b.dataset.t==pa));$("#sf").style.display=(t=="profile"||t=="board")?"flex":"none";TABS.forEach(x=>$("#t-"+x[0]).classList.toggle("hide",x[0]!=t));({sim:rS,trees:rM,learn:rD,profile:rP,feed:rF,friends:rFr,board:rB,sim:rS,track:rT})[t]()}
+$("#mt").onclick=e=>e.target.dataset.t&&go(e.target.dataset.t);
+[["public","Public"],["private","Private Vault"],["favs","Favorites"]].forEach(s=>{const b=document.createElement("button");b.className="pt";b.dataset.s=s[0];b.setAttribute("role","tab");b.textContent=s[1];$("#pts").append(b)});
+$("#pts").onclick=e=>{if(e.target.dataset.s){sub=e.target.dataset.s;rP()}};
+PLACES.forEach(p=>$("#bl").append(new Option(p)));let pickAv=0,pickBg=0,pendPic;const BGS=["#334155","#0d9488","#2563eb","#7c3aed","#db2777","#ea580c","#ca8a04","#16a34a"];
+AVS.forEach((a,i)=>{const b=document.createElement("button");b.type="button";b.textContent=a;b.setAttribute("aria-label","Avatar "+(i+1));b.onclick=()=>{pickAv=i;pendPic=null;markPick()};$("#ag").append(b)});
+BGS.forEach((c,i)=>{const b=document.createElement("button");b.type="button";b.style.background=c;b.setAttribute("aria-label","Color "+(i+1));b.onclick=()=>{pickBg=i;markPick()};$("#cg").append(b)});
+function markPick(){$$("#ag button").forEach((b,i)=>b.setAttribute("aria-pressed",i==pickAv&&(pendPic===null||(pendPic===undefined&&!S.me.pic))));$$("#cg button").forEach((b,i)=>b.setAttribute("aria-pressed",i==pickBg))}
+const avHTML=()=>S.me.pic?`<img src="${S.me.pic}" alt="My profile photo">`:AVS[S.me.av];
+const mine=()=>S.posts.map(p=>({...p,by:S.me.h,own:1}));
+const all=()=>[...mine().filter(p=>p.privacy=="public"),...DP.map(p=>({...p,privacy:"public",demo:1}))];
+function card(p,full){const c=(S.cm[p.id]||[]).length,n=(p.c||p.likes||0)+(S.cheered.includes(p.id)?1:0),fav=S.favs.includes(p.id);
+return `<div class="${full?"card":"post"}">${full?"":`<span class="bd ${p.privacy}">${p.privacy.toUpperCase()}</span>`}${p.img?`<img src="${p.img}" alt="Progress photo: ${esc(p.cap)}" ${full?'style="border-radius:12px;max-height:320px"':""}>`:`<div class="ban" ${full?'style="border-radius:12px"':""}>${p.em||""}</div>`}
+<div class="pc" ${full?'style="padding:.8rem 0 0"':""}><div class="sm" style="color:var(--sk)">${esc(p.by)}${p.demo?" · sample post":""}</div><p>${esc(p.cap)}</p>
+<div style="display:flex;gap:.4rem;flex-wrap:wrap;margin-top:.4rem"><button class="btn s ${S.cheered.includes(p.id)?"on":""}" data-a="ch" data-i="${p.id}">Cheer ${n}</button><button class="btn s ${fav?"on":""}" data-a="fv" data-i="${p.id}">${fav?"Saved":"Save"}</button>${full?`<span class="mu sm" style="align-self:center">${c}</span>`:""}</div>
+${full?`<div>${(S.cm[p.id]||[]).map(x=>`<div class="cm">${esc(x)}</div>`).join("")}</div><form data-cf="${p.id}" style="display:flex;gap:.3rem;margin-top:.4rem"><input class="in" style="margin:0" maxlength="100" placeholder="Write a comment" aria-label="Comment"><button class="btn s">Send</button></form>`:""}</div></div>`}
+function rP(){const m=S.me;$("#pav").innerHTML=avHTML();$(".av").style.background=BGS[m.bg||0];$("#pn").textContent=m.name;$("#ph").textContent=m.h+" · "+(locLine()||"Location not set");$("#pb").textContent=m.bio;$("#prk").textContent=rk(m.exp);
+$("#se").textContent=m.exp.toLocaleString();$("#sc").textContent=co2().toFixed(1)+" kg";$("#su").textContent=S.posts.length;$("#sf2").textContent=S.friends.length;
+const pub=S.posts.filter(p=>p.privacy=="public").length,pr=S.posts.length-pub;
+$$(".pt").forEach(b=>{b.setAttribute("aria-selected",b.dataset.s==sub);b.textContent={public:"Public ("+pub+")",private:"Private Vault ("+pr+")",favs:"Favorites ("+S.favs.length+")"}[b.dataset.s]});
+const L=sub=="favs"?[...mine(),...DP].filter(p=>S.favs.includes(p.id)):mine().filter(p=>p.privacy==sub);
+$("#pg").innerHTML=L.length?L.map(p=>card({...p,privacy:p.privacy||"public"},0)).join(""):`<p class="mu">Nothing here yet.${sub!="favs"?" Upload a progress photo to start.":" Tap on a post to save it."}</p>`}
+function rF(){$("#fb").textContent=(S.me.loc&&S.me.loc.brgy)?bn(S.me.loc.brgy):S.bar;const L=all();$("#fl").innerHTML=L.map(p=>card(p,1)).join("")}
+const ymd=d=>d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");
+const ACTS=["I sorted my waste","I avoided single-use plastic","I saved water or electricity","I walked, cycled, or took public transport","I helped plant, clean, or protect nature"];
+const pts=r=>r.acts.length*10+Math.floor(r.km)+Math.floor(r.w),co2=()=>S.rec.reduce((a,r)=>a+r.km*.17,0);
+function streak(){const st=new Set(S.rec.map(r=>r.d));let n=0;const d=new Date();if(!st.has(ymd(d)))d.setDate(d.getDate()-1);while(st.has(ymd(d))){n++;d.setDate(d.getDate()-1)}return n}
+const BG=[["","First step","Log your first day",()=>S.rec.length>=1],["","3-day streak","Log 3 days in a row",()=>streak()>=3],["","7-day streak","Log 7 days in a row",()=>streak()>=7],["","10 km car-free","10 km not driven in total",()=>S.rec.reduce((a,r)=>a+r.km,0)>=10],["","Waste warrior","Sort 5 kg of waste in total",()=>S.rec.reduce((a,r)=>a+r.w,0)>=5],["","Perfect day","Do all 5 eco-actions in one day",()=>S.rec.some(r=>r.acts.length==5)]];
+let editD=null;
+ACTS.forEach((a,i)=>$("#ta").insertAdjacentHTML("beforeend",`<label class="chk"><input type="checkbox" value="${i}"> <span class="sm">${a}</span></label>`));
+function resetForm(){editD=null;$("#tf").reset();$("#td").value=ymd(new Date());$("#td").max=ymd(new Date());$("#tb").textContent="Save this day";$("#tc").classList.add("hide");$("#ft2").textContent="Log a day"}
+function rT(){if(!$("#td").value)resetForm();const days=[];for(let i=13;i>=0;i--){const d=new Date();d.setDate(d.getDate()-i);days.push(ymd(d))}
+const by=Object.fromEntries(S.rec.map(r=>[r.d,r])),pt=d=>by[d]?pts(by[d]):0,wk=days.slice(7),pw=days.slice(0,7),sum=(L,f)=>L.reduce((a,d)=>a+(by[d]?f(by[d]):0),0);
+const tw=sum(wk,pts),tp=sum(pw,pts),lg=wk.filter(d=>by[d]).length,km=sum(wk,r=>r.km),ws=sum(wk,r=>r.w),sk=streak();
+const msg=lg>=6?"Amazing week! You are a real community hero.":lg>=4?"Great week! You are building a strong habit.":lg>=2?"Good progress! A few more days and you will level up.":lg==1?"Nice start! Log another day to begin a streak.":"No records this week yet. Log today to start!";
+const cmp=tp?(tw>tp?`${tw-tp} points more than last week`:tw<tp?`${tp-tw} points less than last week. You can beat it!`:"Same as last week"):(tw?"Your first active week!":"");
+const mx=Math.max(50,...wk.map(pt));
+$("#wk").innerHTML=`<p class="big">${msg}</p><p class="mu">${cmp}</p><div class="stats"><div><b>${tw}</b><span>Eco points (7 days)</span></div><div><b>${lg}/7</b><span>Days logged</span></div><div><b>${km.toFixed(1)} km</b><span>Not driven</span></div><div><b>${(km*.17).toFixed(1)} kg</b><span>CO₂ avoided (est.)</span></div><div><b>${ws.toFixed(1)} kg</b><span>Waste sorted</span></div><div><b>${sk} </b><span>Day streak</span></div></div>
+<div class="wkc" role="img" aria-label="Eco points for each of the last 7 days">${wk.map((d,i)=>`<div class="dy ${i==6?"t":""}"><span class="sm">${pt(d)||""}</span><i style="height:${Math.round(pt(d)/mx*100)}px"></i><span class="sm">${new Date(d+"T00:00").toLocaleDateString(undefined,{weekday:"short"})}</span></div>`).join("")}</div>`;
+$("#bgs").innerHTML=BG.map(b=>`<div class="bg ${b[3]()?"e":""}"><strong class="sm">${b[1]}</strong><div class="mu sm">${b[2]}</div><span>${b[3]()?"Earned":"Locked"}</span></div>`).join("");
+$("#tl").innerHTML=S.rec.map(r=>`<div class="row"><div><strong>${new Date(r.d+"T00:00").toLocaleDateString(undefined,{weekday:"short",month:"short",day:"numeric"})}</strong> <span class="sp"><span>${pts(r)} pts</span>${r.km?`<span>${esc(r.mode)} ${r.km} km</span>`:""}${r.w?`<span>${r.w} kg</span>`:""}<span>${r.acts.length}/5 actions</span></span></div><div><button class="btn s" data-a="er" data-i="${r.d}">Edit</button> <button class="btn s" data-a="dr" data-i="${r.d}">Delete</button></div></div>`).join("")||'<p class="mu sm">No records yet. Log your first day above.</p>'}
+const pack=()=>btoa(unescape(encodeURIComponent(JSON.stringify({me:S.me,rec:S.rec,friends:S.friends,sim:S.sim,bar:S.bar}))));
+// actions
+
+document.addEventListener("click",e=>{const b=e.target.closest("[data-a]");if(!b)return;const a=b.dataset.a,i=b.dataset.i;
+if(a=="rp"){pendPic=null;$("#ep").value="";markPick();toast("Photo will be removed when you press Save")}
+if(a=="z0"&&LM)LM.setView([12.5,122.5],6);
+if(a=="loc")gps((la,lo)=>{me={la,lo};rM();LM&&LM.setView([la,lo],17);toast("Your location is shown only to you")});
+if(a=="gp")gps((la,lo)=>{pend={la,lo};rM();LM&&LM.setView([la,lo],18)});
+if(a=="tg"){const t=S.trees.find(x=>x.id==i);if(t&&LM)LM.setView([t.lat,t.lon],17)}
+if(a=="tx"&&confirm("Delete this planting? Its 50 EXP will be removed too.")){S.trees=S.trees.filter(x=>x.id!=i);S.me.exp=Math.max(0,S.me.exp-50);save();rM()}
+if(a=="up")$("#m-up").classList.add("o");
+if(a=="ed"){const m=S.me;$("#en").value=m.name;$("#eh").value=m.h;pickAv=m.av;pickBg=m.bg||0;pendPic=undefined;$("#ep").value="";markPick();$("#eb").value=m.bio;$("#m-ed").classList.add("o")}
+if(a=="x")$$(".modal").forEach(m=>m.classList.remove("o"));
+if(a=="ch"){const k=S.cheered.indexOf(i);k<0?S.cheered.push(i):S.cheered.splice(k,1);save();rF();rP()}
+if(a=="fv"){const k=S.favs.indexOf(i);k<0?S.favs.push(i):S.favs.splice(k,1);save();$("#t-feed").classList.contains("hide")?rP():rF()}
+if(a=="sc"){S.friends[i].exp+=10;save();rFr();toast("Cheer sent to "+S.friends[i].n+" (+10 EXP for them)")}
+if(a=="er"){const r=S.rec.find(x=>x.d==i);if(r){editD=i;$("#td").value=r.d;$("#tk").value=r.km||"";$("#tm").value=r.mode;$("#tw").value=r.w||"";$$("#ta input").forEach((c,k)=>c.checked=r.acts.includes(k));$("#tb").textContent="Update this day";$("#tc").classList.remove("hide");$("#ft2").textContent="Editing "+i;$("#tf").scrollIntoView({behavior:"smooth",block:"center"})}}
+if(a=="dr"&&confirm("Delete the record for "+i+"?")){S.rec=S.rec.filter(r=>r.d!=i);save();rT()}
+if(a=="tc")resetForm();
+if(a=="sv"){save();$("#ls").textContent="Last saved "+new Date().toLocaleTimeString();toast("Your data is saved in this browser")}
+if(a=="bk"){const c=pack();$("#bx").value=c;try{navigator.clipboard.writeText(c).then(()=>toast("Backup code copied"),()=>toast("Copy the code from the box"))}catch(e){toast("Copy the code from the box")}}
+if(a=="rs"){try{const o=JSON.parse(decodeURIComponent(escape(atob($("#bx").value.trim()))));if(!o.me||!Array.isArray(o.rec))throw 0;const rec=o.rec.filter(r=>r&&typeof r.d=="string").map(r=>({d:r.d,km:+r.km||0,mode:String(r.mode||"Walked"),w:+r.w||0,acts:Array.isArray(r.acts)?r.acts.filter(n=>n>=0&&n<5):[]}));Object.assign(S,{me:o.me,rec,friends:o.friends||S.friends,sim:o.sim||S.sim,bar:o.bar||S.bar});save();rT();toast("Data restored ")}catch(e){toast("That backup code is not valid")}}});
+document.addEventListener("submit",e=>{e.preventDefault();const f=e.target;
+if(f.dataset.cf){const v=f.querySelector("input").value.trim();if(v){(S.cm[f.dataset.cf]=S.cm[f.dataset.cf]||[]).push(S.me.h+": "+v);save();rF()}}});
+$("#sf").onsubmit=()=>{const v=$("#si").value.trim();if(v.length<3)return toast("Type at least 3 letters");lbq[lbl]=v;go("board")};
+$("#ef").onsubmit=()=>{Object.assign(S.me,{name:$("#en").value.trim(),h:($("#eh").value.trim().replace(/^@?/,"@")),av:pickAv,bg:pickBg,pic:pendPic===undefined?S.me.pic:(pendPic||undefined),bio:$("#eb").value.trim()});save();$("#m-ed").classList.remove("o");rP();toast("Profile saved")};
+$("#tf").onsubmit=()=>{const km=+$("#tk").value||0,w=+$("#tw").value||0,acts=$$("#ta input:checked").map(i=>+i.value),d=$("#td").value||ymd(new Date());if(!km&&!w&&!acts.length)return toast("Add at least one thing you did");const r={d,km,mode:$("#tm").value,w,acts},was=editD;S.rec=S.rec.filter(x=>x.d!=d&&x.d!=was);S.rec.push(r);S.rec.sort((a,b)=>a.d<b.d?1:-1);save();resetForm();rT();toast(was?"Entry updated ":"Day saved! +"+pts(r)+" eco points ")};
+$("#uf").onsubmit=()=>{const f=$("#uf2").files[0],cap=$("#uc").value.trim(),pv=$("#upv").value;if(!f)return;const r=new FileReader();
+r.onload=ev=>{const im=new Image();im.onload=()=>{const sc=Math.min(1,480/Math.max(im.width,im.height)),c=document.createElement("canvas");c.width=im.width*sc;c.height=im.height*sc;c.getContext("2d").drawImage(im,0,0,c.width,c.height);
+S.posts.unshift({id:"u"+Date.now(),cap,img:c.toDataURL("image/jpeg",.7),privacy:pv,likes:0});S.me.exp+=300;save();$("#m-up").classList.remove("o");$("#uf").reset();sub=pv;rP();toast("Posted as "+pv.toUpperCase()+"! +300 EXP")};im.onerror=()=>toast("That file is not a readable image");im.src=ev.target.result};r.readAsDataURL(f)};
+
+// ===== Tree map =====
+const ISL=[[[120.5,18.5],[121.5,18.6],[122.3,18.4],[122.4,17.2],[122.0,16.2],[121.6,15.7],[121.5,15.0],[121.9,14.4],[122.3,14.3],[122.8,14.2],[123.4,13.9],[124.0,13.5],[124.2,12.8],[123.6,12.7],[123.2,13.2],[122.7,13.4],[122.0,13.8],[121.7,13.7],[121.0,13.6],[120.6,14.1],[120.6,14.8],[120.1,14.9],[119.9,15.8],[120.3,16.2],[120.4,17.0],[120.4,18.1]],
+[[120.3,13.5],[121.0,13.5],[121.5,13.2],[121.5,12.7],[121.4,12.2],[121.0,12.2],[120.7,12.6],[120.3,13.0]],
+[[120.1,11.4],[119.5,10.9],[118.8,10.1],[118.2,9.3],[117.2,8.4],[117.4,8.2],[118.5,8.9],[119.3,9.7],[119.8,10.4],[120.3,11.0]],
+[[121.9,11.9],[122.6,11.6],[123.1,11.4],[123.1,10.9],[122.6,10.4],[122.1,10.4],[121.9,10.9],[122.1,11.5]],
+[[122.9,10.9],[123.3,10.7],[123.5,10.0],[123.3,9.3],[123.0,9.0],[122.7,9.8],[122.6,10.5]],
+[[123.9,11.3],[124.1,10.8],[123.8,10.0],[123.4,9.5],[123.3,10.0],[123.7,10.7]],
+[[123.8,10.1],[124.5,10.1],[124.5,9.7],[124.1,9.6],[123.8,9.8]],
+[[124.2,12.5],[125.5,12.6],[125.6,11.5],[125.2,11.1],[124.8,11.3],[124.4,11.8]],
+[[124.3,11.5],[125.0,11.3],[125.1,10.6],[125.0,10.0],[124.5,10.2],[124.3,10.8]],
+[[123.1,12.7],[123.9,12.5],[123.8,11.9],[123.3,12.0]],
+[[123.3,8.7],[124.0,8.6],[124.8,8.6],[125.3,9.5],[126.0,9.2],[126.5,8.0],[126.3,6.9],[126.1,6.3],[125.6,5.9],[125.2,6.1],[125.0,6.8],[124.4,6.4],[124.0,6.3],[123.6,7.0],[123.3,7.4],[122.8,7.2],[122.2,7.0],[122.0,6.9],[122.4,7.6],[122.6,8.0],[123.0,8.4]]];
+const CIT=[["Manila",14.6,120.98],["Baguio",16.4,120.59],["Cebu",10.32,123.89],["Iloilo",10.72,122.56],["Davao",7.07,125.61],["Cagayan de Oro",8.48,124.65],["Puerto Princesa",9.74,118.74]];
+const DT=[{la:10.31,lo:123.89,n:120,by:"@sample_cebu"},{la:14.65,lo:121.05,n:80,by:"@sample_qc"},{la:7.07,lo:125.6,n:200,by:"@sample_davao"},{la:16.41,lo:120.59,n:150,by:"@sample_baguio"},{la:10.72,lo:122.56,n:60,by:"@sample_iloilo"},{la:8.48,lo:124.65,n:90,by:"@sample_cdo"}];
+const SP=["Narra","Molave","Mahogany","Acacia","Bamboo","Banaba","Mango","Calamansi","Coconut","Mangrove","Lauan","Talisay","Ipil-ipil","Kamagong","Tindalo","Yakal","Balete","Santol","Guyabano","Jackfruit (Langka)","Avocado","Rambutan","Pili","Cacao"];
+SP.forEach(x=>$("#dl-t").append(new Option(x)));
+const PX=lo=>(lo-116)*40,PY=la=>(19-la)*40;let vb={x:0,y:0,w:440,h:580},pend=null,me=null;
+const path=pts=>pts.map((p,i)=>(i?"L":"M")+PX(p[0]).toFixed(1)+" "+PY(p[1]).toFixed(1)).join("")+"Z";
+function setVB(){const v=vb;v.w=Math.max(55,Math.min(440,v.w));v.h=v.w*580/440;v.x=Math.max(0,Math.min(440-v.w,v.x));v.y=Math.max(0,Math.min(580-v.h,v.y));$("#mp").setAttribute("viewBox",`${v.x} ${v.y} ${v.w} ${v.h}`)}
+function zoom(f){const cx=vb.x+vb.w/2,cy=vb.y+vb.h/2;vb.w*=f;vb.h=vb.w*580/440;vb.x=cx-vb.w/2;vb.y=cy-vb.h/2;setVB();rM()}
+function pin(la,lo,c,t,em){const k=vb.w/440;return `<g><title>${esc(t)}</title><circle cx="${PX(lo)}" cy="${PY(la)}" r="${11*k}" fill="${c}" stroke="#fff" stroke-width="${1.5*k}"/><text x="${PX(lo)}" y="${PY(la)+3*k}" font-size="${8*k}" font-weight="700" fill="#fff" text-anchor="middle">${em}</text></g>`}
+function rM(){drawMap();$("#mbn").style.display=pinMode?"block":"none";
+const mt=S.trees.reduce((a,t)=>a+t.n,0);$("#mt1").textContent=mt.toLocaleString();$("#mt2").textContent=S.trees.length;$("#mt3").textContent=S.demo?DT.reduce((a,d)=>a+d.n,0).toLocaleString():"hidden";$("#mshare").checked=!!S.share;$("#mdemo").checked=!!S.demo;
+if(!$("#md").value)$("#md").value=ymd(new Date());$("#md").max=ymd(new Date());
+$("#mpend").textContent=pend?`Spot selected: ${pend.la.toFixed(4)}°N, ${pend.lo.toFixed(4)}°E`:"Tap the map or use GPS to choose a spot.";
+$("#ml").innerHTML=S.trees.map(t=>`<div class="row"><div><strong>${t.n} × ${esc(t.sp)}</strong><div class="mu sm">${esc(t.d)} · ${t.lat.toFixed(3)}, ${t.lon.toFixed(3)}${t.note?" · "+esc(t.note):""}</div></div><div><button class="btn s" data-a="tg" data-i="${t.id}">View</button> <button class="btn s" data-a="tx" data-i="${t.id}">Delete</button></div></div>`).join("")||'<p class="mu sm">No plantings yet.</p>'}
+const inPH=(la,lo)=>la>=4.5&&la<=19&&lo>=116&&lo<=127;
+function gps(cb){if(!navigator.geolocation)return toast("Location is not supported here. Tap the map to choose a spot instead.");navigator.geolocation.getCurrentPosition(p=>{const la=p.coords.latitude,lo=p.coords.longitude;if(!inPH(la,lo))return toast("You appear to be outside the Philippines on this map");cb(la,lo)},()=>toast("Location is off or blocked. Tap the map to choose a spot instead."),{enableHighAccuracy:true,timeout:10000})}
+$("#mf").onsubmit=()=>{if(!pend)return toast("Tap the map or use GPS to choose a spot first");if(pinMode)return toast("Finish pinning your location first");const spv=$("#ms").value.trim();if(!spv)return toast("Type or choose a tree");const n=Math.max(1,Math.min(1000,Math.floor(+$("#mn").value||1)));S.trees.push({id:"t"+Date.now(),lat:pend.la,lon:pend.lo,n,sp:spv,d:$("#md").value||ymd(new Date()),note:$("#mo").value.trim()});S.me.exp+=50;pend=null;$("#mo").value="";$("#ms").value="";save();rM();toast(""+n+" tree"+(n>1?"s":"")+" added! +50 EXP")};
+$("#mshare").onchange=e=>{S.share=e.target.checked?1:0;save();rM();toast(S.share?"Pins marked as shared (demo)":"Pins are private")};
+$("#mdemo").onchange=e=>{S.demo=e.target.checked?1:0;save();rM()};
+$("#ep").onchange=e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=ev=>{const im=new Image();im.onload=()=>{const q=Math.min(im.width,im.height),c=document.createElement("canvas");c.width=c.height=160;c.getContext("2d").drawImage(im,(im.width-q)/2,(im.height-q)/2,q,q,0,0,160,160);pendPic=c.toDataURL("image/jpeg",.8);markPick();toast("Photo ready. Press Save.")};im.onerror=()=>toast("That file is not a readable image");im.src=ev.target.result};r.readAsDataURL(f)};
+
+function bars(id,rows,max,u){$(id).innerHTML=rows.map(r=>`<div class="meter" style="grid-template-columns:48px 1fr 66px"><span>${r[0]}</span><div class="bar"><i style="width:${r[1]/max*100}%"></i></div><b>${r[1]}${u}</b></div>`).join("")}
+function rD(){bars("#d1",[["2000",46.1],["2010",45.3],["2015",46.3],["2020",47.4],["2023",48.3]],100,"%");bars("#d2",[["2010",13.48],["2014",14.66],["2020",21.4]],25,"M");bars("#d3",[["2022",46.82],["2023",46.86],["2024",46.91],["2025",46.56],["2026",46.69]],100,"")}
+
+// ===== City challenge =====
+const CT=[["🌳","Park",10,"Trees clean the air, soak up rain, and give people a place to rest.",{air:4,flood:2,people:3}],["🚌","Bus station",15,"When many people share a bus, there are fewer cars on the road and cleaner air.",{traffic:7,air:3,people:2}],["🚲","Bike lane",8,"A safe lane lets people cycle instead of driving short trips.",{traffic:4,air:3}],["☀️","Solar roof",12,"Solar panels make electricity from sunlight without smoke.",{air:5}],["♻️","Recycling hub",12,"A place to sort and collect waste so less trash ends up in streets and drains.",{waste:8}],["🏘️","Affordable homes",20,"Safe, low-cost homes so families are not forced to live in crowded or risky places.",{people:8}],["🌊","Drain and pond",15,"Drains and a catch basin hold rainwater so streets do not flood.",{flood:8}],["🚨","Flood sensor",10,"Sensors warn people early so they can move to safety.",{flood:4,people:1}],["♿","Safe sidewalk",8,"Wide, ramped sidewalks help children, elders, and wheelchair users get around.",{people:4,traffic:2}]];
+const PB={100:["🏭","Smoky factory","This factory pollutes the air.",{air:-6}],101:["🚗","Traffic jam","Too many cars squeezed onto a narrow road.",{traffic:-6,air:-2}],102:["🗑️","Trash pile","Trash is piling up and can block drains.",{waste:-7}],103:["🌊","Flood-prone street","Rain floods this street every storm.",{flood:-7}],104:["🏚️","Crowded unsafe housing","Families live in cramped, risky homes.",{people:-7}]};
+const CM=[["air","Clean air",""],["traffic","Smooth traffic",""],["flood","Flood safety",""],["waste","Clean streets",""],["people","Safe homes and access",""]];
+const CL0=()=>{const L=Array(30).fill(-1);[[2,100],[9,100],[4,101],[13,101],[20,101],[6,102],[17,102],[10,103],[22,103],[27,103],[15,104],[25,104]].forEach(x=>L[x[0]]=x[1]);return L};
+let ctool=null;
+const cMet=()=>{const T={air:0,traffic:0,flood:0,waste:0,people:0};S.cb.L.forEach(v=>{const e=v>=100?PB[v][3]:v>=0?CT[v][4]:null;if(e)for(const k in e)T[k]+=e[k]});const M={};for(const k in T)M[k]=Math.max(0,Math.min(100,Math.round(60+T[k]*1.3)));return M};
+const cCost=()=>S.cb.L.reduce((a,v)=>a+(v>=0&&v<100?CT[v][2]:0),0);
+function rS(){if(!S.cb||!S.cb.L||S.cb.L.length!=30)S.cb={L:CL0()};
+if(!$("#ct").children.length)CT.forEach((t,i)=>{const b=document.createElement("button");b.textContent=t[1]+" · "+t[2]+" coins";b.setAttribute("aria-pressed","false");b.onclick=()=>{ctool=ctool==i?null:i;$("#cdesc").textContent=ctool==null?"Tap a fix, then tap the map.":t[1]+" ("+t[2]+" coins): "+t[3];rS()};$("#ct").append(b)});
+$$("#ct button").forEach((b,i)=>b.setAttribute("aria-pressed",i==ctool));
+$("#cmap").innerHTML=S.cb.L.map((v,i)=>`<button class="lot ${v>=100?"pb":v>=0?"ok":""}" data-i="${i}" aria-label="${v>=100?PB[v][1]:v>=0?CT[v][1]:"Empty lot"}">${v>=100?PB[v][0]:v>=0?CT[v][0]:"＋"}</button>`).join("");
+const M=cMet(),sc=Math.round(Object.values(M).reduce((a,b)=>a+b,0)/5);$("#cs").textContent=sc;$("#cm").textContent=sc<45?"":sc<65?"":sc<80?"":"";$("#cb2").textContent=100-cCost();
+const left=S.cb.L.filter(v=>v>=100).length;$("#cr").textContent=left?left+" problem"+(left>1?"s":"")+" still left in the city.":"All the original problems are fixed! ";
+$("#cmt").innerHTML=CM.map(m=>`<div class="meter" style="grid-template-columns:150px 1fr 34px"><span>${m[1]}</span><div class="bar"><i style="width:${M[m[0]]}%"></i></div><b>${M[m[0]]}</b></div>`).join("")}
+$("#cmap").onclick=e=>{const b=e.target.closest("button");if(!b)return;const i=+b.dataset.i,v=S.cb.L[i];
+if(ctool==null){$("#cdesc").textContent=v>=100?PB[v][1]+": "+PB[v][2]+" Pick a fix and tap here.":v>=0?CT[v][1]+": "+CT[v][3]:"Empty lot: pick a fix above, then tap here to build.";return}
+if(v==ctool)S.cb.L[i]=-1;else{const refund=v>=0&&v<100?CT[v][2]:0;if(100-cCost()+refund-CT[ctool][2]<0)return toast("Not enough coins. Remove something or pick a cheaper fix.");S.cb.L[i]=ctool}
+save();rS()};
+$("#cres").onclick=()=>{S.cb={L:CL0()};ctool=null;$("#cout").innerHTML="";$("#cdesc").textContent="Fresh start! Tap a fix, then tap the map.";save();rS()};
+$("#ctest").onclick=()=>{const M=cMet(),sc=Math.round(Object.values(M).reduce((a,b)=>a+b,0)/5),sn=S.cb.L.filter(v=>v==7).length;
+const ev=(v,g,m,b)=>v>=70?'<b style="color:#4ade80">Good.</b> '+g:v>=45?'<b style="color:#f59e0b">Needs work.</b> '+m:'<b style="color:#f87171">Failed.</b> '+b;
+const L=[ev(M.flood,"Typhoon day: drains and green areas handled the rain. Streets stayed mostly dry.","Typhoon day: some streets flooded and traffic stopped for hours.","Typhoon day: many streets flooded and families had to evacuate.")+(sn?" Sensors warned residents early.":""),
+ev(M.traffic,"Rush hour: buses and bike lanes kept people moving.","Rush hour: slow traffic, but people could still get to work.","Rush hour: gridlock! People lost hours stuck in traffic."),
+ev(M.waste,"Garbage day: trash was sorted and collected, and drains stayed clear.","Garbage day: some trash piled up on the streets.","Garbage day: trash blocked the drains and made the street smell."),
+ev(M.air,"Air check: clean air. Children can play outside.","Air check: the air is okay on most days.","Air check: smoky and unhealthy to breathe."),
+ev(M.people,"Everyone counts: families have safe homes and everyone can get around.","Everyone counts: some families and wheelchair users still struggle.","Everyone counts: many families live in unsafe homes with little access.")];
+const w=CM.reduce((a,m)=>M[m[0]]<M[a[0]]?m:a,CM[0]),hint={air:"parks, bike lanes, and solar roofs",traffic:"bus stations and bike lanes",flood:"drains and ponds, plus flood sensors",waste:"recycling hubs",people:"affordable homes and safe sidewalks"}[w[0]];
+$("#cout").innerHTML="<h4>Test results</h4>"+L.map(x=>`<div class="ev">${x}</div>`).join("")+`<p style="margin-top:.6rem"><strong>${sc>=75?"Great job! Your city is strong and balanced.":"Your weakest area is "+w[1].toLowerCase()+". Try "+hint+"."}</strong></p><p class="mu sm">In real life, cities fix these problems with the same ideas: drainage and green spaces, public transport, waste systems, and affordable homes. Real plans also need money, time, and community input.</p>`};
+document.addEventListener("click",e=>{const g=e.target.closest("[data-go]");if(g){go(g.dataset.go);scrollTo({top:0,behavior:"smooth"})}});
+
+// ===== Location and leaderboards =====
+const LV=[["brgy","Barangay"],["mun","Municipality"],["city","City"],["country","Country"]];
+const FN=["Maria","Juan","Ana","Mark","Sarah","Paolo","Liza","Ben","Rica","Carlo","Jessa","Miguel","Kyla","Rafael","Bea","Noel","Camille","Joshua","Trisha","Dennis","Hazel","Ivan","Nina","Jerome"],LN=["Santos","Reyes","Cruz","Garcia","Ramos","Flores","Lim","Tan","Mendoza","Villanueva","Aquino","Bautista","Castro","Navarro","Torres","Pascual","Salazar","Ortega","Fernandez","Gonzales","Rivera","Soriano","Domingo","Lopez"];
+const TC=e=>e>=5000?"#fb7185":e>=3000?"#f59e0b":e>=1500?"#38bdf8":"#a78bfa",INI=n=>n.split(" ").map(w=>w[0]).slice(0,2).join("").toUpperCase();
+const bn=x=>/^(barangay|brgy)/i.test(x)?x:"Barangay "+x;
+const locLine=()=>{const o=S.me.loc;return o?[o.street,o.brgy&&bn(o.brgy),o.mun,o.city,o.prov,o.country].filter(Boolean).join(", "):""};
+let lbl="brgy",lbq={},pinMode=null,locDraft=null;
+const BNS=["Poblacion","San Roque","Santa Cruz","San Isidro","Bagong Silang","Mabolo","Lahug","Guadalupe","Talamban","Banilad","Capitol Site","Kasambagan","Labangon","Pardo","Tisa","Luz","Apas","Busay","Carreta","Day-as","Inayawan","Pasil","Sirao","Zapatera"],MNS=["Santo Nino","San Miguel","Bagumbayan","Mabini","Rizal","Magsaysay","Quezon","San Jose","Del Pilar","Poblacion Norte"],CNS=["Cebu City","Davao City","Quezon City","Iloilo City","Baguio City","Cagayan de Oro","Bacolod City","Zamboanga City","Tacloban City","General Santos"];
+const pick=(arr,seed,n,first)=>{const out=first?[first]:[];let k=0;while(out.length<n&&k<300){const v=arr[(hash(seed)+k*7)%arr.length];k++;if(!out.some(x=>x.toLowerCase()==v.toLowerCase()))out.push(v)}return out};
+const citz=(key,N)=>Array.from({length:N},(_,i)=>{const h=hash(key+"|"+i),e=Math.round(300+Math.pow((h%10007)/10007,2.2)*7000);return{n:FN[h%FN.length]+" "+LN[(h>>5)%LN.length],e,u:Math.floor(e/300)}});
+const best=a=>a.reduce((m,x)=>x.e>m.e?x:m,a[0]),nb=x=>x.replace(/^(barangay|brgy)\s*/i,"");
+const myPar=()=>{const o=S.me.loc||{};return o.mun||o.city||""};
+function topB(b,par,mine){const L=citz("b|"+b.toLowerCase()+"|"+par.toLowerCase(),25);if(mine)L.push({n:S.me.name,e:S.me.exp,u:S.posts.length,me:1});const t={...best(L)};t.from="Barangay "+b;t.mine=mine;return t}
+function listMun(m,mine){const o=S.me.loc||{},ob=mine&&o.brgy?nb(o.brgy):null;return pick(BNS,m,8,ob).map((c,i)=>topB(c,m,!!ob&&i==0))}
+function topMun(m,mine){const t={...best(listMun(m,mine))};t.from+=", "+m;t.mine=mine;return t}
+function listCity(c,mine){const o=S.me.loc||{};if(mine&&!o.mun){const ob=o.brgy?nb(o.brgy):null;return pick(BNS,c,12,ob).map((b,i)=>topB(b,c,!!ob&&i==0))}return pick(MNS,c,6,mine&&o.mun?o.mun:null).map((m,i)=>topMun(m,mine&&!!o.mun&&i==0))}
+function topCity(c,mine){const t={...best(listCity(c,mine))};t.from+=", "+c;t.mine=mine;return t}
+function listCountry(cn,mine){const o=S.me.loc||{};if(mine&&!o.city&&o.mun)return[topMun(o.mun,true),...pick(CNS,cn,9).map(c=>topCity(c,false))];return pick(CNS,cn,10,mine&&o.city?o.city:null).map((c,i)=>topCity(c,mine&&!!o.city&&i==0))}
+const ava=(x,z)=>`<div class="ini" style="${z?"width:40px;height:40px;margin:0;font-size:1rem;":""}background:${x.me?"var(--pr)":BGS[hash(x.n)%8]}">${x.me?avHTML():INI(x.n)}</div>`;
+const EXPL={mun:"Only the top citizen of each barangay competes in this list.",city:"Only the top citizen of each municipality (or barangay) competes in this list.",country:"Only the top citizen of each city competes in this list."};
+function rB(){$("#lvs").innerHTML=LV.map(l=>`<button role="tab" data-lv="${l[0]}" aria-selected="${l[0]==lbl}">${l[1]}</button>`).join("");
+const o=S.me.loc||{},mine=!lbq[lbl],raw=lbq[lbl]||o[lbl]||"",nm=raw&&lbl=="brgy"?bn(raw):raw,lvn=LV.find(x=>x[0]==lbl)[1];
+$("#bt").textContent=nm?lvn+" Leaderboard: "+nm:lvn+" Leaderboard";
+if(!raw){$("#bh").innerHTML=`<p class="mu" style="margin:1rem 0">${!S.me.loc?"Add your location to see the top citizens in your barangay, municipality, city, and country.":lbl=="mun"?"You have no municipality set. If you live in a city, check the City tab, or add a municipality in your location.":"This level is not set in your location."}</p><button class="btn" data-a="lo2">Set my location</button>`;$("#bc").innerHTML="";return}
+let L;if(lbl=="brgy"){L=citz("b|"+nb(raw).toLowerCase()+"|"+(mine?myPar().toLowerCase():"search"),25);if(mine)L.push({n:S.me.name,e:S.me.exp,u:S.posts.length,me:1})}else L=lbl=="mun"?listMun(raw,mine):lbl=="city"?listCity(raw,mine):listCountry(raw,mine);
+L.sort((a,b)=>b.e-a.e);const ix=L.findIndex(x=>lbl=="brgy"?x.me:x.mine);
+$("#bh").innerHTML=`<p class="mu sm">${L.length} ${lbl=="brgy"?"citizens":"top citizens"} ranked. ${EXPL[lbl]||""} ${mine?(ix>=0?(lbl=="brgy"?`Your rank: <strong>#${ix+1}</strong>.`:`Your area's top citizen is ranked <strong>#${ix+1}</strong>${L[ix].me?" (that is you!)":""}.`):""):""} ${mine?"":`<button class="btn s" data-a="lbr">Back to my area</button>`}</p>`;
+const pc=(x,i,f)=>`<div class="pc2 ${f?"f":""}">${ava(x)}<strong class="sm">#${i+1} ${esc(x.n)}${x.me?" (you)":""}</strong><div class="tier" style="color:${TC(x.e)}">${rk(x.e)}</div><div class="mu sm">${x.e.toLocaleString()} EXP</div>${x.from?`<div class="mu" style="font-size:.7rem">${esc(x.from)}</div>`:""}</div>`;
+const hl=x=>x.me||(lbl!="brgy"&&x.mine);
+const row=(x,i)=>`<div class="row" ${hl(x)?'style="border-color:var(--sk)"':""}><div class="who"><span class="rk" style="color:var(--mu)">#${i+1}</span>${ava(x,1)}<div><strong>${esc(x.n)}${x.me?" (you)":""}</strong><div class="tier" style="color:${TC(x.e)}">${rk(x.e)}</div>${x.from?`<div class="mu sm">${esc(x.from)}</div>`:""}</div></div><div style="text-align:right"><strong>${x.e.toLocaleString()} EXP</strong><div class="mu sm">${x.u} uploads</div></div></div>`;
+let h=`<div class="pod">${pc(L[1],1,0)}${pc(L[0],0,1)}${pc(L[2],2,0)}</div>`+L.slice(3,10).map((x,i)=>row(x,i+3)).join("");
+if(mine&&ix>=10)h+=`<p class="mu" style="text-align:center;margin:.3rem">...</p>`+row(L[ix],ix);$("#bc").innerHTML=h}
+function openLoc(){const o={...(S.me.loc||{}),...(locDraft||{})};$("#lst").value=o.street||"";$("#lb").value=o.brgy||"";$("#lm").value=o.mun||"";$("#lc").value=o.city||"";$("#lp").value=o.prov||"";$("#lcn").value=o.country||"Philippines";$("#lco").textContent=o.lat!=null?"Map pin set: "+(+o.lat).toFixed(4)+"°N, "+(+o.lon).toFixed(4)+"°E":"No map pin yet. You can pin it on the map or use GPS.";$("#m-loc").classList.add("o")}
+const readLoc=()=>({street:$("#lst").value.trim(),brgy:$("#lb").value.trim(),mun:$("#lm").value.trim(),city:$("#lc").value.trim(),prov:$("#lp").value.trim(),country:$("#lcn").value.trim()||"Philippines"});
+document.addEventListener("click",e=>{const v=e.target.closest("[data-lv]");if(v){lbl=v.dataset.lv;rB();return}const b=e.target.closest("[data-a]");if(!b)return;const a=b.dataset.a;
+if(a=="lo2"){locDraft=null;openLoc()}
+if(a=="lbr"){delete lbq[lbl];rB()}
+if(a=="lpin"){locDraft={...(S.me.loc||{}),...readLoc()};if(locDraft.lat==null)delete locDraft.lat;$("#m-loc").classList.remove("o");pinMode="home";pend=null;go("trees");scrollTo({top:0,behavior:"smooth"})}
+if(a=="lgps")gps((la,lo)=>{fillAddr(la,lo)});
+if(a=="hs"&&pinMode){if(!pend)return toast("Tap the map first to choose your spot");const la=pend.la,lo=pend.lo;locDraft={...(S.me.loc||{}),...(locDraft||{}),lat:la,lon:lo};pend=null;pinMode=null;rM();fillAddr(la,lo)}
+if(a=="hc"&&pinMode){pinMode=null;pend=null;locDraft=null;go("profile")}});
+$("#lf").onsubmit=()=>{const o=readLoc(),d={...(S.me.loc||{}),...(locDraft||{})};if(d.lat==null&&(!o.brgy||(!o.mun&&!o.city)))return toast("Pin your location on the map, or add your barangay and a city or municipality");S.me.loc={...o,lat:d.lat,lon:d.lon};if(S.me.loc.lat==null){delete S.me.loc.lat;delete S.me.loc.lon}locDraft=null;save();$("#m-loc").classList.remove("o");toast("Location saved");go($$(".tb[aria-selected=true]")[0]?.dataset.t=="board"?"board":"profile")};
+
+// ===== Real map (Leaflet + OpenStreetMap) =====
+let LM=null,LG=null;
+function initMap(){if(LM||!window.L)return;LM=L.map("lmap").setView([12.5,122.5],6);const osm=L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png",{maxZoom:19,attribution:"&copy; OpenStreetMap contributors"}),esri=L.tileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}",{maxZoom:19,attribution:"Tiles &copy; Esri"}),sat=L.tileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",{maxZoom:19,attribution:"Tiles &copy; Esri"});osm.addTo(LM);L.control.layers({"Street map":osm,"Street map (Esri)":esri,"Satellite":sat}).addTo(LM);let er=0;osm.on("tileerror",()=>{if(++er==6&&LM.hasLayer(osm)){LM.removeLayer(osm);esri.addTo(LM);$("#mnote").textContent="Switched to the backup street map."}});LG=L.layerGroup().addTo(LM);LM.on("click",e=>{pend={la:e.latlng.lat,lo:e.latlng.lng};rM()})}
+function drawMap(){initMap();if(!LM){$("#mnote").textContent="The map could not load. Check your internet connection and refresh.";return}$("#mnote").textContent="";setTimeout(()=>LM.invalidateSize(),60);LG.clearLayers();
+const ic=(c,t)=>L.divIcon({className:"",html:'<div class="tp" style="background:'+c+'">'+t+"</div>",iconSize:[26,26],iconAnchor:[13,13]});
+if(S.demo)DT.forEach(d=>L.marker([d.la,d.lo],{icon:ic("#f59e0b",d.n),title:d.by+" planted "+d.n+" trees (sample data)"}).addTo(LG));
+S.trees.forEach(t=>L.marker([t.lat,t.lon],{icon:ic("#16a34a",t.n),title:t.n+" "+t.sp+" on "+t.d}).addTo(LG));
+if(S.me.loc&&S.me.loc.lat!=null)L.marker([S.me.loc.lat,S.me.loc.lon],{icon:L.divIcon({className:"",html:'<div class="tp hm">Home</div>',iconSize:[44,26],iconAnchor:[22,13]}),title:"Home"}).addTo(LG);
+if(me)L.circleMarker([me.la,me.lo],{radius:8,color:"#fff",weight:2,fillColor:"#38bdf8",fillOpacity:1}).addTo(LG);
+if(pend)L.circleMarker([pend.la,pend.lo],{radius:14,color:"#f59e0b",weight:3,dashArray:"4",fillOpacity:0}).addTo(LG)}
+$("#mq").onsubmit=()=>{const q=$("#mqi").value.trim(),box=$("#mres");if(q.length<3)return toast("Type a place to search");fetch("https://nominatim.openstreetmap.org/search?format=json&limit=5&countrycodes=ph&q="+encodeURIComponent(q)).then(r=>r.json()).then(j=>{box.innerHTML="";if(!j.length){box.innerHTML='<p class="sm mu">No place found. Try adding the barangay or city.</p>';return}j.forEach(p=>{const b=document.createElement("button");b.type="button";b.className="btn s";b.style.cssText="display:block;width:100%;text-align:left;margin:.25rem 0;border-radius:10px";b.textContent=p.display_name;b.onclick=()=>{pend={la:+p.lat,lo:+p.lon};rM();LM&&LM.setView([+p.lat,+p.lon],17);box.innerHTML=""};box.append(b)})}).catch(()=>toast("Search failed. Check your internet connection."))};
+function fillAddr(la,lo){const fin=g=>{S.me.loc={street:g.street||"",brgy:g.brgy||"",mun:g.mun||"",city:g.city||"",prov:g.prov||"",country:g.country||"Philippines",lat:la,lon:lo};locDraft=null;save();$("#m-loc").classList.remove("o");toast(g.brgy||g.city||g.mun?"Location set: "+locLine():"Pinned. We could not read the address, so add it in My Location.");go("profile")};
+fetch("https://nominatim.openstreetmap.org/reverse?format=jsonv2&addressdetails=1&zoom=18&lat="+la+"&lon="+lo,{headers:{"Accept-Language":"en"}}).then(r=>r.json()).then(j=>{const a=j.address||{};fin({street:a.road,brgy:(a.suburb||a.neighbourhood||a.quarter||a.village||"").replace(/^(barangay|brgy\.?)\s*/i,""),city:a.city,mun:a.municipality||a.town,prov:a.state||a.province||a.county,country:a.country})}).catch(()=>fin({}))}
+
+// ===== Accounts, friends, chat =====
+function loadState(){S=dflt();try{const r=JSON.parse(localStorage.getItem(K));if(r&&r.me)S=Object.assign(dflt(),r)}catch(e){}}
+let FR=[],SR=[],FRU=null,chatUnsub=null,chatPid=null,gmode="load";window.FB_USER=null;
+const myUid=()=>window.FB_USER&&window.FB_USER.uid;
+const gerr=e=>({"auth/invalid-credential":"Wrong email or password.","auth/wrong-password":"Wrong email or password.","auth/user-not-found":"Wrong email or password.","auth/email-already-in-use":"That email already has an account. Try signing in.","auth/weak-password":"Use a password with at least 6 characters.","auth/invalid-email":"That email address does not look right.","auth/unauthorized-domain":"This web address is not allowed yet. Add it under Authentication, Settings, Authorized domains in Firebase.","auth/popup-closed-by-user":"","auth/cancelled-popup-request":"","auth/too-many-requests":"Too many tries. Wait a moment and try again.","auth/network-request-failed":"No internet connection.","handle-taken":"That username is taken. Try another.","permission-denied":"Permission denied. Check your Firestore rules."})[e.code||e.message]??"Something went wrong. Please try again.";
+function showGate(m,msg){gmode=m;$("#gate").classList.remove("hide");const up=m=="up",pf=m=="prof";
+$("#g-off").classList.toggle("hide",m!="off");$("#g-form").classList.toggle("hide",!["in","up","prof"].includes(m));
+$("#g-sub").textContent=m=="load"?"Loading...":m=="off"?"Welcome":pf?"Almost done. Choose how others will see you.":up?"Create your account":"Sign in to continue";
+$("#g-tabs").classList.toggle("hide",pf);$("#g-up").classList.toggle("hide",!(up||pf));$("#g-em").classList.toggle("hide",pf);$("#g-oth").classList.toggle("hide",pf);
+$$("#g-tabs button").forEach(b=>b.setAttribute("aria-selected",b.dataset.g==m));
+$("#ge").required=!pf;$("#gp").required=!pf;$("#gn").required=up||pf;$("#gh").required=up||pf;
+$("#g-go").textContent=pf?"Finish":up?"Create account":"Sign in";$("#g-err").style.color="#f87171";$("#g-err").textContent=msg||""}
+$("#gf").onsubmit=async()=>{if(!window.FB)return;const b=$("#g-go"),n=$("#gn").value.trim(),h=$("#gh").value.trim().toLowerCase();
+if(gmode!="in"&&!/^[a-z0-9_]{3,20}$/.test(h)){$("#g-err").textContent="Username: 3 to 20 letters, numbers, or underscores.";return}
+b.disabled=true;$("#g-err").textContent="";try{if(gmode=="in")await FB.signIn($("#ge").value.trim(),$("#gp").value);else if(gmode=="up")await FB.signUp($("#ge").value.trim(),$("#gp").value,n,h);else await FB.complete(n,h)}catch(e){$("#g-err").textContent=gerr(e)}finally{b.disabled=false}};
+function appAuth(u,p){window.FB_USER=u;K="sustaina_v3_"+u.uid;loadState();S.me.name=p.name;S.me.h="@"+p.handle;if(typeof p.av=="number")S.me.av=p.av;S.me.exp=Math.max(S.me.exp,p.exp||0);save();$("#eh").disabled=true;$("#so").style.display="inline-block";$("#gate").classList.add("hide");if(FRU)FRU();FRU=FB.watchFriends(l=>{FR=l;if(!$("#t-friends").classList.contains("hide"))rFr()});go("profile")}
+function appNeedProfile(u){showGate("prof");$("#gn").value=u.name||""}
+function appSignedOut(){window.FB_USER=null;K="sustaina_v3";loadState();if(FRU){FRU();FRU=null}FR=[];$("#so").style.display="none";$("#eh").disabled=false;showGate("in");go("profile")}
+const pr=(o,b)=>`<div class="row"><div class="who"><div class="sa">${AVS[o.av]||AVS[0]}</div><div><strong>${esc(o.name)}</strong><div class="mu sm">@${esc(o.handle)}</div></div></div><div>${b}</div></div>`;
+function rFr(){if(!window.FB_USER){$("#ft").textContent=S.friends.length;$("#rq-card").style.display="none";$("#fr").innerHTML='<p class="mu sm">These are sample friends. Create an account to find real people and chat.</p>'+S.friends.map((f,i)=>`<div class="row"><div class="who"><div class="sa">${f.av}</div><div><strong>${esc(f.n)}</strong><div class="mu sm">${esc(f.h)} · ${f.exp.toLocaleString()} EXP</div></div></div><button class="btn s" data-a="sc" data-i="${i}">Send Cheer (+10)</button></div>`).join("");return}
+const u=myUid(),oth=f=>f.info[f.members.find(x=>x!=u)],fs=FR.filter(f=>f.status=="friends"),inc=FR.filter(f=>f.status=="pending"&&f.requester!=u),out=FR.filter(f=>f.status=="pending"&&f.requester==u);
+$("#ft").textContent=fs.length;$("#rq-card").style.display=inc.length||out.length?"block":"none";
+$("#rq").innerHTML=inc.map(f=>pr(oth(f),`<button class="btn" data-a="fa" data-i="${f.id}">Accept</button> <button class="btn s" data-a="fd" data-i="${f.id}">Decline</button>`)).join("")+out.map(f=>pr(oth(f),`<span class="mu sm">Request sent</span> <button class="btn s" data-a="fd" data-i="${f.id}">Cancel</button>`)).join("");
+$("#fr").innerHTML=fs.map(f=>pr(oth(f),`<button class="btn" data-a="fc" data-i="${f.id}">Chat</button> <button class="btn s" data-a="fd" data-i="${f.id}">Remove</button>`)).join("")||'<p class="mu sm">No friends yet. Search for people above.</p>';if(SR.length)rSR()}
+function rSR(){$("#sr").innerHTML=SR.length?SR.map(o=>{const f=FR.find(x=>x.members.includes(o.uid));return pr(o,f?`<span class="mu sm">${f.status=="friends"?"Friends":"Pending"}</span>`:`<button class="btn" data-a="fq" data-i="${o.uid}">Add friend</button>`)}).join(""):'<p class="mu sm">No users found. Check the username and try again.</p>'}
+$("#af").onsubmit=async()=>{if(!window.FB_USER)return toast("Create an account to search for people");const q=$("#ai").value.trim().replace(/^@/,"").toLowerCase();if(q.length<2)return toast("Type at least 2 letters of a username");$("#sr").innerHTML='<p class="mu sm">Searching...</p>';try{SR=await FB.search(q);rSR()}catch(e){$("#sr").innerHTML='<p class="sm" style="color:#f87171">Search failed. Check your connection and try again.</p>'}};
+function openChat(pid){const f=FR.find(x=>x.id==pid);if(!f)return;const u=myUid(),o=f.info[f.members.find(x=>x!=u)];$("#ch-t").textContent=o.name+" (@"+o.handle+")";$("#ch-l").innerHTML="";$("#m-chat").classList.add("o");chatPid=pid;if(chatUnsub)chatUnsub();chatUnsub=FB.watchChat(pid,ms=>{$("#ch-l").innerHTML=ms.map(m=>`<div class="msg ${m.from==u?"me":""}">${esc(m.text)}<small>${new Date(m.ts).toLocaleTimeString([],{hour:"2-digit",minute:"2-digit"})}</small></div>`).join("")||'<p class="mu sm" style="text-align:center">Say hi!</p>';$("#ch-l").scrollTop=1e9})}
+$("#ch-f").onsubmit=()=>{const t=$("#ch-i").value.trim();if(!t||!chatPid)return;FB.send(chatPid,t).catch(()=>toast("Message failed to send"));$("#ch-i").value=""};
+$("#so").onclick=()=>{if(window.FB_USER&&window.FB)FB.signOut();else showGate(window.FB_ON?"in":"off")};
+document.addEventListener("click",async e=>{const t=e.target.closest("[data-g]");if(t){showGate(t.dataset.g);return}const b=e.target.closest("[data-a]");if(!b)return;const a=b.dataset.a,i=b.dataset.i;
+if(a=="x"&&chatUnsub){chatUnsub();chatUnsub=null}
+if(a=="gg"){$("#gate").classList.add("hide");$("#so").style.display="inline-block"}
+if(a=="ggl"&&window.FB)FB.google().catch(er=>{$("#g-err").textContent=gerr(er)});
+if(a=="gfp"){e.preventDefault();const m=$("#ge").value.trim();if(!m){$("#g-err").textContent="Type your email first, then tap Forgot password.";return}FB.reset(m).then(()=>{$("#g-err").style.color="var(--ac)";$("#g-err").textContent="Reset email sent. Check your inbox."}).catch(er=>{$("#g-err").textContent=gerr(er)})}
+if(a=="fq"){const o=SR.find(x=>x.uid==i);if(o){try{await FB.add(o,{name:S.me.name,handle:S.me.h.slice(1),av:S.me.av});toast("Friend request sent")}catch(er){toast("Could not send the request")}}}
+if(a=="fa"){try{await FB.accept(i)}catch(er){toast("Could not accept the request")}}
+if(a=="fd"){try{await FB.remove(i)}catch(er){toast("Could not update the request")}}
+if(a=="fc")openChat(i)});
+if(!window.FB_ON)showGate("off");else{showGate("load");setTimeout(()=>{if(gmode=="load")$("#g-sub").textContent="Could not connect. Check your internet connection and refresh the page."},10000)}
+go("profile");
+</script><script type="module">
+import{initializeApp}from"https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import{getAuth,onAuthStateChanged,createUserWithEmailAndPassword,signInWithEmailAndPassword,signInWithPopup,GoogleAuthProvider,signOut,sendPasswordResetEmail}from"https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+import{getFirestore,doc,getDoc,setDoc,updateDoc,deleteDoc,runTransaction,collection,query,where,orderBy,limit,getDocs,addDoc,onSnapshot,serverTimestamp}from"https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+if(window.FB_ON){
+const app=initializeApp(window.SUSTAINA_FIREBASE),auth=getAuth(app),db=getFirestore(app);let busy=false,st;
+async function refresh(u){const d=await getDoc(doc(db,"users",u.uid));d.exists()?window.appAuth({uid:u.uid,email:u.email},d.data()):window.appNeedProfile({uid:u.uid,name:u.displayName||""})}
+async function claim(uid,name,handle){await runTransaction(db,async t=>{const h=doc(db,"handles",handle);if((await t.get(h)).exists())throw new Error("handle-taken");t.set(h,{uid});t.set(doc(db,"users",uid),{name,handle,handleLower:handle,av:0,exp:0})})}
+window.FB={
+async signUp(e,p,n,h){if((await getDoc(doc(db,"handles",h))).exists())throw new Error("handle-taken");busy=true;try{const c=await createUserWithEmailAndPassword(auth,e,p);await claim(c.user.uid,n,h);await refresh(c.user)}finally{busy=false}},
+signIn:(e,p)=>signInWithEmailAndPassword(auth,e,p),
+google:()=>signInWithPopup(auth,new GoogleAuthProvider()),
+async complete(n,h){const u=auth.currentUser;busy=true;try{await claim(u.uid,n,h);await refresh(u)}finally{busy=false}},
+signOut:()=>signOut(auth),reset:e=>sendPasswordResetEmail(auth,e),
+async search(q){const s=await getDocs(query(collection(db,"users"),where("handleLower",">=",q),where("handleLower","<=",q+"\uf8ff"),limit(8)));return s.docs.filter(d=>d.id!=auth.currentUser.uid).map(d=>({uid:d.id,...d.data()}))},
+add:(o,m)=>{const u=auth.currentUser.uid,id=[u,o.uid].sort().join("_");return setDoc(doc(db,"friendships",id),{members:[u,o.uid],requester:u,status:"pending",info:{[u]:m,[o.uid]:{name:o.name,handle:o.handle,av:o.av||0}},createdAt:serverTimestamp()})},
+accept:id=>updateDoc(doc(db,"friendships",id),{status:"friends"}),
+remove:id=>deleteDoc(doc(db,"friendships",id)),
+watchFriends:cb=>onSnapshot(query(collection(db,"friendships"),where("members","array-contains",auth.currentUser.uid)),s=>cb(s.docs.map(d=>({id:d.id,...d.data()})))),
+watchChat:(id,cb)=>onSnapshot(query(collection(db,"friendships",id,"messages"),orderBy("ts"),limit(100)),s=>cb(s.docs.map(d=>{const x=d.data();return{from:x.from,text:x.text,ts:x.ts&&x.ts.toMillis?x.ts.toMillis():Date.now()}}))),
+send:(id,t)=>addDoc(collection(db,"friendships",id,"messages"),{from:auth.currentUser.uid,text:t,ts:serverTimestamp()})
+};
+window.fbSync=d=>{const u=auth.currentUser;if(!u)return;clearTimeout(st);st=setTimeout(()=>updateDoc(doc(db,"users",u.uid),d).catch(()=>{}),1500)};
+onAuthStateChanged(auth,u=>{if(busy)return;u?refresh(u):window.appSignedOut()});
+}
+</script>
+</body></html>
