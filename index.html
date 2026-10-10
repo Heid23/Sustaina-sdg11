@@ -5,9 +5,9 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
 <style>
 :root{--pr:#0d9488;--pd:#0f766e;--sk:#38bdf8;--ac:#f59e0b;--bg:#0f172a;--cd:#1e293b;--tx:#f8fafc;--mu:#a3b1c6;--ln:#334155;--r:16px;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
-*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;padding-bottom:3rem}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--tx);font:1rem/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;padding-bottom:3rem}
 h3,h4{margin:0 0 .4rem}p{margin:.3rem 0}.mu{color:var(--mu)}.sm{font-size:.82rem}
-nav{position:sticky;top:0;z-index:30;background:#0f172af2;backdrop-filter:blur(10px);border-bottom:1px solid var(--ln);padding:.6rem 1rem;padding-top:calc(.6rem + env(safe-area-inset-top,0px))}
+nav{position:sticky;top:0;z-index:30;background:color-mix(in srgb,var(--bg) 94%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--ln);padding:.6rem 1rem;padding-top:calc(.6rem + env(safe-area-inset-top,0px))}
 .nw{max-width:1100px;margin:auto;display:flex;flex-wrap:wrap;gap:.6rem;align-items:center;justify-content:space-between}
 .logo{font-weight:800;color:var(--tx);font-size:1.2rem;letter-spacing:.02em}.logo::before{content:"";display:inline-block;width:14px;height:14px;border-radius:4px;background:var(--pr);margin-right:8px}.tabs{display:flex;gap:.3rem;flex-wrap:wrap}
 .tb,.pt{border:1px solid transparent;background:none;color:var(--mu);border-radius:99px;padding:.45rem .9rem;font:inherit;font-weight:600;font-size:.85rem;cursor:pointer}
@@ -40,7 +40,7 @@ details{background:var(--bg);border:1px solid var(--ln);border-radius:12px;paddi
 .cgrid{display:flex;gap:8px;flex-wrap:wrap;margin:.3rem 0}.cgrid button{width:32px;height:32px;border-radius:50%;border:3px solid var(--ln);cursor:pointer;padding:0}.cgrid button[aria-pressed=true]{border-color:#fff}
 #mp{width:100%;height:auto;border-radius:14px;border:1px solid var(--ln);touch-action:none;cursor:crosshair;display:block;max-height:78vh;background:#0b2a4a}.mc{display:flex;gap:.4rem;flex-wrap:wrap;margin:.5rem 0}
 .cbtn{color:var(--sk);width:46px;height:46px;border-radius:50%;border:2px solid var(--sk);background:var(--cd);font-size:1.3rem;cursor:pointer;padding:0;transition:.2s;display:grid;place-items:center}.cbtn:hover{transform:scale(1.1);background:#38bdf822}.cb{display:flex;gap:.5rem}
-#cmap{display:grid;grid-template-columns:repeat(6,1fr);gap:4px;margin:.5rem 0}.lot{aspect-ratio:1;border-radius:10px;border:1px solid var(--ln);background:#0f172a;color:var(--mu);font-size:clamp(1.1rem,4.5vw,1.9rem);cursor:pointer;padding:0;transition:transform .12s}.lot:hover{transform:scale(1.08)}.lot.pb{background:#7f1d1d55;border-color:#b91c1c}.lot.ok{background:#0d948844;border-color:var(--pr)}
+#cmap{display:grid;grid-template-columns:repeat(6,1fr);gap:4px;margin:.5rem 0}.lot{aspect-ratio:1;border-radius:10px;border:1px solid var(--ln);background:var(--bg);color:var(--mu);font-size:clamp(1.1rem,4.5vw,1.9rem);cursor:pointer;padding:0;transition:transform .12s}.lot:hover{transform:scale(1.08)}.lot.pb{background:#7f1d1d55;border-color:#b91c1c}.lot.ok{background:#0d948844;border-color:var(--pr)}
 .ev{padding:.5rem .7rem;border-radius:10px;background:var(--bg);margin:.35rem 0;font-size:.9rem}
 #ef label{display:block;margin-top:.8rem}#ef .in{margin-bottom:.2rem}
 .cbtn{background:var(--pr);color:#fff;border-color:var(--pr);box-shadow:0 2px 6px #0007}.cbtn:hover{background:var(--pd);transform:scale(1.06)}.cw{display:flex;flex-direction:column;align-items:center;gap:3px}.cw span{font-size:.7rem;color:var(--mu);font-weight:600}
@@ -52,18 +52,32 @@ input::-webkit-calendar-picker-indicator{filter:invert(1);opacity:.85;cursor:poi
 #lmap{height:min(68vh,520px);border-radius:14px;position:relative;z-index:0;isolation:isolate;background:#0b2a4a}.tp{width:26px;height:26px;border-radius:50%;color:#fff;font:700 11px system-ui;display:grid;place-items:center;border:2px solid #fff;box-shadow:0 1px 4px #0008}.tp.hm{width:44px;border-radius:13px;background:#2563eb}
 .gate{position:fixed;inset:0;z-index:200;background:var(--bg);display:grid;place-items:center;padding:1rem;overflow:auto}.gate.hide{display:none}
 .msg{max-width:82%;padding:.45rem .75rem;border-radius:14px;background:#334155;align-self:flex-start;font-size:.92rem;word-break:break-word}.msg.me{background:var(--pr);align-self:flex-end}.msg small{display:block;opacity:.7;font-size:.65rem;margin-top:2px}
+.gate{background:radial-gradient(900px 520px at 50% -8%,#0f766e 0%,#0b3b57 38%,#070f1d 78%)}.grow.hide,.gate.hide{display:none}
+.gp{width:100%;max-width:400px;background:rgba(10,18,35,.62);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);border:1px solid rgba(94,234,212,.22);border-radius:30px;padding:1.6rem 1.3rem;box-shadow:0 24px 70px #000a}
+.gl{width:78px;height:78px;margin:0 auto .6rem;border-radius:50%;display:grid;place-items:center;border:2px solid #22d3ee55;box-shadow:0 0 32px #22d3ee66,inset 0 0 22px #22d3ee33;color:#67e8f9}
+.gt{text-align:center;font-size:1.7rem;font-weight:800;margin:.2rem 0;color:#fff}.gs{text-align:center;color:#9fb4cc;font-size:.88rem;margin:0 0 1rem}
+.fld{display:flex;align-items:center;gap:.75rem;background:rgba(2,6,23,.6);border:1px solid rgba(148,163,184,.2);border-left:3px solid #22d3ee;border-radius:18px;padding:.5rem .95rem;margin:.6rem 0;transition:.2s}.fld:focus-within{border-color:#67e8f9;box-shadow:0 0 0 3px #22d3ee33}
+.fld>svg{flex:none;color:#67e8f9}.fld>div{flex:1;min-width:0}.fld label{display:block;font-size:.68rem;color:#9fb4cc;font-weight:700;letter-spacing:.04em}.fld input{width:100%;background:none;border:0;color:#fff;font:inherit;font-size:1rem;padding:.1rem 0;outline:0}.fld button{background:none;border:0;color:#9fb4cc;cursor:pointer;padding:.2rem;display:grid}
+.grow{display:flex;justify-content:space-between;align-items:center;gap:.6rem;margin:.5rem .2rem .9rem;font-size:.85rem;color:#c6d4e6}.grow label{display:flex;gap:.5rem;align-items:center;cursor:pointer}.grow input{width:18px;height:18px;accent-color:#22d3ee}.grow a{color:#67e8f9;font-weight:700;text-decoration:none}
+.gbtn{width:100%;border:0;border-radius:99px;padding:.95rem;font:inherit;font-weight:800;font-size:1rem;cursor:pointer;color:#032a33;background:linear-gradient(180deg,#a5f3fc,#22d3ee);box-shadow:0 0 30px #22d3ee77;transition:.2s}.gbtn:hover{box-shadow:0 0 40px #22d3eebb}.gbtn:disabled{opacity:.6}
+.ggo{width:100%;display:flex;align-items:center;justify-content:center;gap:.7rem;margin-top:.9rem;padding:.85rem;border-radius:99px;border:1px solid rgba(148,163,184,.25);background:rgba(2,6,23,.55);color:#fff;font:inherit;font-weight:700;cursor:pointer;transition:.2s}.ggo:hover{border-color:#67e8f9}
+.gor{display:flex;align-items:center;gap:.7rem;color:#8aa0ba;font-size:.8rem;margin:1rem 0 0}.gor::before,.gor::after{content:"";flex:1;height:1px;background:rgba(148,163,184,.25)}
+.gate .seg{background:rgba(2,6,23,.55)}.gate .seg button{color:#9fb4cc}.gate .seg button[aria-selected=true]{background:linear-gradient(180deg,#14b8a6,#0d9488);color:#fff}.gate .btn.s{background:rgba(51,65,85,.7);color:#fff}
+.nav-i{width:40px;height:40px;border-radius:50%;border:1px solid var(--ln);background:var(--cd);color:var(--tx);cursor:pointer;display:grid;place-items:center;padding:0;transition:.2s}.nav-i:hover{color:var(--sk);border-color:var(--sk)}
+html[data-theme=light]{--bg:#f1f5f9;--cd:#fff;--tx:#0f172a;--mu:#52627a;--ln:#d5dde8;--sk:#0369a1;--ac:#b45309}html[data-theme=light] input::-webkit-calendar-picker-indicator{filter:none}
+.msg{color:#fff}.setsec{margin:1.1rem 0 .3rem;font-size:.8rem;letter-spacing:.06em;text-transform:uppercase;color:var(--mu)}
 @media(prefers-reduced-motion:reduce){*{transition:none!important}}
 </style></head><body>
 <nav><div class="nw"><span class="logo">SUSTAINA <small class="mu">SDG 11</small></span>
 <div class="tabs" role="tablist" id="mt"></div>
-<form id="sf" style="display:flex;gap:.3rem"><input id="si" class="in" list="bl" style="width:200px;margin:0" placeholder="Search another area" aria-label="Search another area leaderboard"><datalist id="bl"></datalist><button class="btn">Go</button></form><button class="btn s" id="so" style="display:none">Sign out</button></div></nav>
+<form id="sf" style="display:flex;gap:.3rem"><input id="si" class="in" list="bl" style="width:200px;margin:0" placeholder="Search another area" aria-label="Search another area leaderboard"><datalist id="bl"></datalist><button class="btn">Go</button></form><button class="nav-i" data-a="sets" aria-label="Settings" title="Settings"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg></button></div></nav>
 <main>
 <section id="t-profile" class="card" style="padding:0;background:none;border:0;box-shadow:none">
 <div class="card"><div class="ph"><div class="av"><span id="pav"></span><b id="prk"></b></div><div style="flex:1;min-width:230px">
 <h3 style="font-size:1.5rem"><span id="pn"></span> <small class="sm" style="background:var(--pr);padding:2px 8px;border-radius:6px">Citizen</small></h3>
 <p class="mu sm" id="ph"></p><p class="sm" id="pb"></p>
 <div class="stats"><div><b id="se">0</b><span>EXP Points</span></div><div><b id="sc">0 kg</b><span>CO₂ avoided (est.)</span></div><div><b id="su">0</b><span>Uploads</span></div><div><b id="sf2">0</b><span>Friends</span></div></div>
-<button class="btn" data-a="up">Upload Progress Photo</button> <button class="btn s" data-a="ed">Edit Profile</button> <button class="btn s" data-go="track">My Records</button> <button class="btn s" data-a="lo2">My Location</button></div></div></div>
+<button class="btn" data-a="up">Upload Progress Photo</button> <button class="btn s" data-a="ed">Edit Profile</button> <button class="btn s" data-go="track">My Records</button> <button class="btn s" data-a="lo2">My Location</button> <button class="btn s" data-a="acct">Account</button></div></div></div>
 <div class="card"><div role="tablist" style="border-bottom:1px solid var(--ln);margin-bottom:1rem" id="pts"></div><div class="grid" id="pg"></div></div></section>
 
 <section id="t-learn" class="hide"><div class="card"><h3>What is SDG 11?</h3>
@@ -159,15 +173,25 @@ input::-webkit-calendar-picker-indicator{filter:invert(1);opacity:.85;cursor:poi
 <p class="sm" style="margin-top:.8rem" id="lco">No map pin yet.</p>
 <p style="margin-top:.4rem"><button type="button" class="btn s" data-a="lpin">Pin on map</button> <button type="button" class="btn s" data-a="lgps">Use GPS</button></p>
 <p style="margin-top:1rem"><button class="btn">Save location</button> <button type="button" class="btn s" data-a="x">Cancel</button></p></form></div></div>
-<div class="gate" id="gate"><div class="card" style="max-width:420px;width:100%;margin:0">
-<div class="logo" style="margin-bottom:.3rem">SUSTAINA</div><p class="mu sm" id="g-sub">Loading...</p>
-<div id="g-off" class="hide"><p class="sm">Accounts are not set up yet. Add your Firebase settings to the file (see FIREBASE_SETUP.md), or continue without an account to try the app. Friends and chat need an account.</p><p style="margin-top:.8rem"><button class="btn" data-a="gg">Continue without an account</button></p></div>
-<div id="g-form" class="hide"><div class="seg" id="g-tabs"><button type="button" data-g="in" aria-selected="true">Sign in</button><button type="button" data-g="up" aria-selected="false">Create account</button></div>
-<form id="gf"><div id="g-up" class="hide"><label class="sm" for="gn">Full name</label><input id="gn" class="in" maxlength="30" autocomplete="name"><label class="sm" for="gh">Username</label><input id="gh" class="in" maxlength="20" placeholder="e.g. eco_juan" autocomplete="username"></div>
-<div id="g-em"><label class="sm" for="ge">Email</label><input id="ge" class="in" type="email" autocomplete="email"><label class="sm" for="gp">Password</label><input id="gp" class="in" type="password" minlength="6" autocomplete="current-password"></div>
-<p class="sm" id="g-err" style="color:#f87171;min-height:1.3em;margin:.4rem 0"></p><button class="btn" style="width:100%" id="g-go">Sign in</button></form>
-<div id="g-oth"><p class="mu sm" style="text-align:center;margin:.8rem 0">or</p><button class="btn s" style="width:100%" data-a="ggl">Continue with Google</button><p class="sm" style="text-align:center;margin-top:.8rem"><a href="#" data-a="gfp" style="color:var(--sk)">Forgot password?</a></p></div></div></div></div>
+<div class="gate" id="gate"><div class="gp"><div class="gl"><svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21v-7"/><path d="M12 14c-3.3 0-6-2.6-6-5.8C6 5 9 3 12 3s6 2 6 5.2c0 3.2-2.7 5.8-6 5.8z"/><path d="M12 10l3-2M12 12l-3-2"/></svg></div><h2 class="gt" id="g-title">SUSTAINA</h2><p class="gs" id="g-sub">Loading...</p>
+<p id="g-back" class="hide" style="text-align:center;margin:0 0 .6rem"><button type="button" class="btn s" data-a="gb">Cancel</button></p>
+<div id="g-off" class="hide"><p class="sm" style="color:#c6d4e6">Accounts are not set up yet. Add your Firebase settings to the file (see FIREBASE_SETUP.md), or continue without an account to try the app. Friends and chat need an account.</p><p style="margin-top:.9rem"><button class="gbtn" data-a="gg">Continue without an account</button></p></div>
+<div id="g-form" class="hide"><div class="seg" id="g-tabs"><button type="button" data-g="in" aria-selected="true">Log In</button><button type="button" data-g="up" aria-selected="false">Create account</button></div>
+<form id="gf"><div id="g-up" class="hide"><div class="fld"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg><div><label for="gn">Full name</label><input id="gn" maxlength="30" autocomplete="name"></div></div><div class="fld"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M16 8v5a3 3 0 0 0 6 0v-1a10 10 0 1 0-4 8"/></svg><div><label for="gh">Username</label><input id="gh" maxlength="20" autocomplete="username" placeholder="e.g. eco_juan"></div></div></div>
+<div id="g-em"><div class="fld"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h18v12H3z"/><path d="M3 7l9 6 9-6"/></svg><div><label for="ge">Email</label><input id="ge" type="email" autocomplete="email"></div></div><div class="fld"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg><div><label for="gp">Password</label><input id="gp" type="password" minlength="6" autocomplete="current-password"></div><button type="button" data-a="geye" aria-label="Show or hide password"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg></button></div>
+<div class="grow" id="g-rr"><label><input type="checkbox" id="grm" checked> Remember me</label><a href="#" data-a="gfp">Forgotten password?</a></div></div>
+<p class="sm" id="g-err" style="color:#fb7185;min-height:1.3em;margin:.2rem .3rem .6rem"></p><button class="gbtn" id="g-go">Log In</button></form>
+<div id="g-oth"><div class="gor">or</div><button type="button" class="ggo" data-a="ggl"><svg width="20" height="20" viewBox="0 0 48 48" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.5 0 6.6 1.2 9.1 3.6l6.8-6.8C35.8 2.4 30.3 0 24 0 14.6 0 6.5 5.4 2.6 13.2l7.9 6.1C12.4 13.5 17.7 9.5 24 9.5z"/><path fill="#4285F4" d="M46.1 24.5c0-1.6-.1-3.1-.4-4.5H24v9h12.4c-.5 2.9-2.2 5.3-4.6 6.9l7.4 5.7c4.3-4 6.9-9.9 6.9-17.1z"/><path fill="#FBBC05" d="M10.5 28.7a14.5 14.5 0 0 1 0-9.4l-7.9-6.1a24 24 0 0 0 0 21.6l7.9-6.1z"/><path fill="#34A853" d="M24 48c6.5 0 11.9-2.1 15.9-5.8l-7.4-5.7c-2.1 1.4-4.8 2.3-8.5 2.3-6.3 0-11.6-4.3-13.5-10l-7.9 6.1C6.5 42.6 14.6 48 24 48z"/></svg><span id="g-gt">Log in with Google</span></button></div></div></div></div>
 <div class="modal" id="m-chat"><div class="card" style="display:flex;flex-direction:column;height:min(80vh,560px)"><div style="display:flex;justify-content:space-between;align-items:center;gap:.6rem"><h3 id="ch-t" style="margin:0"></h3><button class="btn s" data-a="x">Close</button></div><div id="ch-l" style="flex:1;overflow:auto;margin:.8rem 0;display:flex;flex-direction:column;gap:.4rem"></div><form id="ch-f" style="display:flex;gap:.4rem"><input id="ch-i" class="in" style="margin:0" maxlength="500" placeholder="Type a message" autocomplete="off" required aria-label="Message"><button class="btn">Send</button></form></div></div>
+<div class="modal" id="m-set"><div class="card"><div style="display:flex;justify-content:space-between;align-items:center;gap:.6rem"><h3 style="margin:0">Settings</h3><button class="btn s" data-a="x">Close</button></div>
+<p class="setsec">Appearance</p><p class="sm">Theme</p><div class="seg"><button data-ui="theme:dark">Dark</button><button data-ui="theme:light">Light</button></div>
+<p class="sm">Text size</p><div class="seg"><button data-ui="size:sm">Small</button><button data-ui="size:md">Normal</button><button data-ui="size:lg">Large</button></div>
+<p class="setsec">Privacy</p><label class="chk"><input type="checkbox" id="sset-share"> <span class="sm">Share my tree pins publicly (demo: works only in this browser for now)</span></label><label class="chk"><input type="checkbox" id="sset-demo"> <span class="sm">Show sample community pins on the map</span></label>
+<p class="setsec">Account</p><p class="sm mu" id="set-who"></p><p style="margin-top:.4rem"><button class="btn s" data-a="acct">Manage account</button></p>
+<p class="setsec">Data</p><p class="sm mu">Your records, trees, and posts are saved in this browser.</p><p style="margin-top:.4rem"><button class="btn s" data-go="track">Backup and restore</button> <button class="btn s" data-a="clr" style="color:#f87171">Clear my data on this device</button></p>
+<p class="setsec">About</p><p class="sm mu">SUSTAINA is an independent educational project about UN Sustainable Development Goal 11. It is not affiliated with the United Nations.</p><p class="sm"><a href="https://sdgs.un.org/goals/goal11" target="_blank" rel="noopener" style="color:var(--sk)">Learn about SDG 11</a></p></div></div>
+<div class="modal" id="m-acct"><div class="card"><div style="display:flex;justify-content:space-between;align-items:center;gap:.6rem"><h3 style="margin:0">Account</h3><button class="btn s" data-a="x">Close</button></div><div id="ac-l" style="margin-top:.8rem"></div><div id="ac-pw"></div>
+<p style="margin-top:.8rem" id="ac-b"><button class="btn s" data-a="aadd">Add account</button> <button class="btn s" data-a="aso" style="color:#f87171">Sign out</button></p></div></div>
 <div id="toast" role="status" aria-live="polite"></div>
 
 <script>
@@ -392,20 +416,21 @@ fetch("https://nominatim.openstreetmap.org/reverse?format=jsonv2&addressdetails=
 function loadState(){S=dflt();try{const r=JSON.parse(localStorage.getItem(K));if(r&&r.me)S=Object.assign(dflt(),r)}catch(e){}}
 let FR=[],SR=[],FRU=null,chatUnsub=null,chatPid=null,gmode="load";window.FB_USER=null;
 const myUid=()=>window.FB_USER&&window.FB_USER.uid;
-const gerr=e=>({"auth/invalid-credential":"Wrong email or password.","auth/wrong-password":"Wrong email or password.","auth/user-not-found":"Wrong email or password.","auth/email-already-in-use":"That email already has an account. Try signing in.","auth/weak-password":"Use a password with at least 6 characters.","auth/invalid-email":"That email address does not look right.","auth/unauthorized-domain":"This web address is not allowed yet. Add it under Authentication, Settings, Authorized domains in Firebase.","auth/popup-closed-by-user":"","auth/cancelled-popup-request":"","auth/too-many-requests":"Too many tries. Wait a moment and try again.","auth/network-request-failed":"No internet connection.","handle-taken":"That username is taken. Try another.","permission-denied":"Permission denied. Check your Firestore rules."})[e.code||e.message]??"Something went wrong. Please try again.";
-function showGate(m,msg){gmode=m;$("#gate").classList.remove("hide");const up=m=="up",pf=m=="prof";
+const gerr=e=>({"auth/invalid-credential":"Wrong email or password. If you signed up with Google, tap Continue with Google instead.","auth/wrong-password":"Wrong email or password. If you signed up with Google, tap Continue with Google instead.","auth/user-not-found":"No account found with that email. Try Create account.","auth/email-already-in-use":"That email already has an account. Sign in, or tap Continue with Google if you signed up with Google.","auth/weak-password":"Use a password with at least 6 characters.","auth/invalid-email":"That email address does not look right.","auth/unauthorized-domain":"This web address is not allowed yet. Add it under Authentication, Settings, Authorized domains in Firebase.","auth/popup-closed-by-user":"","auth/cancelled-popup-request":"","auth/too-many-requests":"Too many tries. Wait a moment and try again.","auth/network-request-failed":"No internet connection.","handle-taken":"That username is taken. Try another.","permission-denied":"Permission denied. Check your Firestore rules."})[e.code||e.message]??"Something went wrong. Please try again.";
+function showGate(m,msg){gmode=m;$("#g-back").classList.toggle("hide",!window.FB_USER||m=="off"||m=="load");$("#gate").classList.remove("hide");const up=m=="up",pf=m=="prof";
 $("#g-off").classList.toggle("hide",m!="off");$("#g-form").classList.toggle("hide",!["in","up","prof"].includes(m));
-$("#g-sub").textContent=m=="load"?"Loading...":m=="off"?"Welcome":pf?"Almost done. Choose how others will see you.":up?"Create your account":"Sign in to continue";
-$("#g-tabs").classList.toggle("hide",pf);$("#g-up").classList.toggle("hide",!(up||pf));$("#g-em").classList.toggle("hide",pf);$("#g-oth").classList.toggle("hide",pf);
+$("#g-title").textContent=pf?"Almost done":up?"Create account":m=="in"?"Log In":"SUSTAINA";
+$("#g-sub").textContent=m=="load"?"Loading...":m=="off"?"Welcome":pf?"Choose how others will see you.":up?"Join the community":"Welcome back";
+$("#g-tabs").classList.toggle("hide",pf);$("#g-up").classList.toggle("hide",!(up||pf));$("#g-em").classList.toggle("hide",pf);$("#g-oth").classList.toggle("hide",pf);$("#g-rr").classList.toggle("hide",up);
 $$("#g-tabs button").forEach(b=>b.setAttribute("aria-selected",b.dataset.g==m));
 $("#ge").required=!pf;$("#gp").required=!pf;$("#gn").required=up||pf;$("#gh").required=up||pf;
-$("#g-go").textContent=pf?"Finish":up?"Create account":"Sign in";$("#g-err").style.color="#f87171";$("#g-err").textContent=msg||""}
+$("#g-go").textContent=pf?"Finish":up?"Create account":"Log In";$("#g-gt").textContent=up?"Sign up with Google":"Log in with Google";$("#g-err").style.color="#fb7185";$("#g-err").textContent=msg||""}
 $("#gf").onsubmit=async()=>{if(!window.FB)return;const b=$("#g-go"),n=$("#gn").value.trim(),h=$("#gh").value.trim().toLowerCase();
 if(gmode!="in"&&!/^[a-z0-9_]{3,20}$/.test(h)){$("#g-err").textContent="Username: 3 to 20 letters, numbers, or underscores.";return}
-b.disabled=true;$("#g-err").textContent="";try{if(gmode=="in")await FB.signIn($("#ge").value.trim(),$("#gp").value);else if(gmode=="up")await FB.signUp($("#ge").value.trim(),$("#gp").value,n,h);else await FB.complete(n,h)}catch(e){$("#g-err").textContent=gerr(e)}finally{b.disabled=false}};
-function appAuth(u,p){window.FB_USER=u;K="sustaina_v3_"+u.uid;loadState();S.me.name=p.name;S.me.h="@"+p.handle;if(typeof p.av=="number")S.me.av=p.av;S.me.exp=Math.max(S.me.exp,p.exp||0);save();$("#eh").disabled=true;$("#so").style.display="inline-block";$("#gate").classList.add("hide");if(FRU)FRU();FRU=FB.watchFriends(l=>{FR=l;if(!$("#t-friends").classList.contains("hide"))rFr()});go("profile")}
+b.disabled=true;$("#g-err").textContent="";try{if(gmode=="in")await FB.signIn($("#ge").value.trim(),$("#gp").value,$("#grm").checked);else if(gmode=="up")await FB.signUp($("#ge").value.trim(),$("#gp").value,n,h,$("#grm").checked);else await FB.complete(n,h)}catch(e){$("#g-err").textContent=gerr(e)}finally{b.disabled=false}};
+function appAuth(u,p){window.FB_USER=u;K="sustaina_v3_"+u.uid;loadState();S.me.name=p.name;S.me.h="@"+p.handle;if(typeof p.av=="number")S.me.av=p.av;S.me.exp=Math.max(S.me.exp,p.exp||0);save();$("#eh").disabled=true;$$(".modal").forEach(m=>m.classList.remove("o"));if(chatUnsub){chatUnsub();chatUnsub=null}$("#gate").classList.add("hide");if(FRU)FRU();FRU=FB.watchFriends(l=>{FR=l;if(!$("#t-friends").classList.contains("hide"))rFr()});go("profile")}
 function appNeedProfile(u){showGate("prof");$("#gn").value=u.name||""}
-function appSignedOut(){window.FB_USER=null;K="sustaina_v3";loadState();if(FRU){FRU();FRU=null}FR=[];$("#so").style.display="none";$("#eh").disabled=false;showGate("in");go("profile")}
+function appSignedOut(){window.FB_USER=null;K="sustaina_v3";loadState();if(FRU){FRU();FRU=null}FR=[];$("#eh").disabled=false;showGate("in");go("profile")}
 const pr=(o,b)=>`<div class="row"><div class="who"><div class="sa">${AVS[o.av]||AVS[0]}</div><div><strong>${esc(o.name)}</strong><div class="mu sm">@${esc(o.handle)}</div></div></div><div>${b}</div></div>`;
 function rFr(){if(!window.FB_USER){$("#ft").textContent=S.friends.length;$("#rq-card").style.display="none";$("#fr").innerHTML='<p class="mu sm">These are sample friends. Create an account to find real people and chat.</p>'+S.friends.map((f,i)=>`<div class="row"><div class="who"><div class="sa">${f.av}</div><div><strong>${esc(f.n)}</strong><div class="mu sm">${esc(f.h)} · ${f.exp.toLocaleString()} EXP</div></div></div><button class="btn s" data-a="sc" data-i="${i}">Send Cheer (+10)</button></div>`).join("");return}
 const u=myUid(),oth=f=>f.info[f.members.find(x=>x!=u)],fs=FR.filter(f=>f.status=="friends"),inc=FR.filter(f=>f.status=="pending"&&f.requester!=u),out=FR.filter(f=>f.status=="pending"&&f.requester==u);
@@ -416,42 +441,91 @@ function rSR(){$("#sr").innerHTML=SR.length?SR.map(o=>{const f=FR.find(x=>x.memb
 $("#af").onsubmit=async()=>{if(!window.FB_USER)return toast("Create an account to search for people");const q=$("#ai").value.trim().replace(/^@/,"").toLowerCase();if(q.length<2)return toast("Type at least 2 letters of a username");$("#sr").innerHTML='<p class="mu sm">Searching...</p>';try{SR=await FB.search(q);rSR()}catch(e){$("#sr").innerHTML='<p class="sm" style="color:#f87171">Search failed. Check your connection and try again.</p>'}};
 function openChat(pid){const f=FR.find(x=>x.id==pid);if(!f)return;const u=myUid(),o=f.info[f.members.find(x=>x!=u)];$("#ch-t").textContent=o.name+" (@"+o.handle+")";$("#ch-l").innerHTML="";$("#m-chat").classList.add("o");chatPid=pid;if(chatUnsub)chatUnsub();chatUnsub=FB.watchChat(pid,ms=>{$("#ch-l").innerHTML=ms.map(m=>`<div class="msg ${m.from==u?"me":""}">${esc(m.text)}<small>${new Date(m.ts).toLocaleTimeString([],{hour:"2-digit",minute:"2-digit"})}</small></div>`).join("")||'<p class="mu sm" style="text-align:center">Say hi!</p>';$("#ch-l").scrollTop=1e9})}
 $("#ch-f").onsubmit=()=>{const t=$("#ch-i").value.trim();if(!t||!chatPid)return;FB.send(chatPid,t).catch(()=>toast("Message failed to send"));$("#ch-i").value=""};
-$("#so").onclick=()=>{if(window.FB_USER&&window.FB)FB.signOut();else showGate(window.FB_ON?"in":"off")};
 document.addEventListener("click",async e=>{const t=e.target.closest("[data-g]");if(t){showGate(t.dataset.g);return}const b=e.target.closest("[data-a]");if(!b)return;const a=b.dataset.a,i=b.dataset.i;
 if(a=="x"&&chatUnsub){chatUnsub();chatUnsub=null}
-if(a=="gg"){$("#gate").classList.add("hide");$("#so").style.display="inline-block"}
-if(a=="ggl"&&window.FB)FB.google().catch(er=>{$("#g-err").textContent=gerr(er)});
+if(a=="gg")$("#gate").classList.add("hide");
+if(a=="ggl"&&window.FB)FB.google($("#grm").checked).catch(er=>{$("#g-err").textContent=gerr(er)});
 if(a=="gfp"){e.preventDefault();const m=$("#ge").value.trim();if(!m){$("#g-err").textContent="Type your email first, then tap Forgot password.";return}FB.reset(m).then(()=>{$("#g-err").style.color="var(--ac)";$("#g-err").textContent="Reset email sent. Check your inbox."}).catch(er=>{$("#g-err").textContent=gerr(er)})}
 if(a=="fq"){const o=SR.find(x=>x.uid==i);if(o){try{await FB.add(o,{name:S.me.name,handle:S.me.h.slice(1),av:S.me.av});toast("Friend request sent")}catch(er){toast("Could not send the request")}}}
 if(a=="fa"){try{await FB.accept(i)}catch(er){toast("Could not accept the request")}}
-if(a=="fd"){try{await FB.remove(i)}catch(er){toast("Could not update the request")}}
+if(a=="fd"){try{await FB.remove2(i)}catch(er){toast("Could not update the request")}}
 if(a=="fc")openChat(i)});
 if(!window.FB_ON)showGate("off");else{showGate("load");setTimeout(()=>{if(gmode=="load")$("#g-sub").textContent="Could not connect. Check your internet connection and refresh the page."},10000)}
+
+// ===== Account manager =====
+function renderAcct(){const l=$("#ac-l"),pw=$("#ac-pw"),guest=!window.FB_USER||!window.FB;$("#ac-b").style.display=guest?"none":"block";
+if(guest){l.innerHTML='<p class="mu sm">You are using the app without an account. Sign in to save your profile, find friends, and chat.</p><p style="margin-top:.6rem"><button class="btn" data-a="asi">Sign in or create account</button></p>';pw.innerHTML="";return}
+l.innerHTML=FB.accounts().map(a=>`<div class="row"><div class="who"><div class="sa">${AVS[a.av]||AVS[0]}</div><div><strong>${esc(a.name||"")}</strong><div class="mu sm">@${esc(a.handle||"")}${a.email?" · "+esc(a.email):""}</div></div></div><div>${a.active?'<span class="mu sm">Current</span>':`<button class="btn s" data-a="asw" data-i="${a.id}">Switch</button> <button class="btn s" data-a="arm" data-i="${a.id}">Remove</button>`}</div></div>`).join("");
+pw.innerHTML=FB.hasPassword()?"":'<div style="margin-top:1rem"><strong class="sm">Add a password</strong><p class="mu sm">You signed in with Google. Add a password to also sign in with your email.</p><input id="apw" type="password" class="in" placeholder="New password (6+ characters)" autocomplete="new-password"><button class="btn s" data-a="apw">Save password</button><p class="sm" id="apm" style="color:#f87171;min-height:1.2em"></p></div>'}
+document.addEventListener("click",async e=>{const b=e.target.closest("[data-a]");if(!b)return;const a=b.dataset.a,i=b.dataset.i;
+if(a=="acct"){renderAcct();$("#m-acct").classList.add("o")}
+if(a=="asi"||a=="aadd"){$("#m-acct").classList.remove("o");showGate(window.FB_ON?"in":"off")}
+if(!window.FB)return;
+if(a=="asw"){try{await FB.switchTo(i);toast("Switched account")}catch(er){toast("Could not switch account")}}
+if(a=="arm"&&confirm("Remove this account from this device? You can sign in again later.")){await FB.remove(i);renderAcct()}
+if(a=="aso"){const c=FB.accounts().find(x=>x.active);if(c){$("#m-acct").classList.remove("o");await FB.remove(c.id);toast("Signed out")}}
+if(a=="apw"){const v=$("#apw").value;if(v.length<6){$("#apm").textContent="Use at least 6 characters.";return}try{await FB.setPassword(v);toast("Password added. You can now sign in with your email.");renderAcct()}catch(er){$("#apm").textContent=er.code=="auth/requires-recent-login"?"For security, sign out, sign in with Google again, then try once more.":gerr(er)}}
+if(a=="gb"){await FB.cancelPending();$("#gate").classList.add("hide")}});
+
+// ===== Settings =====
+let UI={theme:"dark",size:"md"};try{Object.assign(UI,JSON.parse(localStorage.getItem("sustaina_ui"))||{})}catch(e){}
+function applyUI(){document.documentElement.dataset.theme=UI.theme;document.documentElement.style.fontSize={sm:"15px",md:"16px",lg:"18px"}[UI.size]||"16px"}
+function rSet(){$$("[data-ui]").forEach(b=>{const p=b.dataset.ui.split(":");b.setAttribute("aria-selected",UI[p[0]]==p[1])});$("#sset-share").checked=!!S.share;$("#sset-demo").checked=!!S.demo;$("#set-who").textContent=window.FB_USER?"Signed in as "+S.me.name+" ("+S.me.h+")":"You are not signed in."}
+$("#sset-share").onchange=e=>{S.share=e.target.checked?1:0;save()};$("#sset-demo").onchange=e=>{S.demo=e.target.checked?1:0;save();if(!$("#t-trees").classList.contains("hide"))rM()};
+document.addEventListener("click",e=>{const u=e.target.closest("[data-ui]");if(u){const p=u.dataset.ui.split(":");UI[p[0]]=p[1];try{localStorage.setItem("sustaina_ui",JSON.stringify(UI))}catch(x){}applyUI();rSet();return}
+const b=e.target.closest("[data-a]");if(!b)return;const a=b.dataset.a;
+if(a=="sets"){rSet();$("#m-set").classList.add("o")}
+if(a=="acct")$("#m-set").classList.remove("o");
+if(a=="geye"){const i=$("#gp");i.type=i.type=="password"?"text":"password"}
+if(a=="clr"&&confirm("Clear your records, trees, and posts on this device? Your profile and account stay.")){S.rec=[];S.trees=[];S.posts=[];S.cb=null;S.cheered=[];S.favs=[];S.cm={};save();$("#m-set").classList.remove("o");toast("Data cleared on this device");go("profile")}});
+document.addEventListener("click",e=>{if(e.target.closest("[data-go]"))$("#m-set").classList.remove("o")});
+applyUI();
 go("profile");
 </script><script type="module">
-import{initializeApp}from"https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-import{getAuth,onAuthStateChanged,createUserWithEmailAndPassword,signInWithEmailAndPassword,signInWithPopup,GoogleAuthProvider,signOut,sendPasswordResetEmail}from"https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+import{initializeApp,deleteApp}from"https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import{getAuth,onAuthStateChanged,createUserWithEmailAndPassword,signInWithEmailAndPassword,signInWithPopup,GoogleAuthProvider,EmailAuthProvider,linkWithCredential,signOut,sendPasswordResetEmail,setPersistence,browserLocalPersistence,browserSessionPersistence}from"https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 import{getFirestore,doc,getDoc,setDoc,updateDoc,deleteDoc,runTransaction,collection,query,where,orderBy,limit,getDocs,addDoc,onSnapshot,serverTimestamp}from"https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 if(window.FB_ON){
-const app=initializeApp(window.SUSTAINA_FIREBASE),auth=getAuth(app),db=getFirestore(app);let busy=false,st;
-async function refresh(u){const d=await getDoc(doc(db,"users",u.uid));d.exists()?window.appAuth({uid:u.uid,email:u.email},d.data()):window.appNeedProfile({uid:u.uid,name:u.displayName||""})}
-async function claim(uid,name,handle){await runTransaction(db,async t=>{const h=doc(db,"handles",handle);if((await t.get(h)).exists())throw new Error("handle-taken");t.set(h,{uid});t.set(doc(db,"users",uid),{name,handle,handleLower:handle,av:0,exp:0})})}
+const cfg=window.SUSTAINA_FIREBASE,LK="sustaina_sessions",rauth=getAuth(initializeApp(cfg,"reset"));
+let sess=[],cur=null,pend=null,st;
+const mk=n=>{const app=initializeApp(cfg,n);return{name:n,app,auth:getAuth(app),db:getFirestore(app),prof:null}};
+const store=()=>{try{localStorage.setItem(LK,JSON.stringify({names:sess.map(s=>s.name),active:cur&&cur.name}))}catch(e){}};
+const waitUser=a=>new Promise(r=>{const u=onAuthStateChanged(a,x=>{u();r(x)})});
+const kill=async s=>{try{await signOut(s.auth)}catch(e){}try{await deleteApp(s.app)}catch(e){}};
+async function loadProf(s){const u=s.auth.currentUser,d=await getDoc(doc(s.db,"users",u.uid));s.prof=d.exists()?d.data():null;return s.prof}
+async function activate(s){cur=s;store();const u=s.auth.currentUser;window.appAuth({uid:u.uid,email:u.email},s.prof)}
+async function adopt(s){const u=s.auth.currentUser,dup=sess.find(x=>x!==s&&x.auth.currentUser&&x.auth.currentUser.uid==u.uid);
+if(dup){try{await deleteApp(s.app)}catch(e){}pend=null;return activate(dup)}
+await loadProf(s);if(!s.prof){pend=s;window.appNeedProfile({uid:u.uid,name:u.displayName||""});return}
+sess.push(s);pend=null;return activate(s)}
+async function attempt(fn,rm){const s=mk("acc_"+Date.now());try{await setPersistence(s.auth,rm===false?browserSessionPersistence:browserLocalPersistence);await fn(s);await adopt(s)}catch(e){await kill(s);throw e}}
+async function claim(db,uid,name,handle){await runTransaction(db,async t=>{const h=doc(db,"handles",handle);if((await t.get(h)).exists())throw new Error("handle-taken");t.set(h,{uid});t.set(doc(db,"users",uid),{name,handle,handleLower:handle,av:0,exp:0})})}
+const uid=()=>cur.auth.currentUser.uid;
 window.FB={
-async signUp(e,p,n,h){if((await getDoc(doc(db,"handles",h))).exists())throw new Error("handle-taken");busy=true;try{const c=await createUserWithEmailAndPassword(auth,e,p);await claim(c.user.uid,n,h);await refresh(c.user)}finally{busy=false}},
-signIn:(e,p)=>signInWithEmailAndPassword(auth,e,p),
-google:()=>signInWithPopup(auth,new GoogleAuthProvider()),
-async complete(n,h){const u=auth.currentUser;busy=true;try{await claim(u.uid,n,h);await refresh(u)}finally{busy=false}},
-signOut:()=>signOut(auth),reset:e=>sendPasswordResetEmail(auth,e),
-async search(q){const s=await getDocs(query(collection(db,"users"),where("handleLower",">=",q),where("handleLower","<=",q+"\uf8ff"),limit(8)));return s.docs.filter(d=>d.id!=auth.currentUser.uid).map(d=>({uid:d.id,...d.data()}))},
-add:(o,m)=>{const u=auth.currentUser.uid,id=[u,o.uid].sort().join("_");return setDoc(doc(db,"friendships",id),{members:[u,o.uid],requester:u,status:"pending",info:{[u]:m,[o.uid]:{name:o.name,handle:o.handle,av:o.av||0}},createdAt:serverTimestamp()})},
-accept:id=>updateDoc(doc(db,"friendships",id),{status:"friends"}),
-remove:id=>deleteDoc(doc(db,"friendships",id)),
-watchFriends:cb=>onSnapshot(query(collection(db,"friendships"),where("members","array-contains",auth.currentUser.uid)),s=>cb(s.docs.map(d=>({id:d.id,...d.data()})))),
-watchChat:(id,cb)=>onSnapshot(query(collection(db,"friendships",id,"messages"),orderBy("ts"),limit(100)),s=>cb(s.docs.map(d=>{const x=d.data();return{from:x.from,text:x.text,ts:x.ts&&x.ts.toMillis?x.ts.toMillis():Date.now()}}))),
-send:(id,t)=>addDoc(collection(db,"friendships",id,"messages"),{from:auth.currentUser.uid,text:t,ts:serverTimestamp()})
+signUp:(e,p,n,h,rm)=>attempt(async s=>{if((await getDoc(doc(s.db,"handles",h))).exists())throw new Error("handle-taken");const c=await createUserWithEmailAndPassword(s.auth,e,p);await claim(s.db,c.user.uid,n,h)},rm),
+signIn:(e,p,rm)=>attempt(s=>signInWithEmailAndPassword(s.auth,e,p),rm),
+google:rm=>attempt(s=>{const pr=new GoogleAuthProvider();pr.setCustomParameters({prompt:"select_account"});return signInWithPopup(s.auth,pr)},rm),
+async complete(n,h){const s=pend;if(!s)throw new Error("Please sign in again.");await claim(s.db,s.auth.currentUser.uid,n,h);await loadProf(s);sess.push(s);pend=null;await activate(s)},
+async cancelPending(){if(pend){const s=pend;pend=null;await kill(s)}},
+accounts:()=>sess.map(s=>({id:s.name,email:s.auth.currentUser.email,name:s.prof&&s.prof.name,handle:s.prof&&s.prof.handle,av:(s.prof&&s.prof.av)||0,active:s===cur})),
+async switchTo(id){const s=sess.find(x=>x.name==id);if(s&&s!==cur)await activate(s)},
+async remove(id){const s=sess.find(x=>x.name==id);if(!s)return;const was=s===cur;await kill(s);sess=sess.filter(x=>x!==s);if(was){cur=null;if(sess.length)await activate(sess[0]);else{store();window.appSignedOut()}}else store()},
+hasPassword:()=>!!(cur&&cur.auth.currentUser.providerData.some(p=>p.providerId=="password")),
+setPassword:p=>{const u=cur.auth.currentUser;return linkWithCredential(u,EmailAuthProvider.credential(u.email,p))},
+reset:e=>sendPasswordResetEmail(rauth,e),
+async search(q){const s=await getDocs(query(collection(cur.db,"users"),where("handleLower",">=",q),where("handleLower","<=",q+"\uf8ff"),limit(8)));return s.docs.filter(d=>d.id!=uid()).map(d=>({uid:d.id,...d.data()}))},
+add:(o,m)=>{const u=uid(),id=[u,o.uid].sort().join("_");return setDoc(doc(cur.db,"friendships",id),{members:[u,o.uid],requester:u,status:"pending",info:{[u]:m,[o.uid]:{name:o.name,handle:o.handle,av:o.av||0}},createdAt:serverTimestamp()})},
+accept:id=>updateDoc(doc(cur.db,"friendships",id),{status:"friends"}),
+remove2:id=>deleteDoc(doc(cur.db,"friendships",id)),
+watchFriends:cb=>onSnapshot(query(collection(cur.db,"friendships"),where("members","array-contains",uid())),s=>cb(s.docs.map(d=>({id:d.id,...d.data()})))),
+watchChat:(id,cb)=>onSnapshot(query(collection(cur.db,"friendships",id,"messages"),orderBy("ts"),limit(100)),s=>cb(s.docs.map(d=>{const x=d.data();return{from:x.from,text:x.text,ts:x.ts&&x.ts.toMillis?x.ts.toMillis():Date.now()}}))),
+send:(id,t)=>addDoc(collection(cur.db,"friendships",id,"messages"),{from:uid(),text:t,ts:serverTimestamp()})
 };
-window.fbSync=d=>{const u=auth.currentUser;if(!u)return;clearTimeout(st);st=setTimeout(()=>updateDoc(doc(db,"users",u.uid),d).catch(()=>{}),1500)};
-onAuthStateChanged(auth,u=>{if(busy)return;u?refresh(u):window.appSignedOut()});
+window.fbSync=d=>{if(!cur)return;const s=cur;clearTimeout(st);if(s.prof)Object.assign(s.prof,d);st=setTimeout(()=>updateDoc(doc(s.db,"users",s.auth.currentUser.uid),d).catch(()=>{}),1500)};
+(async()=>{let sv={names:[],active:null};try{sv=JSON.parse(localStorage.getItem(LK))||sv}catch(e){}
+for(const n of sv.names){const s=mk(n),u=await waitUser(s.auth);if(u){await loadProf(s).catch(()=>{});if(s.prof)sess.push(s);else await kill(s)}else{try{await deleteApp(s.app)}catch(e){}}}
+if(!sess.length){store();window.appSignedOut();return}
+await activate(sess.find(s=>s.name==sv.active)||sess[0])})();
 }
 </script>
 </body></html>
