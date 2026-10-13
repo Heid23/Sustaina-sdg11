@@ -117,6 +117,25 @@ html[data-theme=light]{--bg:#f1f5f9;--cd:#fff;--tx:#0f172a;--mu:#52627a;--ln:#d5
 .newp{background:#ef4444;color:#fff;border-radius:99px;font-size:.65rem;font-weight:800;padding:1px 7px;margin-left:.3rem}.snip{font-size:.8rem;color:var(--mu);max-width:230px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.snip.u{color:var(--tx);font-weight:700}
 @media(prefers-reduced-motion:reduce){.lx *{animation:none!important;transition:none!important}.rvl{opacity:1;transform:none}}
 @media(prefers-reduced-motion:reduce){*{transition:none!important}}
+.feedw{max-width:560px;margin:0 auto}.fbar{display:flex;justify-content:flex-end;margin-bottom:.7rem}
+.ftabs{display:flex;gap:.3rem;background:var(--cd);border:1px solid var(--ln);border-radius:99px;padding:4px;margin-bottom:.8rem}.ftabs button{flex:1;border:0;background:none;color:var(--mu);font:inherit;font-weight:700;font-size:.9rem;padding:.55rem .4rem;border-radius:99px;cursor:pointer;transition:.2s}.ftabs button[aria-selected=true]{background:var(--pr);color:#fff;box-shadow:0 2px 10px #0d948855}
+.fctx{margin:.2rem .3rem .8rem}
+.fpc{background:var(--cd);border:1px solid var(--ln);border-radius:18px;overflow:hidden;margin-bottom:1.1rem;box-shadow:0 6px 24px #0003}
+.fph{display:flex;align-items:center;gap:.7rem;padding:.75rem .9rem}.fav{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;font-size:1.3rem;overflow:hidden;flex:none;border:2px solid var(--pr)}.fav img{width:100%;height:100%;object-fit:cover}
+.fpn{display:flex;flex-direction:column;min-width:0;flex:1}.fpn .mu{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.lnk{background:none;border:0;padding:0;color:var(--tx);font:inherit;font-weight:700;cursor:pointer;text-align:left}.lnk:hover{color:var(--sk);text-decoration:underline}.lnk.sm{font-size:.82rem;color:var(--mu);font-weight:600}
+.ico{background:none;border:0;color:var(--mu);cursor:pointer;padding:.4rem;border-radius:99px;display:grid;place-items:center}.ico:hover{background:var(--bg);color:#fb7185}
+.fpi{width:100%;max-height:520px;object-fit:cover;display:block;background:var(--bg)}
+.fpa{display:flex;align-items:center;gap:.2rem;padding:.45rem .6rem}.sp1{flex:1}
+.ab{display:inline-flex;align-items:center;gap:.35rem;background:none;border:0;color:var(--tx);font:inherit;font-weight:700;font-size:.9rem;padding:.45rem .65rem;border-radius:99px;cursor:pointer;text-decoration:none;transition:.15s}.ab:hover{background:var(--bg)}.ab.on svg{fill:currentColor}
+.ab[data-a=fch].on{color:#fb7185}.ab[data-a=fcm].on{color:var(--sk)}.ab[data-a=ffv].on{color:var(--ac)}
+.fpt{padding:0 .9rem .85rem;margin:0}
+.fcs{border-top:1px solid var(--ln);padding:.7rem .9rem .9rem}.fcm{margin-bottom:.55rem;font-size:.9rem;word-break:break-word}.fcf{display:flex;gap:.4rem;margin-top:.6rem}.fcf .in{margin:0}
+.fe{text-align:center;padding:2.2rem 1rem;color:var(--mu)}.fe h4{color:var(--tx);margin-bottom:.3rem}
+.msg .sn{display:block;font-size:.72rem;font-weight:700;color:var(--ac);margin-bottom:.1rem}
+.pick{max-height:240px;overflow:auto;border:1px solid var(--ln);border-radius:12px;padding:.3rem}.pick label{display:flex;align-items:center;gap:.6rem;padding:.5rem .4rem;border-radius:10px;cursor:pointer}.pick label:hover{background:var(--bg)}.pick input{width:18px;height:18px;accent-color:var(--pr)}
+.gsa{display:grid;place-items:center;background:var(--pr);color:#fff}
+#fp-posts .fpc{margin-bottom:.9rem}
 </style></head><body>
 <nav><div class="nw"><span class="logo">SUSTAINA <small class="mu">SDG 11</small></span>
 <div class="tabs" role="tablist" id="mt"></div>
@@ -184,12 +203,12 @@ html[data-theme=light]{--bg:#f1f5f9;--cd:#fff;--tx:#0f172a;--mu:#52627a;--ln:#d5
 <label class="chk"><input type="checkbox" id="mshare"> <span class="sm">Share my pins publicly (demo: only works inside this browser until the site has a server)</span></label>
 <label class="chk"><input type="checkbox" id="mdemo"> <span class="sm">Show sample community pins</span></label></div>
 <div class="card"><h4>My plantings</h4><div id="ml"></div></div></div></div></section>
-<section id="t-feed" class="hide"><div style="display:flex;justify-content:space-between;align-items:center;gap:.6rem;margin-bottom:.8rem"><h3 style="margin:0">Public Community Feed · <span id="fb"></span></h3><div class="cb"><div class="cw"><button class="cbtn" data-go="trees" aria-label="Open Tree Map" title="Tree Map"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21v-6"/><path d="M12 15a5 5 0 0 0 5-5 5 5 0 0 0-3-4.6A4 4 0 0 0 7 7a5 5 0 0 0 5 8z"/></svg></button><span>Tree Map</span></div><div class="cw"><button class="cbtn" data-go="sim" aria-label="Open City Builder" title="City Builder"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 21V4a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1v17"/><path d="M14 10h5a1 1 0 0 1 1 1v10M2 21h20M8 7h2M8 11h2M8 15h2"/></svg></button><span>City Builder</span></div></div></div><div class="cols"><div><div id="fl"></div></div>
-<div class="card" style="height:fit-content"><h4>Tip</h4><p class="mu sm">Public posts appear here and earn cheers. Private posts stay in your vault. Each upload gives +300 EXP.</p></div></div></section>
+<section id="t-feed" class="hide"><div style="display:flex;justify-content:space-between;align-items:center;gap:.6rem;margin-bottom:.8rem"><h3 style="margin:0">Community Feed</h3><div class="cb"><div class="cw"><button class="cbtn" data-go="trees" aria-label="Open Tree Map" title="Tree Map"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21v-6"/><path d="M12 15a5 5 0 0 0 5-5 5 5 0 0 0-3-4.6A4 4 0 0 0 7 7a5 5 0 0 0 5 8z"/></svg></button><span>Tree Map</span></div><div class="cw"><button class="cbtn" data-go="sim" aria-label="Open City Builder" title="City Builder"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 21V4a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1v17"/><path d="M14 10h5a1 1 0 0 1 1 1v10M2 21h20M8 7h2M8 11h2M8 15h2"/></svg></button><span>City Builder</span></div></div></div><div class="feedw"><div class="fbar"><button class="btn" data-a="up">Post a photo</button></div><div class="ftabs" id="ftabs" role="tablist" aria-label="Feed"><button role="tab" data-ft="brgy">Barangay</button><button role="tab" data-ft="fr">Friends</button><button role="tab" data-ft="you">For You</button></div><div id="fl"></div><p class="mu sm" style="text-align:center;margin-top:1rem">Public posts appear here and earn cheers. Private posts stay in your vault. Each upload gives +300 EXP.</p></div></section>
 
 <section id="t-friends" class="hide"><div class="card"><h3>Find people</h3><form id="af" style="display:flex;gap:.4rem;flex-wrap:wrap;margin-top:.5rem"><input id="ai" class="in" style="flex:1;min-width:180px;margin:0" placeholder="Search by username, e.g. ana_green" maxlength="24" aria-label="Search users"><button class="btn">Search</button></form><div id="sr" style="margin-top:.6rem"></div></div>
 <div class="card" id="rq-card" style="display:none"><h3>Friend requests</h3><div id="rq"></div></div>
-<div class="card"><h3>Friends (<span id="ft"></span>)</h3><div id="fr"></div></div></section>
+<div class="card"><h3>Friends (<span id="ft"></span>)</h3><div id="fr"></div></div>
+<div class="card" id="gc-card" style="display:none"><div style="display:flex;justify-content:space-between;align-items:center;gap:.6rem;flex-wrap:wrap"><h3 style="margin:0">Group chats (<span id="gct">0</span>)</h3><button class="btn" data-a="gn">New group</button></div><div id="gcl" style="margin-top:.7rem"></div></div></section>
 
 <section id="t-board" class="hide"><div class="card"><div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.6rem"><h3 id="bt" style="margin:0">Leaderboard</h3><button class="btn s" data-a="lo2">Edit my location</button></div><div class="seg" id="lvs" role="tablist" aria-label="Leaderboard level"></div><div id="bh"></div><div id="bc"></div></div><p class="mu sm">Other citizens are sample demo accounts, since this site has no real user database. Your uploads are self-reported and not independently verified.</p></section>
 
@@ -253,6 +272,9 @@ html[data-theme=light]{--bg:#f1f5f9;--cd:#fff;--tx:#0f172a;--mu:#52627a;--ln:#d5
 <form id="ch-f" style="display:flex;gap:.4rem"><input id="ch-i" class="in" style="margin:0" maxlength="500" placeholder="Type a message" autocomplete="off" required aria-label="Message"><button class="btn">Send</button></form>
 <div class="mact hide" id="mact"><button data-a="mr">Reply</button><button data-a="mc">Copy</button><button data-a="mh">Remove for you</button><button data-a="mu" id="mact-u">Unsend</button><button data-a="mx">Cancel</button></div></div></div>
 <div class="modal" id="m-fp"><div class="card"><div style="display:flex;justify-content:space-between;align-items:center"><h3 style="margin:0">Profile</h3><button class="btn s" data-a="x">Close</button></div><div id="fp-b" style="margin-top:.8rem"></div></div></div>
+<div class="modal" id="m-gn"><div class="card"><div style="display:flex;justify-content:space-between;align-items:center"><h3 style="margin:0">New group chat</h3><button class="btn s" data-a="gnx">Close</button></div>
+<form id="gnf" style="margin-top:.8rem"><label class="sm" for="gnn">Group name</label><input id="gnn" class="in" maxlength="40" placeholder="Example: Barangay Cleanup Team" autocomplete="off"><p class="sm mu" style="margin:.7rem 0 .3rem">Choose at least 2 friends</p><div id="gnl" class="pick"></div><p class="sm" id="gne" style="color:#f87171;min-height:1.2em;margin:.4rem 0"></p><button class="btn">Create group</button></form></div></div>
+<div class="modal" id="m-gi"><div class="card"><div style="display:flex;justify-content:space-between;align-items:center;gap:.6rem"><h3 style="margin:0" id="gi-t">Group info</h3><button class="btn s" data-a="gix">Close</button></div><div id="gi-b" style="margin-top:.8rem"></div></div></div>
 <div class="modal" id="m-set"><div class="card"><div style="display:flex;justify-content:space-between;align-items:center;gap:.6rem"><h3 style="margin:0">Settings</h3><button class="btn s" data-a="x">Close</button></div>
 <p class="setsec">Appearance</p><p class="sm">Theme</p><div class="seg"><button data-ui="theme:dark">Dark</button><button data-ui="theme:light">Light</button></div>
 <p class="sm">Text size</p><div class="seg"><button data-ui="size:sm">Small</button><button data-ui="size:md">Normal</button><button data-ui="size:lg">Large</button></div>
@@ -279,7 +301,8 @@ const DP=[{id:"d1",by:"@maria_green",cap:"Community river cleanup drive: 12 sack
 const SIM=[["Electric BRT / mass transit",15],["Protected bike lanes",10],["Rooftop solar microgrids",15],["Smart waste segregation hubs",10],["IoT flood early-warning sensors",10],["Parks and street trees",10]];
 const dflt=()=>({me:{name:"Juan Dela Cruz",h:"@eco_juan",bio:"Planting trees and reducing waste every day!",av:0,exp:0,co2:0},bar:PLACES[0],posts:[],friends:[{n:"Maria Santos",h:"@maria_green",av:"👩‍🔬",exp:3920},{n:"Mark Ramos",h:"@mark_trees",av:"🧑‍🎓",exp:3100},{n:"Sarah Lim",h:"@sarah_recycle",av:"🧑‍🍳",exp:2450}],logs:[],cb:null,rec:[],trees:[],share:0,demo:1,favs:[],cheered:[],cm:{},sim:[1,1,1,0,0,0],km:0,wk:0});
 let S=dflt(),sub="public";try{const r=JSON.parse(localStorage.getItem(K));if(r&&r.me)S=Object.assign(dflt(),r)}catch(e){}
-function save(){S.me.exp=300*S.posts.length+50*S.trees.length;try{localStorage.setItem(K,JSON.stringify(S))}catch(e){toast("Storage is full: this photo may not be saved after you close the page")}if(window.fbSync)fbSync({name:S.me.name,av:S.me.av,bg:S.me.bg||0,pic:S.me.pic||"",bio:S.me.bio||"",exp:S.me.exp,up:S.posts.length,tr:S.trees.reduce((a,t)=>a+t.n,0)});try{cloudPush()}catch(e){}}
+var SREADY=true,DIRTY=false;
+function save(){if(!SREADY)DIRTY=true;S.me.exp=300*S.posts.length+50*S.trees.length;try{localStorage.setItem(K,JSON.stringify(S))}catch(e){toast("Storage is full: this photo may not be saved after you close the page")}if(window.fbSync&&SREADY)fbSync({name:S.me.name,av:S.me.av,bg:S.me.bg||0,pic:S.me.pic||"",bio:S.me.bio||"",exp:S.me.exp,up:S.posts.length,tr:S.trees.reduce((a,t)=>a+t.n,0)});try{cloudPush()}catch(e){}}
 let tt;function toast(m){const t=$("#toast");t.textContent=m;t.classList.add("s");clearTimeout(tt);tt=setTimeout(()=>t.classList.remove("s"),2600)}
 const rk=e=>e>=5000?"MYTHIC SUPREME":e>=3000?"MYTHIC":e>=1500?"LEGEND":"EPIC";
 const hash=s=>{let h=7;for(const c of s)h=(h*31+c.charCodeAt(0))>>>0;return h};
@@ -295,7 +318,7 @@ AVS.forEach((a,i)=>{const b=document.createElement("button");b.type="button";b.t
 BGS.forEach((c,i)=>{const b=document.createElement("button");b.type="button";b.style.background=c;b.setAttribute("aria-label","Color "+(i+1));b.onclick=()=>{pickBg=i;markPick()};$("#cg").append(b)});
 function markPick(){$$("#ag button").forEach((b,i)=>b.setAttribute("aria-pressed",i==pickAv&&(pendPic===null||(pendPic===undefined&&!S.me.pic))));$$("#cg button").forEach((b,i)=>b.setAttribute("aria-pressed",i==pickBg))}
 const avHTML=()=>S.me.pic?`<img src="${S.me.pic}" alt="My profile photo">`:AVS[S.me.av];
-const mine=()=>S.posts.map(p=>({...p,by:S.me.h,own:1}));
+const mine=()=>S.posts.map(p=>({...p,by:S.me.h,own:1,likes:(MYF[(window.FB_USER?window.FB_USER.uid:"")+"_"+p.id]||p).likes}));
 const all=()=>[...mine().filter(p=>p.privacy=="public"),...DP.map(p=>({...p,privacy:"public",demo:1}))];
 function card(p,full){const c=(S.cm[p.id]||[]).length,n=(p.c||p.likes||0)+(S.cheered.includes(p.id)?1:0),fav=S.favs.includes(p.id);
 return `<div class="${full?"card":"post"}">${full?"":`<span class="bd ${p.privacy}">${p.privacy.toUpperCase()}</span>`}${p.img?`<img src="${p.img}" alt="Progress photo: ${esc(p.cap)}" ${full?'style="border-radius:12px;max-height:320px"':""}>`:`<div class="ban" ${full?'style="border-radius:12px"':""}>${p.em||""}</div>`}
@@ -306,9 +329,9 @@ function rP(){const m=S.me;$("#pav").innerHTML=avHTML();$(".av").style.backgroun
 $("#se").textContent=m.exp.toLocaleString();$("#sc").textContent=co2().toFixed(1)+" kg";$("#su").textContent=S.posts.length;$("#sf2").textContent=S.friends.length;
 const pub=S.posts.filter(p=>p.privacy=="public").length,pr=S.posts.length-pub;
 $$(".pt").forEach(b=>{b.setAttribute("aria-selected",b.dataset.s==sub);b.textContent={public:"Public ("+pub+")",private:"Private Vault ("+pr+")",favs:"Favorites ("+S.favs.length+")"}[b.dataset.s]});
-const L=sub=="favs"?[...mine(),...DP].filter(p=>S.favs.includes(p.id)):mine().filter(p=>p.privacy==sub);
-$("#pg").innerHTML=L.length?L.map(p=>card({...p,privacy:p.privacy||"public"},0)).join(""):`<p class="mu">Nothing here yet.${sub!="favs"?" Upload a progress photo to start.":" Tap on a post to save it."}</p>`}
-function rF(){$("#fb").textContent=(S.me.loc&&S.me.loc.brgy)?bn(S.me.loc.brgy):S.bar;const L=all();$("#fl").innerHTML=L.map(p=>card(p,1)).join("")}
+const L=sub=="favs"?[...mine(),...DP].filter(p=>S.favs.includes(p.id)):mine().filter(p=>p.privacy==sub),RL=sub=="favs"?favReal():[];
+$("#pg").innerHTML=(L.length||RL.length)?RL.map(rcard).join("")+L.map(p=>card({...p,privacy:p.privacy||"public"},0)).join(""):`<p class="mu">Nothing here yet.${sub!="favs"?" Upload a progress photo to start.":" Tap on a post to save it."}</p>`}
+function rF(){showFeed()}
 const ymd=d=>d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");
 const ACTS=["I sorted my waste","I avoided single-use plastic","I saved water or electricity","I walked, cycled, or took public transport","I helped plant, clean, or protect nature"];
 const pts=r=>r.acts.length*10+Math.floor(r.km)+Math.floor(r.w),co2=()=>S.rec.reduce((a,r)=>a+r.km*.17,0);
@@ -356,7 +379,7 @@ $("#ef").onsubmit=()=>{Object.assign(S.me,{name:$("#en").value.trim(),h:($("#eh"
 $("#tf").onsubmit=()=>{const km=+$("#tk").value||0,w=+$("#tw").value||0,acts=$$("#ta input:checked").map(i=>+i.value),d=$("#td").value||ymd(new Date());if(!km&&!w&&!acts.length)return toast("Add at least one thing you did");const r={d,km,mode:$("#tm").value,w,acts},was=editD;S.rec=S.rec.filter(x=>x.d!=d&&x.d!=was);S.rec.push(r);S.rec.sort((a,b)=>a.d<b.d?1:-1);save();resetForm();rT();toast(was?"Entry updated ":"Day saved! +"+pts(r)+" eco points ")};
 $("#uf").onsubmit=()=>{const f=$("#uf2").files[0],cap=$("#uc").value.trim(),pv=$("#upv").value;if(!f)return;const r=new FileReader();
 r.onload=ev=>{const im=new Image();im.onload=()=>{const sc=Math.min(1,480/Math.max(im.width,im.height)),c=document.createElement("canvas");c.width=im.width*sc;c.height=im.height*sc;c.getContext("2d").drawImage(im,0,0,c.width,c.height);
-const np={id:"u"+Date.now(),cap,img:c.toDataURL("image/jpeg",.7),privacy:pv,likes:0,t:Date.now()};S.posts.unshift(np);if(window.FB_USER&&window.FB)FB.addPost(np).catch(()=>toast("Could not upload the photo to your account"));save();$("#m-up").classList.remove("o");$("#uf").reset();sub=pv;rP();toast("Posted as "+pv.toUpperCase()+"! +300 EXP")};im.onerror=()=>toast("That file is not a readable image");im.src=ev.target.result};r.readAsDataURL(f)};
+const np={id:"u"+Date.now(),cap,img:c.toDataURL("image/jpeg",.7),privacy:pv,likes:0,t:Date.now()};S.posts.unshift(np);if(window.FB_USER&&window.FB){FB.addPost(np).catch(()=>toast("Could not upload the photo to your account"));if(pv=="public")FB.feedPut(np,feedMeta()).catch(()=>toast("Could not share the photo to the community feed"))}save();$("#m-up").classList.remove("o");$("#uf").reset();sub=pv;rP();toast("Posted as "+pv.toUpperCase()+"! +300 EXP")};im.onerror=()=>toast("That file is not a readable image");im.src=ev.target.result};r.readAsDataURL(f)};
 
 // ===== Tree map =====
 const ISL=[[[120.5,18.5],[121.5,18.6],[122.3,18.4],[122.4,17.2],[122.0,16.2],[121.6,15.7],[121.5,15.0],[121.9,14.4],[122.3,14.3],[122.8,14.2],[123.4,13.9],[124.0,13.5],[124.2,12.8],[123.6,12.7],[123.2,13.2],[122.7,13.4],[122.0,13.8],[121.7,13.7],[121.0,13.6],[120.6,14.1],[120.6,14.8],[120.1,14.9],[119.9,15.8],[120.3,16.2],[120.4,17.0],[120.4,18.1]],
@@ -498,28 +521,28 @@ $("#g-go").textContent=pf?"Finish":up?"Create account":"Log In";$("#g-gt").textC
 $("#gf").onsubmit=async()=>{if(!window.FB)return;const b=$("#g-go"),n=$("#gn").value.trim(),h=$("#gh").value.trim().toLowerCase();
 if(gmode!="in"&&!/^[a-z0-9_]{3,20}$/.test(h)){$("#g-err").textContent="Username: 3 to 20 letters, numbers, or underscores.";return}
 b.disabled=true;$("#g-err").textContent="";try{if(gmode=="in")await FB.signIn($("#ge").value.trim(),$("#gp").value,$("#grm").checked);else if(gmode=="up")await FB.signUp($("#ge").value.trim(),$("#gp").value,n,h,$("#grm").checked);else await FB.complete(n,h)}catch(e){$("#g-err").textContent=gerr(e)}finally{b.disabled=false}};
-function appAuth(u,p){window.FB_USER=u;K="sustaina_v3_"+u.uid;loadState();S.me.name=p.name;S.me.h="@"+p.handle;if(typeof p.av=="number")S.me.av=p.av;S.me.exp=Math.max(S.me.exp,p.exp||0);save();startSync(p);$("#eh").disabled=true;$$(".modal").forEach(m=>m.classList.remove("o"));if(chatUnsub){chatUnsub();chatUnsub=null}$("#gate").classList.add("hide");if(FRU)FRU();prevLast=null;prevReq=0;FRU=FB.watchFriends(onFriends);go("profile")}
+function appAuth(u,p){window.FB_USER=u;K="sustaina_v3_"+u.uid;loadState();S.me.name=p.name;S.me.h="@"+p.handle;if(typeof p.av=="number")S.me.av=p.av;S.me.exp=Math.max(S.me.exp,p.exp||0);SREADY=false;save();DIRTY=false;startSync(p);$("#eh").disabled=true;$$(".modal").forEach(m=>m.classList.remove("o"));if(chatUnsub){chatUnsub();chatUnsub=null}$("#gate").classList.add("hide");if(FRU)FRU();prevLast=null;prevReq=0;FRU=FB.watchFriends(onFriends);if(GRU)GRU();prevG=null;GR=[];GRU=FB.watchGroups(onGroups);stopAllFeeds();go("profile")}
 function appNeedProfile(u){showGate("prof");$("#gn").value=u.name||""}
-function appSignedOut(){UNS.forEach(f=>{try{f()}catch(e){}});UNS=[];window.FB_USER=null;K="sustaina_v3";loadState();if(FRU){FRU();FRU=null}FR=[];updateBadge();$("#eh").disabled=false;showGate("in");go("profile")}
+function appSignedOut(){UNS.forEach(f=>{try{f()}catch(e){}});UNS=[];window.FB_USER=null;SREADY=true;K="sustaina_v3";loadState();if(FRU){FRU();FRU=null}FR=[];if(GRU){GRU();GRU=null}GR=[];stopAllFeeds();updateBadge();$("#eh").disabled=false;showGate("in");go("profile")}
 const pr=(o,b,x="")=>`<div class="row"><div class="who"><div class="sa">${AVS[o.av]||AVS[0]}</div><div><strong>${esc(o.name)}</strong><div class="mu sm">@${esc(o.handle)}</div>${x}</div></div><div>${b}${o.uid?` <button class="btn s" data-a="vp" data-i="${o.uid}">Profile</button>`:""}</div></div>`;
-function rFr(){if(!window.FB_USER){$("#ft").textContent=S.friends.length;$("#rq-card").style.display="none";$("#fr").innerHTML='<p class="mu sm">These are sample friends. Create an account to find real people and chat.</p>'+S.friends.map((f,i)=>`<div class="row"><div class="who"><div class="sa">${f.av}</div><div><strong>${esc(f.n)}</strong><div class="mu sm">${esc(f.h)} · ${f.exp.toLocaleString()} EXP</div></div></div><button class="btn s" data-a="sc" data-i="${i}">Send Cheer (+10)</button></div>`).join("");return}
+function rFr(){if(!window.FB_USER){$("#ft").textContent=S.friends.length;$("#rq-card").style.display="none";$("#gc-card").style.display="none";$("#fr").innerHTML='<p class="mu sm">These are sample friends. Create an account to find real people and chat.</p>'+S.friends.map((f,i)=>`<div class="row"><div class="who"><div class="sa">${f.av}</div><div><strong>${esc(f.n)}</strong><div class="mu sm">${esc(f.h)} · ${f.exp.toLocaleString()} EXP</div></div></div><button class="btn s" data-a="sc" data-i="${i}">Send Cheer (+10)</button></div>`).join("");return}
 const u=myUid(),oth=f=>{const id=f.members.find(x=>x!=u);return{...f.info[id],uid:id}},fs=FR.filter(f=>f.status=="friends"),inc=FR.filter(f=>f.status=="pending"&&f.requester!=u),out=FR.filter(f=>f.status=="pending"&&f.requester==u);
 $("#ft").textContent=fs.length;$("#rq-card").style.display=inc.length||out.length?"block":"none";
 $("#rq").innerHTML=inc.map(f=>pr(oth(f),`<button class="btn" data-a="fa" data-i="${f.id}">Accept</button> <button class="btn s" data-a="fd" data-i="${f.id}">Decline</button>`)).join("")+out.map(f=>pr(oth(f),`<span class="mu sm">Request sent</span> <button class="btn s" data-a="fd" data-i="${f.id}">Cancel</button>`)).join("");
-$("#fr").innerHTML=fs.map(f=>pr(oth(f),`<button class="btn" data-a="fc" data-i="${f.id}">Chat${unread(f)?' <span class="newp">New</span>':""}</button> <button class="btn s" data-a="fd" data-i="${f.id}">Remove</button>`,snip(f))).join("")||'<p class="mu sm">No friends yet. Search for people above.</p>';if(SR.length)rSR()}
+$("#fr").innerHTML=fs.map(f=>pr(oth(f),`<button class="btn" data-a="fc" data-i="${f.id}">Chat${unread(f)?' <span class="newp">New</span>':""}</button> <button class="btn s" data-a="fd" data-i="${f.id}">Remove</button>`,snip(f))).join("")||'<p class="mu sm">No friends yet. Search for people above.</p>';if(SR.length)rSR();rGC()}
 function rSR(){$("#sr").innerHTML=SR.length?SR.map(o=>{const f=FR.find(x=>x.members.includes(o.uid));return pr(o,f?`<span class="mu sm">${f.status=="friends"?"Friends":"Pending"}</span>`:`<button class="btn" data-a="fq" data-i="${o.uid}">Add friend</button>`)}).join(""):'<p class="mu sm">No users found. Check the username and try again.</p>'}
 $("#af").onsubmit=async()=>{if(!window.FB_USER)return toast("Create an account to search for people");const q=$("#ai").value.trim().replace(/^@/,"").toLowerCase();if(q.length<2)return toast("Type at least 2 letters of a username");$("#sr").innerHTML='<p class="mu sm">Searching...</p>';try{SR=await FB.search(q);rSR()}catch(e){$("#sr").innerHTML='<p class="sm" style="color:#f87171">Search failed. Check your connection and try again.</p>'}};
 let CMS=[],replyTo=null,lpT=null,actMid=null,chatFirst=true;
 const otherOf=f=>{const u=myUid(),id=f.members.find(x=>x!=u);return{...f.info[id],uid:id}};
 function drawChat(){const u=myUid(),L=$("#ch-l"),hs=new Set(S.hid||[]),near=chatFirst||L.scrollHeight-L.scrollTop-L.clientHeight<90;
-L.innerHTML=CMS.filter(m=>!hs.has(m.id)).map(m=>`<div class="msg ${m.from==u?"me":""}" data-mid="${m.id}">${m.reply?`<div class="qt"><b>${esc(m.reply.n)}</b>${esc(m.reply.t)}</div>`:""}${esc(m.text)}<small>${new Date(m.ts).toLocaleTimeString([],{hour:"2-digit",minute:"2-digit"})}</small></div>`).join("")||'<p class="mu sm" style="text-align:center">Say hi!</p>';if(near)L.scrollTop=1e9;chatFirst=false}
-function openChat(pid){const f=FR.find(x=>x.id==pid);if(!f)return;const o=otherOf(f);markRead(f);$("#ch-t").textContent=o.name+" (@"+o.handle+")";$("#ch-t").dataset.i=o.uid;$("#ch-l").innerHTML="";$("#m-chat").classList.add("o");chatPid=pid;replyTo=null;chatFirst=true;$("#ch-rp").classList.add("hide");$("#mact").classList.add("hide");if(chatUnsub)chatUnsub();chatUnsub=FB.watchChat(pid,ms=>{CMS=ms;drawChat()})}
+L.innerHTML=CMS.filter(m=>!hs.has(m.id)).map(m=>`<div class="msg ${m.from==u?"me":""}" data-mid="${m.id}">${chatKind=="gc"&&m.from!=u?`<b class="sn">${esc(m.n||"Member")}</b>`:""}${m.reply?`<div class="qt"><b>${esc(m.reply.n)}</b>${esc(m.reply.t)}</div>`:""}${esc(m.text)}<small>${new Date(m.ts).toLocaleTimeString([],{hour:"2-digit",minute:"2-digit"})}</small></div>`).join("")||'<p class="mu sm" style="text-align:center">Say hi!</p>';if(near)L.scrollTop=1e9;chatFirst=false}
+function openChat(pid){const f=FR.find(x=>x.id==pid);if(!f)return;const o=otherOf(f);markRead(f);$("#ch-t").textContent=o.name+" (@"+o.handle+")";$("#ch-t").dataset.i=o.uid;$("#ch-l").innerHTML="";$("#m-chat").classList.add("o");chatPid=pid;chatKind="dm";$("#ch-t").setAttribute("data-a","vpc");$("#ch-t").title="View profile";replyTo=null;chatFirst=true;$("#ch-rp").classList.add("hide");$("#mact").classList.add("hide");if(chatUnsub)chatUnsub();chatUnsub=FB.watchChat(pid,ms=>{CMS=ms;drawChat()})}
 function showMenu(mid){const m=CMS.find(x=>x.id==mid);if(!m)return;actMid=mid;$("#mact-u").style.display=m.from==myUid()?"block":"none";$("#mact").classList.remove("hide")}
 (function(){const L=$("#ch-l");const stop=()=>{clearTimeout(lpT);lpT=null};
 L.addEventListener("pointerdown",e=>{const m=e.target.closest(".msg");if(!m)return;stop();const x=e.clientX,y=e.clientY;L._p=[x,y];lpT=setTimeout(()=>{showMenu(m.dataset.mid);if(navigator.vibrate)try{navigator.vibrate(15)}catch(z){}},450)});
 L.addEventListener("pointermove",e=>{if(lpT&&L._p&&Math.abs(e.clientX-L._p[0])+Math.abs(e.clientY-L._p[1])>10)stop()});["pointerup","pointercancel","pointerleave","scroll"].forEach(t=>L.addEventListener(t,stop));
 L.addEventListener("contextmenu",e=>{const m=e.target.closest(".msg");if(m){e.preventDefault();showMenu(m.dataset.mid)}});L.addEventListener("dblclick",e=>{const m=e.target.closest(".msg");if(m)showMenu(m.dataset.mid)})})();
-$("#ch-f").onsubmit=()=>{const t=$("#ch-i").value.trim();if(!t||!chatPid)return;FB.send(chatPid,t,replyTo?{t:replyTo.t,n:replyTo.n}:null).catch(()=>toast("Message failed to send"));$("#ch-i").value="";replyTo=null;$("#ch-rp").classList.add("hide")};
+$("#ch-f").onsubmit=()=>{const t=$("#ch-i").value.trim();if(!t||!chatPid)return;(chatKind=="gc"?FB.gsend(chatPid,t,replyTo?{t:replyTo.t,n:replyTo.n}:null,S.me.name):FB.send(chatPid,t,replyTo?{t:replyTo.t,n:replyTo.n}:null)).catch(()=>toast("Message failed to send"));$("#ch-i").value="";replyTo=null;$("#ch-rp").classList.add("hide")};
 document.addEventListener("click",async e=>{const t=e.target.closest("[data-g]");if(t){showGate(t.dataset.g);return}const b=e.target.closest("[data-a]");if(!b)return;const a=b.dataset.a,i=b.dataset.i;
 if(a=="x"&&chatUnsub){chatUnsub();chatUnsub=null}
 if(a=="gg")$("#gate").classList.add("hide");
@@ -602,45 +625,157 @@ const a=e.target.closest("[data-qa]");if(a){const v=a.dataset.qa;if(v=="again"){
 // ===== Cloud sync, friend profiles, message actions =====
 let curTab="profile",UNS=[],LP=0,SYNC=false,pushT=null;
 const cloud=()=>({rec:S.rec,trees:S.trees,cb:S.cb||null,favs:S.favs,cheered:S.cheered,cm:S.cm,share:S.share,demo:S.demo,loc:S.me.loc||null,hid:S.hid||[],lr:S.lr||{}});
-function cloudPush(){if(!window.FB_USER||!window.FB||SYNC)return;clearTimeout(pushT);pushT=setTimeout(()=>{const t=Date.now();LP=t;FB.saveData(JSON.stringify(cloud()),t).catch(()=>{})},1500)}
+function cloudPush(){if(!window.FB_USER||!window.FB||SYNC||!SREADY)return;clearTimeout(pushT);pushT=setTimeout(()=>{const t=Date.now();LP=t;FB.saveData(JSON.stringify(cloud()),t).catch(()=>{})},1500)}
 function applyCloud(o){let d;try{d=JSON.parse(o.json)}catch(e){return}SYNC=true;["rec","trees","cb","favs","cheered","cm","hid","lr"].forEach(k=>{if(d[k]!==undefined&&d[k]!==null)S[k]=d[k]});if(d.cb===null)S.cb=null;if(d.share!==undefined)S.share=d.share;if(d.demo!==undefined)S.demo=d.demo;if(d.loc!==undefined){if(d.loc)S.me.loc=d.loc;else delete S.me.loc}
 S.me.exp=300*S.posts.length+50*S.trees.length;try{localStorage.setItem(K,JSON.stringify(S))}catch(e){}SYNC=false}
 function refreshView(){if(!window.FB_USER)return;try{go(curTab)}catch(e){}}
 function applyUserDoc(p){if(p.name!==undefined)S.me.name=p.name;if(typeof p.av=="number")S.me.av=p.av;if(p.bg!==undefined)S.me.bg=p.bg;if(p.pic!==undefined)S.me.pic=p.pic||undefined;if(p.bio!==undefined)S.me.bio=p.bio;SYNC=true;try{localStorage.setItem(K,JSON.stringify(S))}catch(e){}SYNC=false}
 function startSync(p){UNS.forEach(f=>{try{f()}catch(e){}});UNS=[];applyUserDoc(p);const k0=K;
-FB.getData().then(o=>{if(K!=k0)return;if(o)applyCloud(o);else cloudPush();let fp=true;
+FB.getData().then(o=>{if(K!=k0)return;SREADY=true;if(o)applyCloud(o);else cloudPush();if(DIRTY||p.bio===undefined||p.pic===undefined||p.bg===undefined){DIRTY=false;save()}let fp=true;
 UNS=[FB.watchPosts(l=>{if(K!=k0)return;if(fp&&!l.length&&S.posts.length){S.posts.forEach(x=>FB.addPost(x).catch(()=>{}));fp=false;return}fp=false;S.posts=l.sort((a,b)=>(b.t||0)-(a.t||0)).map(x=>({id:x.id,cap:x.cap,img:x.img,privacy:x.privacy,likes:x.likes||0,t:x.t}));S.me.exp=300*S.posts.length+50*S.trees.length;SYNC=true;try{localStorage.setItem(K,JSON.stringify(S))}catch(e){}SYNC=false;refreshView()}),
 FB.watchData(o=>{if(K!=k0||o.t<=LP)return;applyCloud(o);refreshView()}),
-FB.watchUser(p=>{if(K!=k0)return;applyUserDoc(p);refreshView()})];refreshView()}).catch(()=>{})}
+FB.watchUser(p=>{if(K!=k0)return;applyUserDoc(p);refreshView()})];refreshView();startMyFeed()}).catch(()=>{if(K==k0&&!SREADY){toast("Could not load your saved data. Trying again...");setTimeout(()=>{if(K==k0&&!SREADY&&window.FB_USER)startSync(p)},6000)}})}
 const okImg=x=>typeof x=="string"&&x.startsWith("data:image/");
-async function openFP(id){$("#m-fp").classList.add("o");$("#fp-b").innerHTML='<p class="mu">Loading...</p>';try{const[u,ps]=await Promise.all([FB.getUser(id),FB.getPosts(id)]);if(!u){$("#fp-b").innerHTML='<p class="mu">This profile could not be found.</p>';return}
+async function openFP(id){$("#m-fp").classList.add("o");$("#fp-b").innerHTML='<p class="mu">Loading...</p>';try{const[u,ps,fps]=await Promise.all([FB.getUser(id),FB.getPosts(id),FB.getFeedByUser(id).catch(()=>[])]);closeFPcm();FP.id=id;FP.posts=fps;if(u)UC[id]=u;if(!u){$("#fp-b").innerHTML='<p class="mu">This profile could not be found.</p>';return}
 const me=id==myUid(),fr=FR.find(f=>f.status=="friends"&&f.members.includes(id)),pic=okImg(u.pic)?`<img src="${u.pic}" alt="Profile photo" style="width:100%;height:100%;object-fit:cover;border-radius:50%">`:AVS[u.av]||AVS[0],ex=u.exp||0;
 $("#fp-b").innerHTML=`<div class="ph"><div class="av" style="background:${BGS[u.bg||0]};overflow:hidden">${pic}</div><div style="flex:1;min-width:200px"><h3 style="margin:0">${esc(u.name||"")}</h3><div class="mu sm">@${esc(u.handle||"")}</div><div class="tier" style="color:${TC(ex)};margin:.2rem 0">${rk(ex)}</div><p class="sm">${esc(u.bio||"")}</p></div></div>
 <div class="stats"><div><b>${ex.toLocaleString()}</b><span>EXP</span></div><div><b>${u.up||0}</b><span>Uploads</span></div><div><b>${u.tr||0}</b><span>Trees planted</span></div></div>
 ${fr?`<p><button class="btn" data-a="fc" data-i="${fr.id}">Message</button></p>`:""}
-<h4 style="margin-top:1rem">Public posts</h4><div class="grid">${ps.length?ps.map(p=>`<div class="post">${okImg(p.img)?`<img src="${p.img}" alt="Post photo">`:'<div class="ban">No photo</div>'}<div class="pc"><p>${esc(p.cap||"")}</p></div></div>`).join(""):'<p class="mu sm">No public posts yet.</p>'}</div>`}catch(e){$("#fp-b").innerHTML='<p style="color:#f87171">Could not load this profile. Check your connection and Firestore rules.</p>'}}
+<h4 style="margin-top:1rem">Public posts</h4>${fps.length?`<div id="fp-posts">${fps.map(fcard).join("")}</div>`:`<div class="grid">${ps.length?ps.map(p=>`<div class="post">${okImg(p.img)?`<img src="${p.img}" alt="Post photo">`:'<div class="ban">No photo</div>'}<div class="pc"><p>${esc(p.cap||"")}</p></div></div>`).join(""):'<p class="mu sm">No public posts yet.</p>'}</div>`}`}catch(e){$("#fp-b").innerHTML='<p style="color:#f87171">Could not load this profile. Check your connection and Firestore rules.</p>'}}
 document.addEventListener("click",async e=>{const b=e.target.closest("[data-a]");if(!b)return;const a=b.dataset.a,i=b.dataset.i;
 if(a=="vp"&&window.FB)openFP(i);
 if(a=="vpc"&&window.FB&&i){$("#m-chat").classList.remove("o");if(chatUnsub){chatUnsub();chatUnsub=null}openFP(i)}
 if(a=="fc"){$("#m-fp").classList.remove("o")}
 if(a=="mx"||a=="mx2"){$("#mact").classList.add("hide");if(a=="mx2"){replyTo=null;$("#ch-rp").classList.add("hide")}}
 if(["mr","mc","mh","mu"].includes(a)){const m=CMS.find(x=>x.id==actMid);$("#mact").classList.add("hide");if(!m)return;
-if(a=="mr"){const f=FR.find(x=>x.id==chatPid),o=f?otherOf(f):{name:"them"};replyTo={t:m.text.slice(0,90),n:m.from==myUid()?"You":o.name};$("#ch-rt").textContent="Replying to "+replyTo.n+": "+replyTo.t;$("#ch-rp").classList.remove("hide");$("#ch-i").focus()}
+if(a=="mr"){const f=FR.find(x=>x.id==chatPid),o=f?otherOf(f):{name:"them"};replyTo={t:m.text.slice(0,90),n:m.from==myUid()?"You":(chatKind=="gc"?(m.n||"Member"):o.name)};$("#ch-rt").textContent="Replying to "+replyTo.n+": "+replyTo.t;$("#ch-rp").classList.remove("hide");$("#ch-i").focus()}
 if(a=="mc"){try{await navigator.clipboard.writeText(m.text);toast("Copied")}catch(er){toast("Could not copy")}}
 if(a=="mh"){S.hid=S.hid||[];S.hid.push(m.id);save();drawChat();toast("Removed for you")}
-if(a=="mu"&&confirm("Unsend this message for everyone?")){try{await FB.unsend(chatPid,m.id)}catch(er){toast("Could not unsend the message")}}}});
+if(a=="mu"&&confirm("Unsend this message for everyone?")){try{await (chatKind=="gc"?FB.gunsend(chatPid,m.id):FB.unsend(chatPid,m.id))}catch(er){toast("Could not unsend the message")}}}});
 
 // ===== New message notifications =====
 let prevLast=null,prevReq=0;
 const unread=f=>!!(f.status=="friends"&&f.last&&f.last.from!=myUid()&&f.last.ts>((S.lr||{})[f.id]||0));
 const snip=f=>f.last?`<div class="snip ${unread(f)?"u":""}">${f.last.from==myUid()?"You: ":""}${esc(f.last.text)}</div>`:"";
-function updateBadge(){const u=myUid();let n=0;if(u)n=FR.filter(unread).length+FR.filter(f=>f.status=="pending"&&f.requester!=u).length;const b=$("#fnb");if(b){b.textContent=n>9?"9+":n;b.classList.toggle("hide",!n)}document.title=(n?"("+n+") ":"")+"SUSTAINA: SDG 11 Community Platform"}
+function updateBadge(){const u=myUid();let n=0;if(u)n=FR.filter(unread).length+GR.filter(gunread).length+FR.filter(f=>f.status=="pending"&&f.requester!=u).length;const b=$("#fnb");if(b){b.textContent=n>9?"9+":n;b.classList.toggle("hide",!n)}document.title=(n?"("+n+") ":"")+"SUSTAINA: SDG 11 Community Platform"}
 function markRead(f){S.lr=S.lr||{};const t=f.last?f.last.ts:0;if(t&&(S.lr[f.id]||0)<t){S.lr[f.id]=t;save()}updateBadge();if(!$("#t-friends").classList.contains("hide"))rFr()}
 function onFriends(l){const first=prevLast===null;if(first)prevLast={};const me=myUid(),chatOpen=id=>$("#m-chat").classList.contains("o")&&chatPid==id;
 l.forEach(f=>{const t=f.last?f.last.ts:0;if(!first&&f.status=="friends"&&f.last&&f.last.from!=me&&t>(prevLast[f.id]||0)&&!chatOpen(f.id))toast(otherOf(f).name+": "+f.last.text);prevLast[f.id]=t});
 const nreq=l.filter(f=>f.status=="pending"&&f.requester!=me).length;if(!first&&nreq>prevReq)toast("You have a new friend request");prevReq=nreq;
-FR=l;const o=FR.find(f=>chatOpen(f.id));if(o)markRead(o);updateBadge();if(!$("#t-friends").classList.contains("hide"))rFr()}
+FR=l;if(!$("#t-feed").classList.contains("hide")&&FD.tab=="fr"&&FD.key!=K+"|"+feedKey())showFeed();const o=FR.find(f=>chatOpen(f.id));if(o)markRead(o);updateBadge();if(!$("#t-friends").classList.contains("hide"))rFr()}
 (()=>{const b=document.querySelector('.tb[data-t="friends"]');if(b)b.insertAdjacentHTML("beforeend",'<span class="nb hide" id="fnb" aria-label="New notifications"></span>')})();
+
+// ===== Feed (Barangay / Friends / For You), post actions, group chats =====
+var chatKind="dm",GRU=null,GR=[],prevG=null,GI=null,MYF={},MYR=false,MYU=null,bfd=false,BFT=false,ucT=null;
+const FD={tab:"you",posts:[],sig:"",unsub:null,key:null,loading:false,err:false,cm:{}},FP={id:null,posts:[]},FAVC={},FAVT={},UC={};
+const IC={
+heart:'<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8l1 1.1L12 21l7.8-7.5 1-1.1a5.5 5.5 0 0 0 0-7.8z"/></svg>',
+chat:'<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.4 8.4 0 0 1-9 8.4 8.6 8.6 0 0 1-3.6-.8L3 21l1.9-5.3A8.4 8.4 0 1 1 21 11.5z"/></svg>',
+save:'<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>',
+dl:'<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 21h16"/></svg>',
+trash:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h18M8 6V4h8v2M6 6l1 14h10l1-14"/></svg>',
+grp:'<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.9M16 3.1a4 4 0 0 1 0 7.8"/></svg>'};
+const ago=t=>{if(!t)return"";const s=Math.max(1,Math.floor((Date.now()-t)/1000));if(s<60)return"Just now";const m=Math.floor(s/60);if(m<60)return m+" min ago";const h=Math.floor(m/60);if(h<24)return h+" h ago";const d=Math.floor(h/24);if(d<7)return d+" d ago";return new Date(t).toLocaleDateString(undefined,{month:"short",day:"numeric"})};
+const bkOf=o=>o&&o.brgy?String(o.brgy).toLowerCase().replace(/^(barangay|brgy\.?)\s*/,"").trim()+"|"+String(o.city||o.mun||"").toLowerCase().trim():"";
+const feedMeta=()=>{const o=S.me.loc;return{name:S.me.name,handle:String(S.me.h||"").replace(/^@/,""),av:S.me.av||0,bg:S.me.bg||0,bk:bkOf(o),bl:o&&o.brgy?bn(o.brgy):"",cl:o?(o.city||o.mun||""):""}};
+const friendIds=()=>FR.filter(f=>f.status=="friends").map(f=>f.members.find(x=>x!=myUid())).filter(Boolean).sort();
+const findP=id=>FD.posts.find(p=>p.id==id)||FP.posts.find(p=>p.id==id)||FAVC[id];
+function auvHTML(u,av,bg){const pic=u==myUid()?S.me.pic:(UC[u]&&okImg(UC[u].pic)?UC[u].pic:null);return `<div class="fav" style="background:${BGS[bg||0]||BGS[0]}">${pic?`<img src="${pic}" alt="">`:(AVS[av]||AVS[0])}</div>`}
+function needUsers(L){const me=myUid();L.forEach(p=>{if(p.uid&&p.uid!=me&&UC[p.uid]===undefined&&Object.keys(UC).length<80){UC[p.uid]=null;FB.getUser(p.uid).then(u=>{UC[p.uid]=u||{};clearTimeout(ucT);ucT=setTimeout(redrawAll,200)}).catch(()=>{UC[p.uid]={}})}})}
+function cmHTML(fid){const st=FD.cm[fid]||{list:[]},me=myUid();return `<div class="fcs">${st.list.map(x=>`<div class="fcm"><div><b>${esc(x.name||"User")}</b> <span>${esc(x.text)}</span></div><div class="mu sm">${ago(x.t)}${x.uid==me?` · <button class="lnk sm" data-a="fcd" data-i="${fid}" data-c="${x.id}">Delete</button>`:""}</div></div>`).join("")||'<p class="mu sm">No comments yet. Be the first.</p>'}<form class="fcf" data-fcf="${fid}"><input class="in fcin" data-fid="${fid}" maxlength="200" placeholder="Write a comment" aria-label="Comment" autocomplete="off"><button class="btn s">Send</button></form></div>`}
+function fcard(p){const me=myUid(),c=S.cheered.includes(p.id),sv=S.favs.includes(p.id),st=FD.cm[p.id],op=!!(st&&st.open);
+return `<article class="fpc"><header class="fph">${auvHTML(p.uid,p.av,p.bg)}<div class="fpn"><button class="lnk" data-a="vp" data-i="${p.uid}">${esc(p.name||"User")}</button><span class="mu sm">@${esc(p.handle||"")} · ${ago(p.t)}${p.bl?" · "+esc(p.bl):""}</span></div>${p.uid==me?`<button class="ico" data-a="fdel" data-i="${p.id}" aria-label="Delete post" title="Delete post">${IC.trash}</button>`:""}</header>
+${okImg(p.img)?`<img class="fpi" src="${p.img}" alt="Photo: ${esc(p.cap||"")}" loading="lazy">`:""}
+<div class="fpa"><button class="ab ${c?"on":""}" data-a="fch" data-i="${p.id}" aria-pressed="${c}" aria-label="Cheer">${IC.heart}<span>${p.likes||0}</span></button><button class="ab ${op?"on":""}" data-a="fcm" data-i="${p.id}" aria-expanded="${op}" aria-label="Comments">${IC.chat}<span>${p.cn||0}</span></button><span class="sp1"></span>${okImg(p.img)?`<a class="ab" href="${p.img}" download="sustaina-${esc(p.id)}.jpg" aria-label="Download photo" title="Download photo">${IC.dl}</a>`:""}<button class="ab ${sv?"on":""}" data-a="ffv" data-i="${p.id}" aria-pressed="${sv}" aria-label="${sv?"Remove from saved":"Save"}" title="${sv?"Saved":"Save"}">${IC.save}</button></div>
+${p.cap?`<p class="fpt"><b>${esc(p.name||"")}</b> ${esc(p.cap)}</p>`:""}${op?cmHTML(p.id):""}</article>`}
+function rcard(p){return `<div class="post">${okImg(p.img)?`<img src="${p.img}" alt="Saved photo: ${esc(p.cap||"")}">`:'<div class="ban"></div>'}<div class="pc"><div class="sm" style="color:var(--sk)">${esc(p.name||"")} · @${esc(p.handle||"")}</div><p>${esc(p.cap||"")}</p><div style="display:flex;gap:.4rem;flex-wrap:wrap;margin-top:.4rem"><button class="btn s ${S.cheered.includes(p.id)?"on":""}" data-a="fch" data-i="${p.id}">Cheer ${p.likes||0}</button><button class="btn s on" data-a="ffv" data-i="${p.id}">Saved</button></div></div></div>`}
+function paint(el,html){const keep=[...el.querySelectorAll(".fcin")].map(i=>({f:i.dataset.fid,v:i.value,fo:document.activeElement===i,s:i.selectionStart}));el.innerHTML=html;keep.forEach(k=>{const i=el.querySelector('.fcin[data-fid="'+k.f+'"]');if(i&&k.v){i.value=k.v}if(i&&k.fo){i.focus();try{i.setSelectionRange(k.s,k.s)}catch(e){}}})}
+function stopFeed(){if(FD.unsub){try{FD.unsub()}catch(e){}FD.unsub=null}Object.values(FD.cm).forEach(s=>{if(s.unsub){try{s.unsub()}catch(e){}}});FD.cm={};FD.key=null;FD.posts=[];FD.sig="";FD.err=false}
+function stopMy(){if(MYU){try{MYU()}catch(e){}MYU=null}MYF={};MYR=false;bfd=false}
+function stopAllFeeds(){stopFeed();stopMy();FP.posts=[];FP.id=null}
+function startFeed(){const k=feedKey(),key=K+"|"+k;if(FD.key==key&&FD.unsub)return;if(FD.unsub){try{FD.unsub()}catch(e){}FD.unsub=null}FD.key=key;FD.posts=[];FD.sig="";FD.err=false;FD.loading=true;
+const cb=l=>{FD.loading=false;FD.err=false;FD.posts=l.sort((a,b)=>(b.t||0)-(a.t||0));const sg=l.map(p=>p.id+":"+(p.likes||0)+":"+(p.cn||0)).join(",");if(sg!=FD.sig){FD.sig=sg;drawFeed()}},er=()=>{FD.loading=false;FD.err=true;drawFeed()};
+if(FD.tab=="fr")FD.unsub=FB.watchFeed({uids:[myUid(),...friendIds()].slice(0,30)},cb,er);
+else if(FD.tab=="brgy"){const b=bkOf(S.me.loc);if(!b){FD.loading=false;FD.key=null;return}FD.unsub=FB.watchFeed({bk:b},cb,er)}
+else FD.unsub=FB.watchFeed({},cb,er)}
+function feedKey(){if(FD.tab=="fr")return"fr:"+friendIds().join(",");if(FD.tab=="brgy")return"brgy:"+bkOf(S.me.loc);return"you"}
+function showFeed(){$$("#ftabs button").forEach(b=>b.setAttribute("aria-selected",b.dataset.ft==FD.tab));
+if(!window.FB_USER||!window.FB){stopFeed();$("#ftabs").style.display="none";drawFeed();return}
+$("#ftabs").style.display="flex";startFeed();drawFeed()}
+function emptyHTML(){if(FD.tab=="brgy"&&!bkOf(S.me.loc))return '<div class="fe"><h4>Set your barangay first</h4><p>Add your location so we can show posts from your barangay.</p><p><button class="btn" data-a="lo2">Set my location</button></p></div>';
+if(FD.tab=="brgy")return '<div class="fe"><h4>No posts in your barangay yet</h4><p>Be the first. Post a public photo with your location set.</p><p><button class="btn" data-a="up">Post a photo</button></p></div>';
+if(FD.tab=="fr")return '<div class="fe"><h4>No posts from friends yet</h4><p>Add friends, or post a public photo yourself.</p><p><button class="btn" data-go="friends">Find friends</button></p></div>';
+return '<div class="fe"><h4>No public posts yet</h4><p>Post the first photo of what you did for your community.</p><p><button class="btn" data-a="up">Post a photo</button></p></div>'}
+function drawFeed(){const box=$("#fl");if(!box||$("#t-feed").classList.contains("hide"))return;
+if(!window.FB_USER){box.innerHTML='<div class="fe" style="padding:1rem"><p>Sign in to see posts from your barangay, your friends, and everyone.</p><p><button class="btn" data-a="asi">Sign in or create account</button></p></div><p class="mu sm" style="margin:.6rem 0">Sample posts</p>'+all().map(p=>card(p,1)).join("");return}
+const ctx={brgy:()=>{const o=S.me.loc;return o&&o.brgy?"Posts from "+bn(o.brgy)+(o.city||o.mun?", "+(o.city||o.mun):""):"Posts from your barangay"},fr:()=>"Posts from you and your friends",you:()=>"Public posts from everyone"}[FD.tab]();
+let h=`<p class="mu sm fctx">${esc(ctx)}</p>`;
+if(FD.err)h+='<div class="fe"><h4>Could not load the feed</h4><p>Check your internet and make sure the latest Firestore rules are published.</p></div>';
+else if(FD.loading&&!FD.posts.length)h+='<div class="fe"><p>Loading posts...</p></div>';
+else if(!FD.posts.length)h+=emptyHTML();
+else h+=FD.posts.map(fcard).join("");
+if(FD.tab=="you"&&!FD.err&&!FD.loading&&FD.posts.length<3)h+='<p class="mu sm" style="margin:1rem 0 .6rem">Sample posts</p>'+DP.map(p=>card({...p,privacy:"public",demo:1},1)).join("");
+paint(box,h);needUsers(FD.posts)}
+function drawFPPosts(){const el=$("#fp-posts");if(el)paint(el,FP.posts.map(fcard).join(""))}
+function redrawAll(){if(!$("#t-feed").classList.contains("hide"))drawFeed();if($("#m-fp").classList.contains("o"))drawFPPosts();if(!$("#t-profile").classList.contains("hide"))rP()}
+function favReal(){const known=new Set([...S.posts.map(p=>p.id),...DP.map(p=>p.id)]),out=[],miss=[];S.favs.filter(i=>!known.has(i)).forEach(i=>{const p=FAVC[i]||FD.posts.find(x=>x.id==i)||FP.posts.find(x=>x.id==i);if(p){FAVC[i]=p;out.push(p)}else if(!FAVT[i]&&window.FB_USER&&window.FB)miss.push(i)});
+if(miss.length){miss.forEach(i=>FAVT[i]=1);FB.getFeedPosts(miss.slice(0,20)).then(L=>{L.forEach(p=>FAVC[p.id]=p);if(L.length&&sub=="favs")rP()}).catch(()=>{})}return out}
+async function doCheer(id){const p=findP(id);if(!p||!window.FB_USER)return;const was=S.cheered.includes(id),l0=p.likes||0;
+if(was){S.cheered=S.cheered.filter(x=>x!=id);p.likes=Math.max(0,l0-1)}else{S.cheered.push(id);p.likes=l0+1}save();redrawAll();
+try{const r=await FB.cheer(id,!was);p.likes=r.likes;redrawAll()}catch(e){S.cheered=was?[...S.cheered,id]:S.cheered.filter(x=>x!=id);p.likes=l0;save();redrawAll();toast(e&&e.message=="gone"?"That post is no longer available":"Could not send your cheer")}}
+function doSave(id){const p=findP(id),k=S.favs.indexOf(id);if(k<0){S.favs.push(id);if(p)FAVC[id]=p}else S.favs.splice(k,1);save();redrawAll();toast(k<0?"Saved to Favorites":"Removed from Favorites")}
+function toggleCm(id){const st=FD.cm[id]=FD.cm[id]||{list:[],open:false,unsub:null};
+if(st.open){st.open=false;if(st.unsub){try{st.unsub()}catch(e){}st.unsub=null}}
+else{st.open=true;st.unsub=FB.watchComments(id,l=>{st.list=l;redrawAll()},()=>toast("Could not load comments"))}redrawAll()}
+async function delComment(fid,cid){if(!confirm("Delete your comment?"))return;try{await FB.delComment(fid,cid);const p=FP.posts.find(x=>x.id==fid);if(p){p.cn=Math.max(0,(p.cn||0)-1);redrawAll()}}catch(e){toast("Could not delete the comment")}}
+async function delPost(fid){const u=myUid();if(!u||fid.indexOf(u+"_")!=0)return;if(!confirm("Delete this post? Its 300 EXP will be removed too."))return;const pid=fid.slice(u.length+1);
+try{await FB.delPost(pid,fid);S.posts=S.posts.filter(x=>x.id!=pid);S.favs=S.favs.filter(x=>x!=fid);save();FD.posts=FD.posts.filter(x=>x.id!=fid);FP.posts=FP.posts.filter(x=>x.id!=fid);redrawAll();toast("Post deleted")}catch(e){toast("Could not delete the post")}}
+function closeFPcm(){FP.posts.forEach(p=>{const s=FD.cm[p.id];if(s&&s.unsub){try{s.unsub()}catch(e){}s.unsub=null;s.open=false}})}
+async function backfillFeed(){if(!window.FB_USER||!window.FB||!MYR||BFT)return;BFT=true;
+try{const meta=feedMeta(),u=myUid();for(const p of S.posts){if(p.privacy!="public")continue;const fid=u+"_"+p.id,ex=MYF[fid];
+if(!ex)await FB.feedPut(p,meta);else{const up={};if(ex.name!==meta.name)up.name=meta.name;if(ex.handle!==meta.handle)up.handle=meta.handle;if(ex.av!==meta.av)up.av=meta.av;if(ex.bg!==meta.bg)up.bg=meta.bg;if(!ex.bk&&meta.bk){up.bk=meta.bk;up.bl=meta.bl;up.cl=meta.cl}if(Object.keys(up).length)await FB.feedUpdate(fid,up)}}}catch(e){}BFT=false}
+function startMyFeed(){stopMy();MYU=FB.watchMyFeed(m=>{MYF=m;MYR=true;if(!bfd){bfd=true;setTimeout(backfillFeed,2500);setTimeout(backfillFeed,12000)}if(!$("#t-profile").classList.contains("hide"))rP()},()=>{})}
+// ----- group chats -----
+const gt=g=>(g.last&&g.last.ts)||(g.createdAt&&g.createdAt.toMillis?g.createdAt.toMillis():0);
+const gunread=g=>!!(g.last&&g.last.from!=myUid()&&g.last.ts>((S.lr||{})[g.id]||0));
+const gsnip=g=>g.last?`<div class="snip ${gunread(g)?"u":""}">${g.last.from==myUid()?"You: ":esc(g.last.n||"Member")+": "}${esc(g.last.text)}</div>`:"";
+function gMarkRead(g){S.lr=S.lr||{};const t=g.last?g.last.ts:0;if(t&&(S.lr[g.id]||0)<t){S.lr[g.id]=t;save()}updateBadge();if(!$("#t-friends").classList.contains("hide"))rFr()}
+function rGC(){const c=$("#gc-card");if(!c)return;if(!window.FB_USER){c.style.display="none";return}c.style.display="block";$("#gct").textContent=GR.length;
+$("#gcl").innerHTML=GR.map(g=>`<div class="row"><div class="who"><div class="sa gsa">${IC.grp}</div><div><strong>${esc(g.name)}</strong><div class="mu sm">${g.members.length} members</div>${gsnip(g)}</div></div><div><button class="btn" data-a="gc" data-i="${g.id}">Open${gunread(g)?' <span class="newp">New</span>':""}</button></div></div>`).join("")||'<p class="mu sm">No group chats yet. Tap New group to start one with your friends.</p>'}
+function onGroups(l){const first=prevG===null;if(first)prevG={};const me=myUid(),open=id=>$("#m-chat").classList.contains("o")&&chatKind=="gc"&&chatPid==id;
+l.forEach(g=>{const t=g.last?g.last.ts:0;if(!first&&g.last&&g.last.from!=me&&t>(prevG[g.id]||0)&&!open(g.id))toast(g.name+" - "+(g.last.n||"Member")+": "+g.last.text);prevG[g.id]=t});
+GR=l.sort((a,b)=>gt(b)-gt(a));
+if($("#m-chat").classList.contains("o")&&chatKind=="gc"&&!GR.find(g=>g.id==chatPid)){$("#m-chat").classList.remove("o");if(chatUnsub){chatUnsub();chatUnsub=null}toast("You are no longer in that group")}
+const o=GR.find(g=>open(g.id));if(o){gMarkRead(o);$("#ch-t").textContent=o.name+" ("+o.members.length+")"}updateBadge();if(!$("#t-friends").classList.contains("hide"))rFr();if($("#m-gi").classList.contains("o"))drawGI()}
+function openGC(gid,tries){const g=GR.find(x=>x.id==gid);if(!g){if((tries||0)<6)setTimeout(()=>openGC(gid,(tries||0)+1),300);return}
+gMarkRead(g);chatPid=gid;chatKind="gc";const t=$("#ch-t");t.textContent=g.name+" ("+g.members.length+")";t.setAttribute("data-a","gi");t.dataset.i=gid;t.title="Group info";$("#ch-l").innerHTML="";$("#m-chat").classList.add("o");replyTo=null;chatFirst=true;$("#ch-rp").classList.add("hide");$("#mact").classList.add("hide");
+if(chatUnsub)chatUnsub();chatUnsub=FB.gWatch(gid,ms=>{CMS=ms;drawChat()})}
+function openGI(gid){GI=gid;if(!GR.find(g=>g.id==gid))return;drawGI();$("#m-gi").classList.add("o")}
+function drawGI(){const g=GR.find(x=>x.id==GI),box=$("#gi-b");if(!g){$("#m-gi").classList.remove("o");return}const me=myUid(),own=g.owner==me;$("#gi-t").textContent=g.name;
+const mem=g.members.map(id=>{const o=(g.info||{})[id]||{name:"Member",handle:"",av:0};return `<div class="row"><div class="who"><div class="sa">${AVS[o.av]||AVS[0]}</div><div><strong>${esc(o.name)}${id==me?" (you)":""}</strong><div class="mu sm">@${esc(o.handle||"")}${id==g.owner?" · Owner":""}</div></div></div><div>${own&&id!=me?`<button class="btn s" data-a="grm" data-i="${id}">Remove</button>`:""}</div></div>`}).join("");
+const cand=FR.filter(f=>f.status=="friends").map(otherOf).filter(o=>!g.members.includes(o.uid));
+box.innerHTML=`<h4>Members (${g.members.length})</h4>${mem}`+(own?`<h4 style="margin-top:1rem">Rename group</h4><div style="display:flex;gap:.4rem"><input id="gi-rn" class="in" style="margin:0" maxlength="40" value="${esc(g.name)}" aria-label="Group name"><button class="btn" data-a="grn">Save</button></div><h4 style="margin-top:1rem">Add friends</h4>${cand.length?`<div class="pick" id="gi-ad">${cand.map(o=>`<label><input type="checkbox" value="${o.uid}"><span>${esc(o.name)} <span class="mu sm">@${esc(o.handle)}</span></span></label>`).join("")}</div><p><button class="btn" data-a="gad">Add selected</button></p>`:'<p class="mu sm">All your friends are already in this group.</p>'}<p style="margin-top:1rem"><button class="btn s" data-a="gdl">Delete group</button></p>`:`<p style="margin-top:1rem"><button class="btn s" data-a="glv">Leave group</button></p>`)+'<p class="mu sm" id="gi-m" style="color:#f87171;min-height:1.2em"></p>'}
+document.addEventListener("click",async e=>{const ft=e.target.closest("[data-ft]");if(ft){FD.tab=ft.dataset.ft;stopFeed();showFeed();return}
+const b=e.target.closest("[data-a]");if(!b)return;const a=b.dataset.a,i=b.dataset.i;
+if(a=="fch")doCheer(i);if(a=="ffv")doSave(i);if(a=="fcm")toggleCm(i);if(a=="fdel")delPost(i);if(a=="fcd")delComment(i,b.dataset.c);if(a=="x")closeFPcm();
+if(!window.FB)return;
+if(a=="gn"){const fs=FR.filter(f=>f.status=="friends").map(otherOf);$("#gnn").value="";$("#gne").textContent=fs.length<2?"You need at least 2 friends to start a group chat.":"";$("#gnl").innerHTML=fs.map(o=>`<label><input type="checkbox" value="${o.uid}"><span>${esc(o.name)} <span class="mu sm">@${esc(o.handle)}</span></span></label>`).join("");$("#m-gn").classList.add("o")}
+if(a=="gnx")$("#m-gn").classList.remove("o");
+if(a=="gc")openGC(i);
+if(a=="gi")openGI(i);
+if(a=="gix")$("#m-gi").classList.remove("o");
+const g=GR.find(x=>x.id==GI),msg=t=>{const m=$("#gi-m");if(m)m.textContent=t};
+if(a=="grn"&&g){const v=$("#gi-rn").value.trim();if(!v)return msg("Type a group name.");try{await FB.gUpdate(g.id,{name:v});if(chatKind=="gc"&&chatPid==g.id)$("#ch-t").textContent=v+" ("+g.members.length+")"}catch(er){msg("Could not rename the group.")}}
+if(a=="gad"&&g){const ids=$$("#gi-ad input:checked").map(x=>x.value);if(!ids.length)return msg("Choose at least one friend.");if(g.members.length+ids.length>20)return msg("A group can have up to 20 people.");
+const info={...(g.info||{})};ids.forEach(id=>{const f=FR.find(x=>x.status=="friends"&&x.members.includes(id));if(f){const o=otherOf(f);info[id]={name:o.name,handle:o.handle,av:o.av||0}}});try{await FB.gUpdate(g.id,{members:[...g.members,...ids],info});toast("Added to the group")}catch(er){msg("Could not add people.")}}
+if(a=="grm"&&g&&confirm("Remove this person from the group?")){const info={...(g.info||{})};delete info[i];try{await FB.gUpdate(g.id,{members:g.members.filter(x=>x!=i),info})}catch(er){msg("Could not remove this person.")}}
+if(a=="glv"&&g&&confirm("Leave this group? You will not see its messages anymore.")){try{await FB.gUpdate(g.id,{members:g.members.filter(x=>x!=myUid())});$("#m-gi").classList.remove("o");$("#m-chat").classList.remove("o");if(chatUnsub){chatUnsub();chatUnsub=null}toast("You left the group")}catch(er){msg("Could not leave the group.")}}
+if(a=="gdl"&&g&&confirm("Delete this group for everyone?")){try{await FB.gDelete(g.id);$("#m-gi").classList.remove("o");$("#m-chat").classList.remove("o");if(chatUnsub){chatUnsub();chatUnsub=null}toast("Group deleted")}catch(er){msg("Could not delete the group.")}}});
+document.addEventListener("submit",async e=>{const f=e.target;if(!f||!f.dataset||!f.dataset.fcf||!window.FB_USER||!window.FB)return;const inp=f.querySelector("input"),v=inp.value.trim();if(!v)return;const fid=f.dataset.fcf;inp.value="";
+try{await FB.addComment(fid,{name:S.me.name,handle:String(S.me.h||"").replace(/^@/,"")},v);const p=FP.posts.find(x=>x.id==fid);if(p){p.cn=(p.cn||0)+1;redrawAll()}}catch(er){inp.value=v;toast(er&&er.message=="gone"?"That post is no longer available":"Could not post your comment")}});
+$("#gnf").onsubmit=async()=>{const name=$("#gnn").value.trim(),ids=$$("#gnl input:checked").map(x=>x.value),err=$("#gne");if(!name){err.textContent="Type a group name.";return}if(ids.length<2){err.textContent="Choose at least 2 friends.";return}if(ids.length>19){err.textContent="A group can have up to 20 people.";return}
+const me=myUid(),info={[me]:{name:S.me.name,handle:String(S.me.h||"").replace(/^@/,""),av:S.me.av||0}};ids.forEach(id=>{const f=FR.find(x=>x.status=="friends"&&x.members.includes(id));if(f){const o=otherOf(f);info[id]={name:o.name,handle:o.handle,av:o.av||0}}});
+err.textContent="";try{const gid=await FB.gCreate(name,[me,...ids],info);$("#m-gn").classList.remove("o");openGC(gid)}catch(er){err.textContent="Could not create the group. Check your connection and that the latest Firestore rules are published."}};
 go("profile");
 </script><script type="module">
 import{initializeApp,deleteApp}from"https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
@@ -689,7 +824,26 @@ watchUser:cb=>onSnapshot(doc(cur.db,"users",uid()),s=>{if(s.exists()&&!s.metadat
 watchPosts:cb=>onSnapshot(collection(cur.db,"users",uid(),"posts"),s=>cb(s.docs.map(d=>({id:d.id,...d.data()})))),
 addPost:p=>setDoc(doc(cur.db,"users",uid(),"posts",p.id),{cap:p.cap,img:p.img||"",privacy:p.privacy,likes:p.likes||0,t:p.t||Date.now()}),
 async getUser(id){const d=await getDoc(doc(cur.db,"users",id));return d.exists()?{uid:id,...d.data()}:null},
-async getPosts(id){const s=await getDocs(query(collection(cur.db,"users",id,"posts"),where("privacy","==","public"),limit(30)));return s.docs.map(d=>({id:d.id,...d.data()})).sort((a,b)=>(b.t||0)-(a.t||0))}
+async getPosts(id){const s=await getDocs(query(collection(cur.db,"users",id,"posts"),where("privacy","==","public"),limit(30)));return s.docs.map(d=>({id:d.id,...d.data()})).sort((a,b)=>(b.t||0)-(a.t||0))},
+feedPut:(p,m)=>setDoc(doc(cur.db,"feed",uid()+"_"+p.id),{uid:uid(),name:m.name,handle:m.handle,av:m.av,bg:m.bg,bk:m.bk||"",bl:m.bl||"",cl:m.cl||"",cap:p.cap||"",img:p.img||"",likes:0,cn:0,t:p.t||Date.now()}),
+feedUpdate:(fid,d)=>updateDoc(doc(cur.db,"feed",fid),d),
+watchMyFeed:(cb,er)=>onSnapshot(query(collection(cur.db,"feed"),where("uid","==",uid())),s=>{const o={};s.docs.forEach(d=>{const x=d.data();o[d.id]={likes:x.likes||0,cn:x.cn||0,bk:x.bk||"",name:x.name,handle:x.handle,av:x.av,bg:x.bg}});cb(o)},er),
+watchFeed:(o,cb,er)=>{const c=collection(cur.db,"feed");let q;if(o.uids)q=query(c,where("uid","in",o.uids),limit(100));else if(o.bk)q=query(c,where("bk","==",o.bk),limit(100));else q=query(c,orderBy("t","desc"),limit(40));return onSnapshot(q,s=>cb(s.docs.map(d=>({id:d.id,...d.data()}))),er)},
+async getFeedByUser(id){const s=await getDocs(query(collection(cur.db,"feed"),where("uid","==",id),limit(30)));return s.docs.map(d=>({id:d.id,...d.data()})).sort((a,b)=>(b.t||0)-(a.t||0))},
+async getFeedPosts(ids){const r=await Promise.all(ids.map(i=>getDoc(doc(cur.db,"feed",i)).catch(()=>null)));return r.filter(d=>d&&d.exists()).map(d=>({id:d.id,...d.data()}))},
+async delPost(pid,fid){await deleteDoc(doc(cur.db,"feed",fid));await deleteDoc(doc(cur.db,"users",uid(),"posts",pid))},
+cheer:(fid,want)=>runTransaction(cur.db,async t=>{const pr=doc(cur.db,"feed",fid),cr=doc(cur.db,"feed",fid,"cheers",uid()),ps=await t.get(pr);if(!ps.exists())throw new Error("gone");const cs=await t.get(cr);let n=ps.data().likes||0;if(want&&!cs.exists()){t.set(cr,{t:Date.now()});n=n+1;t.update(pr,{likes:n})}else if(!want&&cs.exists()){t.delete(cr);n=Math.max(0,n-1);t.update(pr,{likes:n})}return{on:!!want,likes:n}}),
+watchComments:(fid,cb,er)=>onSnapshot(query(collection(cur.db,"feed",fid,"comments"),orderBy("t"),limit(100)),s=>cb(s.docs.map(d=>({id:d.id,...d.data()}))),er),
+addComment:(fid,m,text)=>runTransaction(cur.db,async t=>{const pr=doc(cur.db,"feed",fid),ps=await t.get(pr);if(!ps.exists())throw new Error("gone");t.set(doc(collection(cur.db,"feed",fid,"comments")),{uid:uid(),name:m.name,handle:m.handle,text:text.slice(0,200),t:Date.now()});t.update(pr,{cn:(ps.data().cn||0)+1})}),
+delComment:(fid,cid)=>runTransaction(cur.db,async t=>{const pr=doc(cur.db,"feed",fid),ps=await t.get(pr);t.delete(doc(cur.db,"feed",fid,"comments",cid));if(ps.exists())t.update(pr,{cn:Math.max(0,(ps.data().cn||0)-1)})}),
+watchGroups:cb=>onSnapshot(query(collection(cur.db,"groups"),where("members","array-contains",uid())),s=>cb(s.docs.map(d=>({id:d.id,...d.data()})))),
+async gCreate(name,members,info){const r=await addDoc(collection(cur.db,"groups"),{name,owner:uid(),members,info,createdAt:serverTimestamp()});return r.id},
+gWatch:(id,cb)=>onSnapshot(query(collection(cur.db,"groups",id,"messages"),orderBy("ts"),limit(150)),s=>cb(s.docs.map(d=>{const x=d.data();return{id:d.id,from:x.from,n:x.n||"",text:x.text,reply:x.reply||null,ts:x.ts&&x.ts.toMillis?x.ts.toMillis():Date.now()}}))),
+async gsend(id,t,rp,n){await addDoc(collection(cur.db,"groups",id,"messages"),{from:uid(),n:n||"",text:t,ts:serverTimestamp(),...(rp?{reply:rp}:{})});try{await updateDoc(doc(cur.db,"groups",id),{last:{from:uid(),n:n||"",text:t.slice(0,80),ts:Date.now()}})}catch(e){}},
+gunsend:(gid,mid)=>deleteDoc(doc(cur.db,"groups",gid,"messages",mid)),
+gUpdate:(id,d)=>updateDoc(doc(cur.db,"groups",id),d),
+gDelete:id=>deleteDoc(doc(cur.db,"groups",id))
+
 };
 window.fbSync=d=>{if(!cur)return;const s=cur;clearTimeout(st);if(s.prof)Object.assign(s.prof,d);st=setTimeout(()=>updateDoc(doc(s.db,"users",s.auth.currentUser.uid),d).catch(()=>{}),1500)};
 (async()=>{let sv={names:[],active:null};try{sv=JSON.parse(localStorage.getItem(LK))||sv}catch(e){}
