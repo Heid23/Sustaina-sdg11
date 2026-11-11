@@ -645,6 +645,55 @@ html[data-theme=night] .sup-b,html[data-theme=dusk] .sup-b,html[data-theme=contr
 #bnav button i{display:grid;place-items:center;height:26px}
 .fmore{display:inline-grid;place-items:center}
 
+
+/* ---- Home, Daily Records, Insights, phone bottom bar ---- */
+.hm-hd{display:flex;align-items:center;justify-content:space-between;gap:.6rem;margin-bottom:.8rem}.hm-hd h2{margin:0;font-size:1.35rem}.hm-hd p{margin:0}
+.hm-bell{position:relative;display:grid;place-items:center;width:44px;height:44px;border-radius:50%;border:1px solid var(--ln);background:var(--cd);color:var(--tx);cursor:pointer}
+.hm-bell .nb{position:absolute;top:-4px;right:-4px;margin:0}
+.hm-sh{margin:1rem .2rem .5rem}
+.hm-q{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:.6rem}
+.hm-qb{display:flex;align-items:center;gap:.6rem;padding:.8rem .9rem;border-radius:18px;border:1px solid var(--ln);background:var(--cd);color:var(--tx);font:inherit;font-weight:700;font-size:.9rem;cursor:pointer;text-align:left;min-height:52px;transition:transform .15s,border-color .2s}
+.hm-qb:hover{border-color:var(--pr)}.hm-qb:active{transform:scale(.97)}.hm-qb svg{flex:none;color:var(--pr)}
+.dr-top{display:flex;gap:1rem;align-items:center}.dr-tx{min-width:0}.dr-tx h3{margin:0}.dr-tx p{margin:.15rem 0 .4rem}
+.dr-ring{flex:none;width:76px;height:76px;border-radius:50%;display:grid;place-items:center;background:conic-gradient(var(--pr) calc(var(--p)*1%),var(--ln) 0);position:relative}
+.dr-ring::before{content:"";position:absolute;inset:7px;border-radius:50%;background:var(--cd)}.dr-ring b{position:relative;font-size:1.05rem}
+.dr-chips{display:flex;flex-wrap:wrap;gap:.35rem}.dr-chip{padding:.2rem .6rem;border-radius:99px;border:1px solid var(--ln);background:var(--bg);font-size:.76rem;font-weight:800}
+.dr-days{display:grid;grid-template-columns:repeat(7,1fr);gap:.3rem;margin:.9rem 0 .6rem}
+.dr-d{display:grid;justify-items:center;gap:.1rem;padding:.35rem 0;border-radius:12px;border:1px solid var(--ln);background:var(--bg);color:var(--mu);font:inherit;font-size:.72rem;cursor:pointer;position:relative;min-height:48px}
+.dr-d b{font-size:.95rem;color:var(--tx)}.dr-d.on{border-color:var(--pr);background:color-mix(in srgb,var(--pr) 18%,var(--bg))}
+.dr-d.has::after{content:"";position:absolute;bottom:3px;width:5px;height:5px;border-radius:50%;background:var(--ac)}
+.dr-a{display:flex;align-items:center;gap:.7rem;width:100%;padding:.65rem .75rem;margin:.3rem 0;border-radius:14px;border:1px solid var(--ln);background:var(--bg);color:var(--tx);font:inherit;font-size:.9rem;text-align:left;cursor:pointer;min-height:48px;transition:background .2s,border-color .2s,transform .15s}
+.dr-a:active{transform:scale(.98)}.dr-c{flex:none;width:26px;height:26px;border-radius:50%;border:2px solid var(--ln);display:grid;place-items:center;color:transparent;transition:background .2s,border-color .2s,color .2s}
+.dr-a.on{border-color:var(--pr);background:color-mix(in srgb,var(--pr) 14%,var(--bg))}.dr-a.on .dr-c{background:var(--pr);border-color:var(--pr);color:#fff}
+.dr-ft{display:flex;flex-wrap:wrap;gap:.6rem;align-items:flex-end;justify-content:space-between;margin-top:.7rem}.dr-ft .in{margin:0;width:auto}
+#i-seg button[aria-selected=true]{background:var(--pr);color:#fff}
+.ih{display:flex;align-items:center;justify-content:space-between;gap:.5rem;padding:.8rem 1rem}.ih h3{margin:0;font-size:1rem;text-align:center;flex:1}.ih .btn{padding:.45rem .8rem}.ih .btn:disabled{opacity:.4;cursor:default}
+.itiles{display:grid;grid-template-columns:repeat(3,1fr);gap:.6rem;margin-bottom:.6rem}.itiles .card{margin:0;padding:.8rem .5rem;text-align:center;display:grid;gap:.1rem}.itiles b{font-size:1.25rem}
+.ibar{height:14px;border-radius:99px;background:var(--ln);overflow:hidden;margin:.4rem 0}.ibar i{display:block;height:100%;border-radius:99px;background:var(--pr);transition:width .6s var(--ease)}
+.ib{display:flex;gap:.3rem;align-items:flex-end}.ib-c{flex:1;min-width:0;display:grid;gap:.25rem;justify-items:center;background:none;border:0;padding:0;color:var(--mu);font:inherit;font-size:.72rem;cursor:pointer}
+.ib-t{display:flex;align-items:flex-end;width:100%;height:110px;border-radius:10px;background:color-mix(in srgb,var(--tx) 7%,var(--bg));overflow:hidden}
+.ib-t i{display:block;width:100%;background:var(--pr);border-radius:8px 8px 0 0;transform-origin:bottom;animation:ibg .6s var(--ease) both}@keyframes ibg{from{transform:scaleY(0)}}
+.ib-c.no .ib-t{background:none;border:1.5px dashed var(--ln)}.ib-c.fut{opacity:.35}
+.ical{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}.ic-h{text-align:center;font-size:.7rem;color:var(--mu)}
+.ic{aspect-ratio:1;border-radius:10px;border:1px dashed var(--ln);background:none;color:var(--mu);font:inherit;font-size:.78rem;cursor:pointer;padding:0}
+.ic.has{border:1px solid transparent;background:color-mix(in srgb,var(--pr) calc(18% + var(--l)*16%),var(--cd));color:var(--tx);font-weight:800}.ic.fut{opacity:.3}
+.ig{margin:.2rem 0;padding-left:1.1rem}.ig li{margin:.3rem 0}
+#bnav{display:none}
+@media(prefers-reduced-motion:reduce){.ib-t i{animation:none}.ibar i{transition:none}}
+@media(max-width:640px){
+ #mt{display:none}
+ #bnav{display:flex;position:fixed;top:auto;left:0;right:0;bottom:0;height:auto;z-index:35;border-bottom:0;align-items:center;justify-content:space-around;padding:.3rem .5rem calc(.3rem + env(safe-area-inset-bottom,0px));background:color-mix(in srgb,var(--bg) 90%,transparent);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-top:1px solid var(--ln);box-shadow:0 -10px 30px -18px #000a}
+ #bnav button{flex:1;display:grid;place-items:center;min-height:52px;background:none;border:0;color:var(--mu);cursor:pointer;position:relative;transition:color .2s,transform .15s}
+ #bnav button:active{transform:scale(.9)}#bnav button i{display:grid;place-items:center;height:26px}
+ #bnav button.on{color:var(--pr)}#bnav button.on::after{content:"";position:absolute;top:0;width:22px;height:3px;border-radius:3px;background:var(--ac)}
+ #bnav .bn-log i{width:48px;height:48px;border-radius:50%;background:var(--pr);color:#fff;margin-top:-16px;box-shadow:0 8px 20px -8px color-mix(in srgb,var(--pr) 80%,#000);transition:transform .2s var(--ease)}
+ #bnav .bn-log.on i{transform:scale(1.08);outline:3px solid var(--ac)}#bnav .bn-log.on::after{display:none}
+ html[data-theme=contrast] #bnav .bn-log i{color:#111}
+ main{padding-bottom:calc(88px + env(safe-area-inset-bottom,0px))}
+ #pw{bottom:calc(64px + env(safe-area-inset-bottom,0px))}
+ #toast{bottom:calc(76px + env(safe-area-inset-bottom,0px))}
+ .itiles b{font-size:1.1rem}
+}
 </style></head><body>
 <nav><div class="nw"><span class="logo">SUSTAINA <small class="mu">SDG 11</small></span>
 <div class="tabs" role="tablist" id="mt"></div>
@@ -749,6 +798,8 @@ html[data-theme=night] .sup-b,html[data-theme=dusk] .sup-b,html[data-theme=contr
 <p><button class="btn" data-a="sv">Save my data</button> <span class="mu sm" id="ls"></span></p>
 <p style="margin-top:.6rem"><button class="btn s" data-a="bk">Create backup code</button> <button class="btn s" data-a="rs">Restore from code</button></p>
 <textarea id="bx" class="in" rows="3" aria-label="Backup code" placeholder="Backup code appears here, or paste one to restore"></textarea></div></section>
+<section id="t-home" class="hide"><div class="hm-hd"><div><h2 id="h-hi">Hello</h2><p class="mu sm" id="h-dt"></p></div><button type="button" class="hm-bell" data-go="friends" aria-label="Inbox and notifications"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9a6 6 0 0112 0c0 6 2.5 7.5 2.5 7.5h-17S6 15 6 9z"/><path d="M10 20a2 2 0 004 0"/></svg><span class="nb hide" id="hnb"></span></button></div><div class="card dr" id="h-dr"></div><div class="wkc" id="h-wk"></div><h4 class="hm-sh">Quick actions</h4><div class="hm-q"><button type="button" class="hm-qb" data-a="up"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></svg><span>Share a photo</span></button><button type="button" class="hm-qb" data-go="trees"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21v-6"/><path d="M12 15c-4 0-6-3-5-6 .5-2 2-3 3.5-3.2C11 4 14 4 15 6c2 .3 3.5 2 3 4-.5 3-3 5-6 5z"/></svg><span>Tree Map</span></button><button type="button" class="hm-qb" data-go="sim"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 21V9l6-4v16"/><path d="M10 21V3h10v18"/><path d="M14 8h2M14 12h2M14 16h2"/></svg><span>City Builder</span></button><button type="button" class="hm-qb" data-go="feed"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="3"/><path d="M3 10h18"/></svg><span>Community Feed</span></button><button type="button" class="hm-qb" data-go="board"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 4h8v5a4 4 0 01-8 0z"/><path d="M8 6H4v1a3 3 0 003 3M16 6h4v1a3 3 0 01-3 3"/><path d="M12 13v4M8 21h8M10 17h4"/></svg><span>Leaderboard</span></button></div></section>
+<section id="t-insights" class="hide"><h2 style="margin:0">Insights</h2><p class="mu sm">Built only from the days you recorded. A day with no record is not counted as zero.</p><div class="seg" id="i-seg" role="tablist" aria-label="Report period"><button type="button" data-p="day">Day</button><button type="button" data-p="week">Week</button><button type="button" data-p="month">Month</button><button type="button" data-p="year">Year</button></div><div id="i-body"></div></section>
 </main>
 
 <div class="modal" id="m-up"><div class="card"><h3>📸 Share a photo</h3><form id="uf">
@@ -768,7 +819,7 @@ html[data-theme=night] .sup-b,html[data-theme=dusk] .sup-b,html[data-theme=contr
 <p class="sm"><strong>Always free:</strong> learning, the map and problem reports. The shop only sells cosmetic items such as frames and pet outfits. They never change how the site works.</p>
 <p class="sm"><strong>Young users:</strong> if you are under 18, ask a parent or guardian before buying anything.</p>
 <p class="sm"><strong>Blocked users:</strong> <span id="blk-n">0</span> <button type="button" class="btn s" data-a="ubl">Unblock all</button></p><p class="sm"><strong>Pet reminders:</strong> get a message when your pet is hungry while SUSTAINA is open. <button type="button" class="btn s" data-a="prn">Turn on</button></p><p><button type="button" class="btn" data-a="x">Close</button></p></div></div>
-<nav id="bnav" aria-label="Main"><button data-go="learn" data-bn="learn"><i><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5.5C6 4.5 9 4.5 12 6c3-1.5 6-1.5 8-.5V19c-2-1-5-1-8 .5-3-1.5-6-1.5-8-.5z"/><path d="M12 6v13.5"/></svg></i>Learn</button><button data-go="feed" data-bn="feed"><i><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/></svg></i>Feed</button><button data-go="profile" data-bn="profile"><i><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c1-4 4-6 8-6s7 2 8 6"/></svg></i>Profile</button><button data-go="friends" data-bn="friends"><i><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z"/></svg></i>Inbox</button><button data-go="board" data-bn="board"><i><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 20V11M12 20V4M19 20v-6"/></svg></i>Ranks</button></nav>
+<nav id="bnav" aria-label="Main"><button type="button" data-go="home" data-bn="home" class="" aria-label="Home" title="Home"><i><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/><path d="M10 20v-6h4v6"/></svg></i></button><button type="button" data-go="learn" data-bn="learn" class="" aria-label="Learn" title="Learn"><i><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4.5A1.5 1.5 0 015.5 3H20v15H5.5A1.5 1.5 0 004 19.5z"/><path d="M4 19.5A1.5 1.5 0 005.5 21H20v-3"/></svg></i></button><button type="button" data-go="track" data-bn="track" class="bn-log" aria-label="Log Eco Day" title="Log Eco Day"><i><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></i></button><button type="button" data-go="insights" data-bn="insights" class="" aria-label="Insights" title="Insights"><i><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 20V11M12 20V4M19 20v-6"/></svg></i></button><button type="button" data-go="profile" data-bn="profile" class="" aria-label="Profile" title="Profile"><i><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c1-4 4-6 8-6s7 2 8 6"/></svg></i></button></nav>
 <div class="modal" id="m-loc"><div class="card"><h3>My location</h3><p class="mu sm">Tip: pin your location on the map and these fields fill in automatically. Your exact pin is only shown to you.</p><form id="lf">
 <label class="sm" for="lst">Street or purok (optional)</label><input id="lst" class="in" maxlength="60" placeholder="e.g. Urgello Street">
 <label class="sm" for="lb">Barangay</label><input id="lb" class="in" maxlength="40" placeholder="e.g. Sambag 1">
@@ -854,9 +905,9 @@ let tt;function toast(m){const t=$("#toast");t.textContent=m;t.classList.add("s"
 const rk=e=>e>=5000?"MYTHIC SUPREME":e>=3000?"MYTHIC":e>=1500?"LEGEND":"EPIC";
 const hash=s=>{let h=7;for(const c of s)h=(h*31+c.charCodeAt(0))>>>0;return h};
 // tabs
-const TABS=[["learn","Learn SDG 11"],["profile","Profile"],["trees","Tree Map"],["feed","Feed"],["friends","Inbox"],["board","Leaderboard"],["sim","City Builder"],["track","My Records"]];
+const TABS=[["home","Home"],["learn","Learn SDG 11"],["profile","Profile"],["trees","Tree Map"],["feed","Feed"],["friends","Inbox"],["board","Leaderboard"],["sim","City Builder"],["track","My Records"],["insights","Insights"]];
 const HID=["trees","sim","track","board"];TABS.filter(t=>!HID.includes(t[0])).forEach(t=>{const b=document.createElement("button");b.className="tb";b.textContent=t[1];b.dataset.t=t[0];b.setAttribute("role","tab");$("#mt").append(b)});
-function go(t){curTab=t;const pa={trees:"feed",sim:"feed",track:"profile"}[t]||t;$$(".tb").forEach(b=>b.setAttribute("aria-selected",b.dataset.t==pa));$("#nav-lb").classList.toggle("on",t=="board");$("#sf").style.display=(t=="profile"||t=="board")?"flex":"none";TABS.forEach(x=>$("#t-"+x[0]).classList.toggle("hide",x[0]!=t));({sim:rS,trees:rM,learn:rL,profile:rP,feed:rF,friends:rFr,board:rB,sim:rS,track:rT})[t]()}
+function go(t){curTab=t;const pa={trees:"feed",sim:"feed",track:"profile"}[t]||t;$$(".tb").forEach(b=>b.setAttribute("aria-selected",b.dataset.t==pa));$("#nav-lb").classList.toggle("on",t=="board");$("#sf").style.display=(t=="profile"||t=="board")?"flex":"none";TABS.forEach(x=>$("#t-"+x[0]).classList.toggle("hide",x[0]!=t));({home:rH,insights:rI,sim:rS,trees:rM,learn:rL,profile:rP,feed:rF,friends:rFr,board:rB,sim:rS,track:rT})[t]()}
 $("#mt").onclick=e=>{const x=e.target.closest("[data-t]");if(x)go(x.dataset.t)};
 [["public","Public"],["private","Private Vault"],["favs","Favorites"]].forEach(s=>{const b=document.createElement("button");b.className="pt";b.dataset.s=s[0];b.setAttribute("role","tab");b.textContent=s[1];$("#pts").append(b)});
 $("#pts").onclick=e=>{if(e.target.dataset.s){sub=e.target.dataset.s;rP()}};
@@ -1605,7 +1656,7 @@ const rL0=rL;rL=function(){rL0();loadCStats()};
 function rBadges(){const e=$("#pbd");if(!e)return;const tr=S.trees.reduce((a,t)=>a+(+t.n||0),0),km=S.rec.reduce((a,r)=>a+(+r.km||0),0),bs=Math.max(bestStreak(),streak()),B=[["📸","First photo",S.posts.length>=1],["🖼️","10 photos",S.posts.length>=10],["🌱","First tree",tr>=1],["🌳","10 trees",tr>=10],["🔥","3-day streak",bs>=3],["⚡","7-day streak",bs>=7],["👑","30-day streak",bs>=30],["🚶","20 km eco travel",km>=20],["🐱","Pet owner",!!S.pet],["🎯","Weekly champ",!!S.wk],["🤝","First friend",S.friends.length>=1]];e.innerHTML=B.map(b=>`<span class="bg ${b[2]?"on":"off"}" title="${b[2]?"Earned":"Locked"}">${b[1]}</span>`).join("")}
 function impactCard(){const m=S.me,tr=S.trees.reduce((a,t)=>a+(+t.n||0),0),c=document.createElement("canvas");c.width=c.height=1080;const x=c.getContext("2d"),cs=getComputedStyle(document.documentElement),pr=cs.getPropertyValue("--pr").trim()||"#0d9488",sk=cs.getPropertyValue("--sk").trim()||"#38bdf8",g=x.createLinearGradient(0,0,1080,1080);g.addColorStop(0,"#0b1220");g.addColorStop(1,"#0f2f2c");x.fillStyle=g;x.fillRect(0,0,1080,1080);x.fillStyle=pr;x.globalAlpha=.25;x.beginPath();x.arc(950,130,330,0,7);x.fill();x.globalAlpha=1;x.textAlign="center";x.fillStyle="#fff";x.font="800 54px sans-serif";x.fillText("SUSTAINA · SDG 11",540,130);x.font="700 40px sans-serif";x.fillStyle=sk;x.fillText("My impact report",540,195);x.fillStyle="#fff";x.font="800 92px sans-serif";x.fillText(String(m.name||"").slice(0,18),540,360);x.font="600 40px sans-serif";x.fillStyle="#9fb3c8";x.fillText(m.h+" · "+rk(m.exp),540,420);const T=[[m.exp.toLocaleString(),"EXP points"],[co2().toFixed(1)+" kg","CO₂ avoided (est.)"],[String(tr),"Trees planted"],[String(S.posts.length),"Photos shared"],[String(Math.max(bestStreak(),streak())),"Best day streak"],[String(S.friends.length),"Friends"]];T.forEach((t,i)=>{const cx=240+(i%3)*300,cy=600+Math.floor(i/3)*230;x.fillStyle="#ffffff14";x.beginPath();x.roundRect(cx-135,cy-95,270,190,28);x.fill();x.fillStyle="#fff";x.font="800 54px sans-serif";x.fillText(t[0],cx,cy+10);x.fillStyle="#9fb3c8";x.font="600 26px sans-serif";x.fillText(t[1],cx,cy+58)});x.fillStyle="#9fb3c8";x.font="600 30px sans-serif";x.fillText("Cities that work for everyone · sustaina-sdg11.vercel.app",540,1030);const a=document.createElement("a");a.download="sustaina-impact.png";a.href=c.toDataURL("image/png");a.click();toast("Impact report saved as an image")}
 document.addEventListener("click",e=>{const b=e.target.closest("[data-a]");if(!b)return;if(b.dataset.a=="imp")impactCard();if(b.dataset.a=="about")$("#m-about").classList.add("o")});
-function bnavSet(t){const pa={trees:"feed",sim:"feed",track:"profile"}[t]||t;$$("#bnav button").forEach(b=>b.classList.toggle("on",b.dataset.bn==pa))}
+
 const go0=go;go=function(t){go0(t);try{bnavSet(t)}catch(e){}};
 
 // ----- report / block, pet reminders -----
@@ -1653,11 +1704,11 @@ function rPet(){const c=$("#pet-card");if(!c)return;
 if(!S.pet){const keep=($("#pet-nm")||{}).value||"";c.classList.remove("is-dead");
 c.innerHTML=`<div class="pet-top"><div class="pet-stage static">${petSVG(PLOOK0,"happy")}</div><div class="pet-info"><h3 style="margin:0 0 .3rem">Adopt Sprout</h3><p class="mu sm" style="margin:0 0 .8rem">Sprout is a small cat with a leaf sprout. Log your day to keep Sprout happy. If you skip 3 days in a row, Sprout dies, and planting a tree brings Sprout back. You can change its hair and clothes anytime.</p><div class="pet-form"><label class="sm" for="pet-nm">Name your pet</label><input id="pet-nm" class="in" maxlength="12" placeholder="Sprout" autocomplete="off"><button type="button" class="btn" data-a="padopt">Adopt</button></div></div></div>`;const n=$("#pet-nm");if(n&&keep)n.value=keep;return}
 const I=petInfo(),p=S.pet,nm=p.name,L=pLook(p);c.classList.toggle("is-dead",I.dead);
-const msg={happy:recToday()?nm+" is happy! You logged today.":nm+" is happy to be here! Log today to keep "+nm+" happy.",hungry:nm+" is hungry. Log today to keep "+nm+" happy.",sad:nm+" is very sad. Log today, or "+nm+" will die tomorrow!",dead:nm+" died because no day was logged for 3 days. Plant a tree to bring "+nm+" back."}[I.mood],nx=petNext(I.n);
+const msg={happy:recToday()?nm+" is happy! You logged today.":nm+" is happy to be here! Log today to keep "+nm+" happy.",hungry:nm+" is hungry. Log today to keep "+nm+" happy.",sad:nm+" is very sad. Log today to cheer "+nm+" up.",dead:nm+" died because no day was logged for 3 days. Plant a tree to bring "+nm+" back."}[I.mood],nx=petNext(I.n);
 c.innerHTML=`<div class="pet-top"><button type="button" class="pet-stage" data-a="pboop" aria-label="Pet ${esc(nm)}">${petSVG(L,I.mood)}</button><div class="pet-info"><div class="pet-hd"><h3>${esc(nm)}</h3><span class="pet-tag">Sprout the cat</span>${p.revives?`<span class="pet-tag rv">Revived ${p.revives}x</span>`:""}</div><div class="pet-hearts" role="img" aria-label="${I.hearts} of 3 hearts">${[0,1,2].map(i=>HEART(i<I.hearts)).join("")}</div><p class="pet-msg ${I.mood}" id="pet-say">${esc(msg)}</p><p class="pet-prog">${I.n} day${I.n==1?"":"s"} logged${nx?" · next unlock: "+esc(nx[1])+" at "+nx[0]+" days":" · everything unlocked"}</p><div class="pet-acts">${I.dead?'<button class="btn" data-go="trees">Plant a tree to revive</button>':I.mood!="happy"?'<button class="btn" data-go="track">Log today</button>':""}<button class="btn" data-a="pcus">Customize</button><button class="btn s" data-a="pren">Rename</button><button class="btn s" data-a="pwt">${S.petWalk===0?"Show walking pet":"Hide walking pet"}</button></div></div></div>`}
 function petOnTree(){const p=S.pet;if(!p||!p.dead)return;p.dead=false;p.revived=ymd(new Date());p.revives=(p.revives||0)+1;setTimeout(()=>toast(p.name+" is alive again! Thank you for planting a tree."),1000)}
 function petCheer(){const p=S.pet;if(!p)return"";const I=petInfo();return I.dead?" "+p.name+" is gone. Plant a tree to bring "+p.name+" back.":I.mood=="happy"?" "+p.name+" loved it!":""}
-function petHint(){const h=$("#pet-hint");if(!h)return;const p=S.pet;if(!p){h.style.display="none";return}const I=petInfo(),n=p.name;h.style.display="block";h.className="pet-hint "+I.mood;h.textContent={happy:n+" is happy today.",hungry:n+" is hungry. Log today to keep "+n+" happy.",sad:n+" is very sad. Log today or "+n+" will die tomorrow!",dead:n+" died. Plant a tree to bring "+n+" back."}[I.mood]}
+function petHint(){const h=$("#pet-hint");if(!h)return;const p=S.pet;if(!p){h.style.display="none";return}const I=petInfo(),n=p.name;h.style.display="block";h.className="pet-hint "+I.mood;h.textContent={happy:n+" is happy today.",hungry:n+" is hungry. Log today to keep "+n+" happy.",sad:n+" is very sad. Log today to cheer "+n+" up.",dead:n+" died. Plant a tree to bring "+n+" back."}[I.mood]}
 // wardrobe
 var PWD=null,PWTAB="hair";
 function openWardrobe(){if(!S.pet)return;PWD=pLook(S.pet);PWTAB="hair";drawWardrobe();$("#m-pw").classList.add("o")}
@@ -1764,8 +1815,98 @@ $("#svf").onsubmit=async()=>{const f=$("#svi").files[0],err=$("#sv-err");err.tex
 $("#lyT").onchange=e=>{S.lyT=e.target.checked;save();rM()};$("#lyP").onchange=e=>{S.lyP=e.target.checked;save();RP.sig="";rM()};
 document.addEventListener("click",e=>{const b=e.target.closest("[data-a=rpsel]");if(b){RP.sel=b.dataset.v;rReports()}});
 
+/* ---- Home (Daily Records) and Insights: both read the same S.rec records as My Records ---- */
+let DRD=null,IP={k:"week",o:0};
+const D0=s=>{const p=s.split("-").map(Number);return new Date(p[0],p[1]-1,p[2])};
+const addD=(s,n)=>{const d=D0(s);d.setDate(d.getDate()+n);return ymd(d)};
+const dBt=(a,b)=>Math.round((D0(b)-D0(a))/864e5);
+const fLong=s=>D0(s).toLocaleDateString(undefined,{weekday:"long",month:"long",day:"numeric"});
+const fShort=s=>D0(s).toLocaleDateString(undefined,{month:"short",day:"numeric"});
+const CHK='<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10"/></svg>';
+const TIPS=["Keep two bins by the door, one for recyclables and one for the rest, so sorting takes no extra thought.","Keep a reusable bottle and bag where you will see them when you leave.","Switch off lights and unplug chargers when you leave a room, and keep showers short.","Pick one short trip this week and walk or cycle it instead of riding.","Join a small clean-up with friends, or add a tree you planted to the Tree Map."];
+function recs(){return(S.rec||[]).filter(r=>r&&typeof r.d=="string")}
+function mirrorBell(){const f=$("#fnb"),h=$("#hnb");if(f&&h){h.textContent=f.textContent;h.classList.toggle("hide",f.classList.contains("hide"))}}
+function rH(){petTick();const now=new Date(),t=ymd(now),sel=(DRD&&DRD<=t)?DRD:t,isT=sel==t;
+const r=recs().find(x=>x.d==sel),acts=r?(r.acts||[]):[],n=acts.length,pc=Math.round(n/5*100);
+const h=now.getHours(),g=h<12?"Good morning":h<18?"Good afternoon":"Good evening",nm=String((S.me&&S.me.name)||"").trim().split(/\s+/)[0];
+$("#h-hi").textContent=g+(nm?", "+nm:"");$("#h-dt").textContent=now.toLocaleDateString(undefined,{weekday:"long",month:"long",day:"numeric"});mirrorBell();
+let st="";for(let i=6;i>=0;i--){const d=new Date(now);d.setDate(d.getDate()-i);const k=ymd(d),has=recs().some(x=>x.d==k);
+st+=`<button type="button" class="dr-d${k==sel?" on":""}${has?" has":""}" data-d="${k}" aria-pressed="${k==sel}" aria-label="${fLong(k)}${has?", has records":", no records"}"><span>${d.toLocaleDateString(undefined,{weekday:"short"}).slice(0,3)}</span><b>${d.getDate()}</b></button>`}
+const sk=streak(),msg=!r?(isT?"Nothing recorded yet today. Tap an action when you do it.":"Nothing recorded for this day."):n==5?"All five actions done.":n+" of 5 actions done.";
+$("#h-dr").innerHTML=`<div class="dr-top"><div class="dr-ring" style="--p:${pc}" role="img" aria-label="${n} of 5 actions done"><b>${n}/5</b></div><div class="dr-tx"><h3>${isT?"Today":fLong(sel)}</h3><p class="mu sm">${msg}</p><div class="dr-chips"><span class="dr-chip">${sk} day streak</span><span class="dr-chip">${r?pts(r):0} eco points</span></div></div></div>
+<div class="dr-days" role="group" aria-label="Pick a day">${st}</div>
+<div id="dr-list">${ACTS.map((a,i)=>`<button type="button" class="dr-a${acts.includes(i)?" on":""}" data-k="${i}" aria-pressed="${acts.includes(i)}"><span class="dr-c" aria-hidden="true">${CHK}</span><span>${a}</span></button>`).join("")}</div>
+<div class="dr-ft"><div><label class="sm mu" for="dr-date">Another date</label><input id="dr-date" class="in" type="date" max="${t}" value="${sel}"></div><button type="button" class="btn s" data-go="track">Add distance and waste</button></div>`;
+try{rWk();const w=$("#wkc");$("#h-wk").innerHTML=w?w.innerHTML:""}catch(e){}}
+function drToggle(k){petTick();const d=(DRD&&DRD<=ymd(new Date()))?DRD:ymd(new Date());let r=S.rec.find(x=>x.d==d);if(!r){r={d,km:0,mode:"Walked",w:0,acts:[]};S.rec.push(r)}
+r.acts=r.acts||[];const i=r.acts.indexOf(k);if(i>=0)r.acts.splice(i,1);else r.acts.push(k);
+if(!r.acts.length&&!r.km&&!r.w)S.rec=S.rec.filter(x=>x!==r);S.rec.sort((a,b)=>a.d<b.d?1:-1);save();rH();
+const b=document.querySelector('#dr-list [data-k="'+k+'"]');if(b)b.focus({preventScroll:true});if(i<0)toast("+10 eco points"+petCheer())}
+document.addEventListener("click",e=>{const a=e.target.closest("#h-dr .dr-a");if(a)return drToggle(+a.dataset.k);const d=e.target.closest("#h-dr .dr-d");if(d){DRD=d.dataset.d;rH()}});
+document.addEventListener("change",e=>{if(e.target.id=="dr-date"&&e.target.value){DRD=e.target.value<=ymd(new Date())?e.target.value:null;rH()}});
+(()=>{const f=$("#fnb");if(f&&window.MutationObserver)new MutationObserver(mirrorBell).observe(f,{attributes:true,childList:true,characterData:true,subtree:true})})();
+
+function iRange(k,o){const t=D0(ymd(new Date()));let a,b;
+if(k=="day"){a=new Date(t);a.setDate(a.getDate()+o);b=new Date(a)}
+else if(k=="week"){const w=(t.getDay()+6)%7;a=new Date(t);a.setDate(a.getDate()-w+7*o);b=new Date(a);b.setDate(b.getDate()+6)}
+else if(k=="month"){a=new Date(t.getFullYear(),t.getMonth()+o,1);b=new Date(a.getFullYear(),a.getMonth()+1,0)}
+else{a=new Date(t.getFullYear()+o,0,1);b=new Date(a.getFullYear(),11,31)}
+return{a:ymd(a),b:ymd(b)}}
+function iStat(a,e){const rs=recs().filter(r=>r.d>=a&&r.d<=e),c=[0,0,0,0,0];let acts=0,km=0,w=0,perfect=0;
+rs.forEach(r=>{const A=(r.acts||[]).filter(k=>k>=0&&k<5);A.forEach(k=>{c[k]++;acts++});km+=+r.km||0;w+=+r.w||0;if(A.length==5)perfect++});
+return{rs,days:rs.length,acts,c,km,w,perfect}}
+function iRun(a,e){const st=new Set(recs().map(r=>r.d));let best=0,cur=0;for(let d=a;d<=e;d=addD(d,1)){if(st.has(d)){cur++;if(cur>best)best=cur}else cur=0}return best}
+function iChart(k,R,e,t,cur){
+if(k=="day"){const n=cur.acts;return`<div class="ibar" role="progressbar" aria-valuemin="0" aria-valuemax="5" aria-valuenow="${n}"><i style="width:${n/5*100}%"></i></div><p class="mu sm">${n} of 5 actions recorded${cur.days?"":" (no record for this day)"}</p>`}
+const by={};recs().forEach(r=>by[r.d]=r);
+if(k=="week"){let h="";for(let i=0;i<7;i++){const d=addD(R.a,i),r=by[d],fut=d>t,v=r?(r.acts||[]).length:null;
+h+=`<button type="button" class="ib-c${fut?" fut":""}${v===null&&!fut?" no":""}" data-tip="${fLong(d)}: ${fut?"not yet":v===null?"no record":v+" of 5 actions"}"><span class="ib-t"><i style="height:${v?v/5*100:0}%"></i></span><span class="ib-l">${D0(d).toLocaleDateString(undefined,{weekday:"narrow"})}</span></button>`}
+return`<div class="ib">${h}</div><p class="mu sm" id="i-tip" aria-live="polite">Tap a bar to see details. A dashed bar means no record.</p>`}
+if(k=="month"){const lead=(D0(R.a).getDay()+6)%7;let h="MTWTFSS".split("").map(x=>`<span class="ic-h">${x}</span>`).join("")+'<span></span>'.repeat(lead);
+for(let d=R.a;d<=R.b;d=addD(d,1)){const r=by[d],fut=d>t,v=r?(r.acts||[]).length:null;
+h+=`<button type="button" class="ic${fut?" fut":""}${v!==null?" has":""}" style="--l:${v||0}" data-tip="${fLong(d)}: ${fut?"not yet":v===null?"no record":v+" of 5 actions"}">${D0(d).getDate()}</button>`}
+return`<div class="ical">${h}</div><p class="mu sm" id="i-tip" aria-live="polite">Darker days have more actions. Tap a day for details.</p>`}
+const Y=D0(R.a).getFullYear();let h="";
+for(let m=0;m<12;m++){const a=ymd(new Date(Y,m,1)),b=ymd(new Date(Y,m+1,0)),fut=a>t,s=iStat(a,b<e?b:e),dm=new Date(Y,m+1,0).getDate(),nm=new Date(Y,m,1).toLocaleDateString(undefined,{month:"long"});
+h+=`<button type="button" class="ib-c${fut?" fut":""}" data-tip="${nm}: ${fut?"not yet":s.days+" logged day"+(s.days==1?"":"s")+", "+s.acts+" actions"}"><span class="ib-t"><i style="height:${fut?0:s.days/dm*100}%"></i></span><span class="ib-l">${nm.slice(0,1)}</span></button>`}
+return`<div class="ib">${h}</div><p class="mu sm" id="i-tip" aria-live="polite">Bars show how many days you logged in each month. Tap a bar for details.</p>`}
+function rI(){const{k,o}=IP,t=ymd(new Date()),R=iRange(k,o),e=R.b<t?R.b:t,len=dBt(R.a,e)+1,partial=R.b>t;
+const P=iRange(k,o-1),pe0=addD(P.a,len-1),pe=pe0<P.b?pe0:P.b,cur=iStat(R.a,e),prev=iStat(P.a,pe);
+$$("#i-seg button").forEach(b=>b.setAttribute("aria-selected",b.dataset.p==k));
+const all=recs(),first=all.length?all.reduce((m,r)=>r.d<m?r.d:m,t):t;
+const title=k=="day"?(o==0?"Today":fLong(R.a)):k=="week"?(o==0?"This week so far":"Week of "+fShort(R.a)+" to "+fShort(R.b)):k=="month"?D0(R.a).toLocaleDateString(undefined,{month:"long",year:"numeric"})+(partial?" so far":""):D0(R.a).getFullYear()+(partial?" so far":"");
+const unit={day:"day",week:"week",month:"month",year:"year"}[k],nxt={day:"tomorrow",week:"next week",month:"next month",year:"next year"}[k];
+let h=`<div class="card ih"><button type="button" class="btn s" data-i="-1" aria-label="Previous ${unit}"${R.a<=first?" disabled":""}>Previous</button><h3>${title}</h3><button type="button" class="btn s" data-i="1" aria-label="Next ${unit}"${o>=0?" disabled":""}>Next</button></div>`;
+const tiles=k=="day"?[[cur.acts+" of 5","Actions"],[cur.rs[0]?pts(cur.rs[0]):0,"Eco points"],[streak(),"Day streak"]]:[[cur.days+" of "+len,"Days logged"],[cur.acts,"Actions"],[cur.perfect,"Days with all five"]];
+h+=`<div class="itiles">${tiles.map(x=>`<div class="card"><b>${x[0]}</b><span class="mu sm">${x[1]}</span></div>`).join("")}</div>`;
+if(cur.days&&(cur.km||cur.w))h+=`<p class="mu sm" style="margin:0 .3rem .8rem">You recorded ${+cur.km.toFixed(1)} km not driven and ${+cur.w.toFixed(1)} kg of waste sorted. These are the numbers you entered.</p>`;
+if(prev.days){const df=cur.acts-prev.acts;h+=`<p class="mu sm" style="margin:0 .3rem .8rem">Compared with the previous ${unit} (same ${len} day${len==1?"":"s"}): ${prev.acts} actions, so ${df==0?"the same":df>0?df+" more":(-df)+" fewer"} now.</p>`}
+else h+=`<p class="mu sm" style="margin:0 .3rem .8rem">No records in the previous ${unit}, so there is nothing to compare yet.</p>`;
+h+=`<div class="card"><h4>Activity</h4>${iChart(k,R,e,t,cur)}</div>`;
+const ord=[0,1,2,3,4].sort((x,y)=>cur.c[y]-cur.c[x]||x-y),weak=ord.slice().reverse().sort((x,y)=>cur.c[x]-cur.c[y]||x-y);
+if(!cur.days){h+=`<div class="card"><h4>No records ${k=="day"?"for this day":"in this "+unit}</h4><p class="sm">Days you did not record are not counted as zero. Record a day to start your report.</p><p><button type="button" class="btn" data-go="track">Log a day</button></p></div>`}
+else{
+const good=ord.filter(i=>cur.c[i]>0).slice(0,2);
+h+=`<div class="card"><h4>What you did well</h4>${good.length?good.map(i=>`<p class="sm">${ACTS[i]}: recorded on ${cur.c[i]} of ${cur.days} logged day${cur.days==1?"":"s"}.</p>`).join(""):'<p class="sm">You logged distance or waste. Tick some actions to see your strongest habits.</p>'}</div>`;
+const imp=weak.filter(i=>cur.c[i]<cur.days).slice(0,2);
+h+=`<div class="card"><h4>What you can improve</h4>${(k!="day"&&cur.days<2)?'<p class="sm">Record a few more days to see where you can improve.</p>':imp.length?imp.map(i=>`<p class="sm">${ACTS[i]}: recorded on ${cur.c[i]} of ${cur.days} logged day${cur.days==1?"":"s"}.</p>`).join(""):'<p class="sm">Every action was recorded on every logged day.</p>'}</div>`;
+if(imp.length)h+=`<div class="card"><h4>Your eco tips</h4>${imp.map(i=>`<p class="sm">${TIPS[i]}</p>`).join("")}</div>`;
+const run=iRun(R.a,e),bd=BG.filter(b=>{try{return b[3]()}catch(x){return false}}).map(b=>b[1]);
+h+=`<div class="card"><h4>Your achievements</h4><p class="sm">${bd.length?"Badges earned so far: "+bd.join(", ")+".":"Your first badge comes after you record your first day."}</p>${cur.perfect?`<p class="sm">Days with all five actions in this ${unit}: ${cur.perfect}.</p>`:""}${run>1?`<p class="sm">Longest run of logged days in this ${unit}: ${run}.</p>`:""}</div>`}
+const wkN={day:1,week:2,month:4,year:12}[k],w0=weak[0];
+const g1=k=="day"?"Tick at least "+Math.min(5,Math.max(cur.acts+1,2))+" actions tomorrow":k=="week"?"Log at least "+Math.min(7,Math.max(3,cur.days+1))+" days next week":k=="month"?"Log at least "+Math.min(28,Math.max(5,cur.days+2))+" days next month":"Log on at least "+Math.max(30,cur.days+10)+" days next year";
+const g2="Record \u201C"+ACTS[w0]+"\u201D on at least "+wkN+" day"+(wkN==1?"":"s")+" "+nxt;
+const run2=iRun(R.a,e),g3=cur.perfect?"Beat your run of "+run2+" logged days in a row":"Do all five actions on one day "+nxt;
+h+=`<div class="card"><h4>Your next goals</h4><ul class="ig"><li class="sm">${g1}</li><li class="sm">${g2}</li><li class="sm">${g3}</li></ul></div>`;
+const km=!cur.days?"Every habit starts with one tick. Record a day to see your report.":partial?"You are "+cur.days+" day"+(cur.days==1?"":"s")+" in so far. Keep going.":(prev.days&&cur.acts>=prev.acts)?"You matched or beat the previous "+unit+". Keep going.":"Every recorded day counts. Pick one goal above and keep going.";
+h+=`<div class="card ik"><h4>Keep going</h4><p class="sm">${km}</p></div>`;
+$("#i-body").innerHTML=h}
+document.addEventListener("click",e=>{const s=e.target.closest("#i-seg [data-p]");if(s){IP={k:s.dataset.p,o:0};return rI()}
+const n=e.target.closest("#t-insights [data-i]");if(n&&!n.disabled){IP.o=Math.min(0,IP.o+(+n.dataset.i));return rI()}
+const tp=e.target.closest("#t-insights [data-tip]");if(tp){const el=$("#i-tip");if(el)el.textContent=tp.dataset.tip}});
+function bnavSet(t){const pa={feed:"home",friends:"home",board:"home",trees:"home",sim:"home"}[t]||t;$$("#bnav button").forEach(b=>{const on=b.dataset.bn==pa;b.classList.toggle("on",on);if(on)b.setAttribute("aria-current","page");else b.removeAttribute("aria-current")})}
 gamiUpd();
-go("learn");
+go("home");
 if(/[?&]paid=1/.test(location.search)){try{history.replaceState(null,"",location.pathname)}catch(e){}setTimeout(()=>{toast("Thank you! Your purchase is being confirmed. It will appear in a few seconds.");openShop("bd")},1800)}else if(/[?&]paid=0/.test(location.search)){try{history.replaceState(null,"",location.pathname)}catch(e){}setTimeout(()=>toast("Payment was cancelled. You were not charged."),1200)}
 window.addEventListener("resize",()=>{try{if(LM)LM.invalidateSize()}catch(e){}});
 </script><script type="module">
