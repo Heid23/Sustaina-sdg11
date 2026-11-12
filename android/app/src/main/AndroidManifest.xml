@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <uses-permission android:name="android.permission.INTERNET" />
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="SUSTAINA"
+        android:roundIcon="@drawable/ic_launcher"
+        android:supportsRtl="true"
+        android:theme="@android:style/Theme.DeviceDefault.Light.NoActionBar">
+        <activity android:name=".MainActivity" android:exported="true" android:configChanges="orientation|screenSize|keyboardHidden" android:windowSoftInputMode="adjustResize">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <receiver android:name=".widgets.WHabit" android:exported="true" android:label="Daily Habit Tracker">
+            <intent-filter><action android:name="android.appwidget.action.APPWIDGET_UPDATE" /></intent-filter>
+            <meta-data android:name="android.appwidget.provider" android:resource="@xml/widget_habit" />
+        </receiver>
+        <receiver android:name=".widgets.WStreak" android:exported="true" android:label="Habit Streak Tracker">
+            <intent-filter><action android:name="android.appwidget.action.APPWIDGET_UPDATE" /></intent-filter>
+            <meta-data android:name="android.appwidget.provider" android:resource="@xml/widget_streak" />
+        </receiver>
+        <receiver android:name=".widgets.WJournal" android:exported="true" android:label="Daily Activity Journal">
+            <intent-filter><action android:name="android.appwidget.action.APPWIDGET_UPDATE" /></intent-filter>
+            <meta-data android:name="android.appwidget.provider" android:resource="@xml/widget_journal" />
+        </receiver>
+        <receiver android:name=".widgets.WWater" android:exported="true" android:label="Water-Saving Tracker">
+            <intent-filter><action android:name="android.appwidget.action.APPWIDGET_UPDATE" /></intent-filter>
+            <meta-data android:name="android.appwidget.provider" android:resource="@xml/widget_water" />
+        </receiver>
+        <receiver android:name=".widgets.WWaste" android:exported="true" android:label="Waste Reduction Tracker">
+            <intent-filter><action android:name="android.appwidget.action.APPWIDGET_UPDATE" /></intent-filter>
+            <meta-data android:name="android.appwidget.provider" android:resource="@xml/widget_waste" />
+        </receiver>
+        <receiver android:name=".widgets.WEnergy" android:exported="true" android:label="Energy-Saving Tracker">
+            <intent-filter><action android:name="android.appwidget.action.APPWIDGET_UPDATE" /></intent-filter>
+            <meta-data android:name="android.appwidget.provider" android:resource="@xml/widget_energy" />
+        </receiver>
+        <receiver android:name=".widgets.WReflect" android:exported="true" android:label="Daily Reflection">
+            <intent-filter><action android:name="android.appwidget.action.APPWIDGET_UPDATE" /></intent-filter>
+            <meta-data android:name="android.appwidget.provider" android:resource="@xml/widget_reflect" />
+        </receiver>
+        <receiver android:name=".widgets.WGoals" android:exported="true" android:label="Personal Goals Tracker">
+            <intent-filter><action android:name="android.appwidget.action.APPWIDGET_UPDATE" /></intent-filter>
+            <meta-data android:name="android.appwidget.provider" android:resource="@xml/widget_goals" />
+        </receiver>
+        <receiver android:name=".widgets.WCal" android:exported="true" android:label="Habit Calendar">
+            <intent-filter><action android:name="android.appwidget.action.APPWIDGET_UPDATE" /></intent-filter>
+            <meta-data android:name="android.appwidget.provider" android:resource="@xml/widget_cal" />
+        </receiver>
+        <receiver android:name=".widgets.WTmrw" android:exported="true" android:label="Tomorrow&apos;s Eco Action">
+            <intent-filter><action android:name="android.appwidget.action.APPWIDGET_UPDATE" /></intent-filter>
+            <meta-data android:name="android.appwidget.provider" android:resource="@xml/widget_tmrw" />
+        </receiver>
+        <receiver android:name=".widgets.WSum" android:exported="true" android:label="Daily Impact">
+            <intent-filter><action android:name="android.appwidget.action.APPWIDGET_UPDATE" /></intent-filter>
+            <meta-data android:name="android.appwidget.provider" android:resource="@xml/widget_sum" />
+        </receiver>
+    </application>
+</manifest>

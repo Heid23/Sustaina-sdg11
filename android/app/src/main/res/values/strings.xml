@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">SUSTAINA</string>
+    <string name="d_habit">Your daily habits and progress.</string>
+    <string name="d_streak">Your current and longest streak.</string>
+    <string name="d_journal">Today\'s recorded activities.</string>
+    <string name="d_water">Water-saving actions this week.</string>
+    <string name="d_waste">Waste-reduction actions this week.</string>
+    <string name="d_energy">Energy-saving actions this week.</string>
+    <string name="d_reflect">Today\'s reflection prompt.</string>
+    <string name="d_goals">Progress on your goals.</string>
+    <string name="d_cal">Days recorded this month.</string>
+    <string name="d_tmrw">An idea for tomorrow.</string>
+    <string name="d_sum">Actions recorded this week.</string>
+</resources>
