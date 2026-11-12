@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android" android:width="56dp" android:height="65dp" android:viewportWidth="60" android:viewportHeight="70">
+    <path android:fillColor="#8b5a2b" android:fillAlpha="0.35" android:pathData="M8,64a22,6 0 1,0 44,0a22,6 0 1,0 -44,0z" />
+    <path android:strokeColor="#16a34a" android:strokeWidth="3" android:strokeLineCap="round" android:pathData="M30,62V26" />
+    <group android:translateX="30" android:translateY="50" android:rotation="-25" android:scaleX="0.9" android:scaleY="0.9">
+        <path android:fillColor="#16a34a" android:fillAlpha="0.95" android:pathData="M0,0C8,-12 24,-12 30,0 24,12 8,12 0,0z" />
+    </group>
+    <group android:translateX="30" android:translateY="50" android:rotation="-155" android:scaleX="0.9" android:scaleY="0.9">
+        <path android:fillColor="#16a34a" android:fillAlpha="0.95" android:pathData="M0,0C8,-12 24,-12 30,0 24,12 8,12 0,0z" />
+    </group>
+    <group android:translateX="30" android:translateY="40" android:rotation="-30" android:scaleX="0.8" android:scaleY="0.8">
+        <path android:fillColor="#16a34a" android:fillAlpha="0.95" android:pathData="M0,0C8,-12 24,-12 30,0 24,12 8,12 0,0z" />
+    </group>
+    <group android:translateX="30" android:translateY="40" android:rotation="-150" android:scaleX="0.8" android:scaleY="0.8">
+        <path android:fillColor="#16a34a" android:fillAlpha="0.95" android:pathData="M0,0C8,-12 24,-12 30,0 24,12 8,12 0,0z" />
+    </group>
+    <group android:translateX="30" android:translateY="30" android:rotation="-40" android:scaleX="0.7" android:scaleY="0.7">
+        <path android:fillColor="#16a34a" android:fillAlpha="0.95" android:pathData="M0,0C8,-12 24,-12 30,0 24,12 8,12 0,0z" />
+    </group>
+    <group android:translateX="30" android:translateY="30" android:rotation="-140" android:scaleX="0.7" android:scaleY="0.7">
+        <path android:fillColor="#16a34a" android:fillAlpha="0.95" android:pathData="M0,0C8,-12 24,-12 30,0 24,12 8,12 0,0z" />
+    </group>
+</vector>

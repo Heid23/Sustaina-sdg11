@@ -26,6 +26,10 @@ object WidgetData {
         return try { JSONObject(raw) } catch (e: Exception) { null }
     }
 
+    fun theme(c: Context): String = load(c)?.optString("st", "light") ?: "light"
+
+    fun bgStyle(c: Context): String = load(c)?.optString("bs", "nature") ?: "nature"
+
     fun save(c: Context, json: String) { c.getSharedPreferences(PREF, 0).edit().putString("d", json).apply() }
 
     fun get(c: Context, key: String): JSONObject? = load(c)?.optJSONObject("w")?.optJSONObject(key)
