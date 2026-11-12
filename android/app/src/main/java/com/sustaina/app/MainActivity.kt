@@ -113,7 +113,17 @@ class MainActivity : Activity() {
 
     override fun onSaveInstanceState(b: Bundle) { super.onSaveInstanceState(b); web.saveState(b) }
     @Deprecated("Deprecated in Java")
-    override fun onBackPressed() { if (web.canGoBack()) web.goBack() else super.onBackPressed() }
+    override fun onBackPressed() {
+        // If a pop-up such as the chat is open, close it first; otherwise go back a page.
+        web.evaluateJavascript(
+            "(function(){var l=document.querySelectorAll('.modal.o');if(!l.length)return 0;var m=l[l.length-1];" +
+            "var b=m.querySelector('[data-a=x]');if(b){b.click()}else{m.classList.remove('o')}return 1})()"
+        ) { r ->
+            if (r != "1") {
+                if (web.canGoBack()) web.goBack() else super@MainActivity.onBackPressed()
+            }
+        }
+    }
     override fun onResume() { super.onResume(); web.evaluateJavascript("try{wgApply();pwPush()}catch(e){}", null) }
     override fun onPause() { super.onPause(); web.evaluateJavascript("try{pwPush()}catch(e){}", null) }
 }

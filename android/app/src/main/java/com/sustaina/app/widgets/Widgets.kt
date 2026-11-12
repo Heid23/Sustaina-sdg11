@@ -22,7 +22,7 @@ class Btn(val label: String, val act: String)
  * colours and art as the My Phone Widgets previews, and turns taps into queued actions (ActionStore).
  */
 abstract class BaseWidget(
-    private val key: String, private val title: String,
+    private val key: String, val title: String,
     private val btns: List<Btn> = emptyList()
 ) : AppWidgetProvider() {
     companion object {
@@ -99,9 +99,22 @@ abstract class BaseWidget(
         return PendingIntent.getBroadcast(c, 0, i, PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE)
     }
 
+    override fun onDeleted(c: Context, ids: IntArray) { WidgetData.clearThemeFor(c, ids) }
+
+    /** Used by the customise screen to redraw one widget after its theme was chosen. */
+    fun redraw(c: Context, m: AppWidgetManager, id: Int) = draw(c, m, id)
+
     private fun draw(c: Context, m: AppWidgetManager, id: Int) {
+        val o = m.getAppWidgetOptions(id)
+        val h = o.getInt(AppWidgetManager.OPTION_APPWIDGET_MIN_HEIGHT, 110)
+        val w = o.getInt(AppWidgetManager.OPTION_APPWIDGET_MIN_WIDTH, 110)
+        m.updateAppWidget(id, build(c, w, h, WidgetData.themeFor(c, id)))
+    }
+
+    /** Builds the widget picture for a size in dp. mode: "auto" (follow the app), "light" or "dark". */
+    fun build(c: Context, w: Int, h: Int, mode: String): RemoteViews {
         val v = RemoteViews(c.packageName, R.layout.widget_generic)
-        val dark = WidgetData.theme(c) == "dark"
+        val dark = when (mode) { "dark" -> true; "light" -> false; else -> WidgetData.theme(c) == "dark" }
         val sfx = if (dark) "_d" else ""
         val bs = WidgetData.bgStyle(c)
         val p = PAL[key] ?: PAL["habit"]!!
@@ -131,9 +144,6 @@ abstract class BaseWidget(
         v.setViewVisibility(R.id.art, View.GONE)
         v.setViewPadding(R.id.content, (14 * dp).toInt(), (14 * dp).toInt(), (14 * dp).toInt(), (14 * dp).toInt())
         val d = WidgetData.get(c, key)
-        val o = m.getAppWidgetOptions(id)
-        val h = o.getInt(AppWidgetManager.OPTION_APPWIDGET_MIN_HEIGHT, 110)
-        val w = o.getInt(AppWidgetManager.OPTION_APPWIDGET_MIN_WIDTH, 110)
         if (d == null) {
             v.setViewVisibility(R.id.big, View.GONE)
             v.setTextViewText(R.id.sub, "Open SUSTAINA once to load your records.")
@@ -241,7 +251,7 @@ abstract class BaseWidget(
         v.setTextColor(R.id.big, t); v.setTextColor(R.id.sub, mu)
         val open = Intent(c, MainActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
         v.setOnClickPendingIntent(R.id.root, PendingIntent.getActivity(c, key.hashCode(), open, PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE))
-        m.updateAppWidget(id, v)
+        return v
     }
 }
 

@@ -10,4 +10,6 @@
     android:updatePeriodMillis="1800000"
     android:widgetCategory="home_screen"
     android:description="@string/d_cal"
+    android:configure="com.sustaina.app.WidgetConfigActivity"
+    android:widgetFeatures="reconfigurable"
     android:initialLayout="@layout/widget_generic" />

@@ -30,6 +30,16 @@ object WidgetData {
 
     fun bgStyle(c: Context): String = load(c)?.optString("bs", "nature") ?: "nature"
 
+    // Light/Dark choice for each widget on the home screen: "auto" (follow the app), "light" or "dark".
+    private const val CFG = "sustaina_widget_cfg"
+    fun themeFor(c: Context, id: Int): String = c.getSharedPreferences(CFG, 0).getString("t$id", "auto") ?: "auto"
+    fun setThemeFor(c: Context, id: Int, mode: String) { c.getSharedPreferences(CFG, 0).edit().putString("t$id", mode).apply() }
+    fun clearThemeFor(c: Context, ids: IntArray) {
+        val e = c.getSharedPreferences(CFG, 0).edit()
+        for (i in ids) e.remove("t$i")
+        e.apply()
+    }
+
     fun save(c: Context, json: String) { c.getSharedPreferences(PREF, 0).edit().putString("d", json).apply() }
 
     fun get(c: Context, key: String): JSONObject? = load(c)?.optJSONObject("w")?.optJSONObject(key)
