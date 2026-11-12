@@ -926,6 +926,32 @@ html[data-theme=contrast] .ec-cd.has{color:#111}
 .ec-hw svg{flex:none;color:var(--pr)}.ec-hw span{display:grid;min-width:0}.ec-hw b{font-size:.84rem}.ec-hw small{font-size:.76rem}.ec-hw.l{grid-column:1/-1}
 .ec-more{margin:0 0 1rem}.ec-more summary{cursor:pointer;font-weight:700;padding:.8rem 1rem;border:1px solid var(--ln);border-radius:14px;background:var(--cd);margin-bottom:.6rem}
 @media(min-width:900px){.ec-grid{grid-template-columns:repeat(5,1fr)}.ec-hg{grid-template-columns:repeat(4,1fr)}.ec-hw.l{grid-column:span 2}.ec-t{min-height:120px}}
+/* ---- EcoInsights pro ---- */
+.ei-ov{display:grid;grid-template-columns:1fr 1fr;gap:.6rem;margin-bottom:.8rem}
+.ei-k{margin:0!important;padding:.85rem;display:grid;gap:.15rem;align-content:start;background:linear-gradient(160deg,color-mix(in srgb,var(--pr) 14%,var(--cd)),var(--cd))}
+.ei-k b{font-size:1.5rem;line-height:1.1}.ei-i{color:var(--pr);display:inline-flex}.ei-k .btn{justify-self:start;margin-top:.3rem}
+.ei-dn{width:128px;height:128px;border-radius:50%;display:grid;place-items:center;flex:none}
+.ei-dn span{width:84px;height:84px;border-radius:50%;background:var(--cd);display:grid;place-content:center;text-align:center}
+.ei-dn small{color:var(--mu);font-size:.7rem}
+.ei-row{display:flex;gap:1rem;align-items:center;flex-wrap:wrap}
+.ei-lgs{display:grid;gap:.35rem;flex:1;min-width:170px}
+.ei-lg{display:flex;align-items:center;gap:.45rem;padding:.4rem .55rem;border:1px solid var(--ln);border-radius:12px;background:transparent;color:var(--tx);font:inherit;font-size:.85rem;text-align:left;cursor:pointer}
+.ei-lg i{width:10px;height:10px;border-radius:50%;flex:none}.ei-lg b{margin-left:auto}.ei-lg small{color:var(--mu);min-width:2.4rem;text-align:right}
+.ei-lg.on{border-color:var(--pr);background:color-mix(in srgb,var(--pr) 12%,transparent)}
+.ei-bars{display:flex;gap:.4rem;align-items:flex-end;height:84px;margin:.5rem 0 .2rem}
+.ei-bars span{flex:1;display:grid;gap:.2rem;justify-items:center;align-content:end;height:100%}
+.ei-bars i{width:100%;border-radius:6px 6px 2px 2px;min-height:3px;background:var(--pr);transition:height .4s}
+.ei-bars small{font-size:.65rem;color:var(--mu)}
+.ei-pb{height:8px;border-radius:5px;background:var(--ln);overflow:hidden}.ei-pb i{display:block;height:100%;background:var(--pr);border-radius:5px}
+.ei-ach{display:grid;grid-template-columns:1fr 1fr;gap:.55rem}
+.ei-b{border:1px solid var(--ln);border-radius:14px;padding:.65rem;display:grid;gap:.15rem;align-content:start}
+.ei-b.lock{opacity:.55;filter:grayscale(1)}
+.ei-b.on{background:color-mix(in srgb,var(--pr) 10%,var(--cd));animation:eipop .5s ease both}
+@keyframes eipop{from{transform:scale(.94);opacity:0}to{transform:none;opacity:1}}
+@media(prefers-reduced-motion:reduce){.ei-b.on{animation:none}.ei-bars i{transition:none}}
+.ei-q{width:100%;box-sizing:border-box;padding:.55rem .7rem;border-radius:12px;border:1px solid var(--ln);background:var(--bg);color:var(--tx);font:inherit;margin-bottom:.4rem}
+.ei-sec h4{margin:.7rem 0 .25rem}.ei-sec ul{margin:0;padding-left:1.1rem}.ei-sec li{margin:.2rem 0}
+.ic.sel{outline:2px solid var(--pr);outline-offset:1px}.ei-off{margin:0 .3rem .6rem}
 </style></head><body>
 <nav><div class="nw"><span class="logo">SUSTAINA <small class="mu">SDG 11</small></span>
 <div class="tabs" role="tablist" id="mt"></div>
@@ -2344,23 +2370,38 @@ function pwView(id,z,dk,d){let h;try{h=PW[id](z,d||pwData())}catch(x){console.er
 function rPw(){const m=$("#pw-main");if(!m)return;const P=pwE(),d=pwData(),dk=P.st=="dark",fav=P.fav,L=PWN.slice().sort((a,b)=>(fav.includes(b[0])?1:0)-(fav.includes(a[0])?1:0));
 m.innerHTML=`<div class="card" style="padding:1rem"><b>About these widgets</b><p class="mu sm" style="margin:.3rem 0 0">These are previews built from your real records. ${window.SustainaAndroid?"Tap Add to home screen under a widget, then confirm on the Android prompt.":"The Add to home screen button works only in the SUSTAINA Android app."}</p></div><div class="card" style="padding:1rem"><b>Widget style</b><div class="pwg-st" style="margin-top:.5rem">${["light","dark"].map(s=>`<button type="button" data-pws="${s}" aria-pressed="${P.st==s}">${s=="light"?"Light":"Dark"}</button>`).join("")}</div></div><div class="pwg">${L.map(([id,t,ds])=>{const z=P.sz[id]||"m",isF=fav.includes(id),wg=["water","waste","energy"].includes(id),open=PWN.length&&id!="sum"?`data-wl="${id}" role="button" tabindex="0" aria-label="Open ${t}"`:"";return`<div class="card pwg-c"><div class="pwg-h"><div><h4>${t}</h4><p class="mu sm">${ds}</p></div><button type="button" class="wl-p" style="position:static;flex:none" data-pwf="${id}" aria-pressed="${isF}" aria-label="${isF?"Remove from favorites":"Add to favorites"}"><svg viewBox="0 0 24 24" width="18" height="18" fill="${isF?"currentColor":"none"}" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/></svg></button></div><div class="pwg-sz" role="group" aria-label="Size">${[["s","Small"],["m","Medium"],["l","Large"]].map(x=>`<button type="button" data-pwz="${id}" data-z="${x[0]}" aria-pressed="${z==x[0]}">${x[1]}</button>`).join("")}${wg?`<label class="mu sm" style="margin-left:auto">Weekly goal <select class="in" data-pwg="${id}" style="width:auto;display:inline-block;padding:.3rem">${[3,5,7,10,14].map(n=>`<option${(P.wg[id]||5)==n?" selected":""}>${n}</option>`).join("")}</select></label>`:""}</div><div class="pwg-pv" ${open}>${pwView(id,z,dk,d)}</div><button type="button" class="btn" data-pwpin="${id}" style="width:100%">Add to home screen</button></div>`}).join("")}</div><div class="card" style="padding:1rem"><b>Adding by hand</b><p class="mu sm" style="margin:.3rem 0 0">In the Android app you can also press and hold an empty spot on the home screen, tap Widgets, find SUSTAINA, then drag the size you chose. iPhone needs a separate iOS app. A website alone cannot place widgets on a phone.</p></div>`}
 document.addEventListener("click",ev=>{const b=ev.target.closest("[data-pws],[data-pwf],[data-pwz]");if(!b||!b.closest("#pw-main"))return;const P=pwE();if(b.dataset.pws)P.st=b.dataset.pws;else if(b.dataset.pwf){const i=P.fav.indexOf(b.dataset.pwf);if(i<0)P.fav.push(b.dataset.pwf);else P.fav.splice(i,1)}else P.sz[b.dataset.pwz]=b.dataset.z;save();const y=scrollY;rPw();scrollTo(0,y)});
-document.addEventListener("click",ev=>{const b=ev.target.closest("[data-pwpin]");if(!b)return;if(!(window.SustainaAndroid&&SustainaAndroid.pinWidget))return toast("This only works in the SUSTAINA Android app");try{pwPush();SustainaAndroid.pinWidget(b.dataset.pwpin)}catch(x){toast("Could not add this widget")}});
+document.addEventListener("click",ev=>{const b=ev.target.closest("[data-pwpin]");if(!b)return;if(!(window.SustainaAndroid&&SustainaAndroid.pinWidget))return toast("This only works in the SUSTAINA Android app");try{pwPush();SustainaAndroid.pinWidget(b.dataset.pwpin,String(pwE().sz[b.dataset.pwpin]||"s"))}catch(x){toast("Could not add this widget")}});
 document.addEventListener("change",ev=>{const s=ev.target.closest("[data-pwg]");if(!s)return;pwE().wg[s.dataset.pwg]=+s.value;save();const y=scrollY;rPw();scrollTo(0,y)});
 
 /* ===== Send widget numbers to the Android app (does nothing in a normal browser) ===== */
 function pwSnap(){const d=pwData(),P=pwE(),e=d.e,acts=(recs().find(x=>x.d==d.T)||{}).acts||[],mo=new Date().toLocaleDateString(undefined,{month:"long"}),w={};
-w.habit={big:d.n+"/"+d.dg,sub:"Today \u00b7 "+pwMsg(d.pc),p:d.pc,lines:d.all.slice(0,3).map(h=>(acts.includes(h[0])?"\u2713 ":"\u25CB ")+h[1])};
+w.habit={big:d.n+"/"+d.dg,sub:"Today \u00b7 "+pwMsg(d.pc),p:d.pc,lines:d.all.slice(0,3).map(h=>(acts.includes(h[0])?"\u2713 ":"\u25CB ")+h[1]),n:d.n,dg:d.dg,items:d.all.slice(0,4).map(h=>({k:h[0],t:h[1],on:acts.includes(h[0])}))};
 const wkd=d.wk.filter(x=>x.has).length;w.streak={big:String(d.st),sub:d.st==0?"Start a new streak today":"day streak",p:Math.round(wkd/7*100),lines:["Longest: "+d.lg+(d.lg==1?" day":" days"),"This week: "+wkd+"/7 days"]};
 const J=e.j.filter(x=>x.d==d.T).map(x=>x.t),A=okActs(d.T).map(k=>d.m[k][1]).filter(t=>!J.includes(t)),L=J.concat(A);w.journal={big:String(L.length),sub:L.length==1?"activity today":"activities today",p:-1,lines:L.slice(-3).reverse()};
-[["water","Water goal"],["waste","Waste goal"],["energy","Energy goal"]].forEach(([c,t])=>{const g=P.wg[c]||5,n=d.cat(c);w[c]={big:Math.min(100,Math.round(n/g*100))+"%",sub:t,p:Math.min(100,Math.round(n/g*100)),lines:[n+"/"+g+" activities this week"]}});
-const PQ=["What was your best eco-friendly action today?","What habit was difficult to maintain?","What would you like to improve tomorrow?"];w.reflect={big:"",sub:"Today\u2019s Reflection",p:-1,lines:[PQ[Math.floor(Date.now()/864e5)%3],e.rf[d.T]?"Written today":"Not written yet"]};
-const G=e.g.filter(gOk).map(g=>({g,p:gProg(g)}));w.goals={big:G.length?G.filter(x=>x.p.done).length+"/"+G.length:"",sub:G.length?"goals done":"No goals yet. Set one in the app.",p:G.length?Math.round(G.filter(x=>x.p.done).length/G.length*100):-1,lines:G.slice(0,3).map(x=>(x.g.k=="any"?"Any eco action":d.m[x.g.k][1])+"  "+x.p.c+"/"+x.p.tg)};
+[["water","Water goal"],["waste","Waste goal"],["energy","Energy goal"]].forEach(([c,t])=>{const g=P.wg[c]||5,n=d.cat(c);w[c]={big:Math.min(100,Math.round(n/g*100))+"%",sub:t,p:Math.min(100,Math.round(n/g*100)),lines:[n+"/"+g+" activities this week"],items:d.all.filter(h=>inCat(h,c)).slice(0,4).map(h=>({k:h[0],t:h[1],on:acts.includes(h[0])}))}});
+const PQ=["What was your best eco-friendly action today?","What habit was difficult to maintain?","What would you like to improve tomorrow?"];w.reflect={qi:Math.floor(Date.now()/864e5)%3,big:"",sub:"Today\u2019s Reflection",p:-1,lines:[PQ[Math.floor(Date.now()/864e5)%3],e.rf[d.T]?"Written today":"Not written yet"]};
+const G=e.g.filter(gOk).map(g=>({g,p:gProg(g)}));w.goals={big:G.length?G.filter(x=>x.p.done).length+"/"+G.length:"",sub:G.length?"goals done":"No goals yet. Set one in the app.",p:G.length?Math.round(G.filter(x=>x.p.done).length/G.length*100):-1,lines:G.slice(0,3).map(x=>(x.g.k=="any"?"Any eco action":d.m[x.g.k][1])+"  "+x.p.c+"/"+x.p.tg),items:G.slice(0,4).map(x=>({k:x.g.k=="any"?"":x.g.k,t:(x.g.k=="any"?"Any eco action":d.m[x.g.k][1])+"  "+x.p.c+"/"+x.p.tg,on:x.g.k!="any"&&acts.includes(x.g.k)}))};
 w.cal={big:String(d.mdays),sub:(d.mdays==1?"day":"days")+" recorded in "+mo,p:-1,lines:[d.st+"-day streak"]};
-const tm=e.tm,tmw=addD(d.T,1);let tx;if(tm&&tm.d==tmw&&d.m[tm.k])tx=d.m[tm.k][1];else{const rc=new Set();for(let i=0;i<3;i++)okActs(addD(d.T,-i)).forEach(k=>rc.add(k));const P2=d.all.filter(h=>!rc.has(h[0])),Q=P2.length?P2:d.all;tx=Q[Math.floor(Date.now()/864e5)%Q.length][1]}
-w.tmrw={big:"",sub:"Tomorrow\u2019s Eco Action",p:-1,lines:[tx]};
+const tm=e.tm,tmw=addD(d.T,1);let tx;let tk;if(tm&&tm.d==tmw&&d.m[tm.k]){tx=d.m[tm.k][1];tk=tm.k}else{const rc=new Set();for(let i=0;i<3;i++)okActs(addD(d.T,-i)).forEach(k=>rc.add(k));const P2=d.all.filter(h=>!rc.has(h[0])),Q=P2.length?P2:d.all;const ch=Q[Math.floor(Date.now()/864e5)%Q.length];tx=ch[1];tk=ch[0]}
+w.tmrw={big:"",sub:"Tomorrow\u2019s Eco Action",p:-1,lines:[tx],k:tk,ai:0,alts:[{k:tk,t:tx}].concat(d.all.filter(h=>h[0]!==tk).slice(0,5).map(h=>({k:h[0],t:h[1]})))};
 const pct=d.pw>0?Math.round((d.wt-d.pw)/d.pw*100):null;w.sum={big:String(d.wt),sub:"activities this week",p:-1,lines:pct==null?[]:[(pct>=0?"+":"")+pct+"% vs last week"]};
 return JSON.stringify({u:Date.now(),w})}
 function pwPush(){try{if(window.SustainaAndroid&&SustainaAndroid.setWidgetData)SustainaAndroid.setWidgetData(pwSnap())}catch(x){}}
+/* ---- actions done on the phone home screen: applied to the same records as the trackers ---- */
+function wgApply(){try{if(!(window.SustainaAndroid&&SustainaAndroid.pendingActions))return;const L=JSON.parse(SustainaAndroid.pendingActions()||"[]");if(!L.length)return;
+const e=eco(),m=hbMap(),done=[];e.wid=e.wid||{};
+const setHb=(k,on,d)=>{const kk=kOf(String(k));if(!m[kk])return;let r=S.rec.find(x=>x.d==d);if(!r){if(!on)return;r={d,km:0,mode:"Walked",w:0,acts:[]};S.rec.push(r)}r.acts=r.acts||[];if(on&&!r.acts.includes(kk))r.acts.push(kk);if(!on)r.acts=r.acts.filter(x=>x!==kk)};
+L.forEach(a=>{done.push(a.id);if(e.wid[a.id])return;e.wid[a.id]=1;const d=a.d||TD();
+if(a.t=="hb")setHb(a.k,a.on!==false,d);
+else if(a.t=="tmd")setHb(a.k,true,d);
+else if(a.t=="jr"&&a.x)e.j.push({id:"w"+String(a.id).slice(0,8),d,tm:"",t:String(a.x).slice(0,200),n:String(a.n||"").slice(0,500)});
+else if(a.t=="rf"&&a.x){const r=e.rf[d]=e.rf[d]||{},f=["a","b","c"][+a.qi||0],x=String(a.x).slice(0,500);r[f]=r[f]?r[f]+"\n"+x:x}
+else if(a.t=="tmg"){const kk=kOf(String(a.k));if(m[kk]&&!e.g.some(g=>g.k==kk&&g.p=="week"))e.g.push({id:"g"+String(a.id).slice(0,8),k:kk,p:"week",n:3})}
+else if(a.t=="tmp"){const kk=kOf(String(a.k));if(m[kk])e.tm={d:addD(d,1),k:kk}}});
+const ks=Object.keys(e.wid);if(ks.length>400)ks.slice(0,ks.length-300).forEach(k=>delete e.wid[k]);
+save();SustainaAndroid.ackActions(JSON.stringify(done));go(document.body.dataset.tab||"home");pwPush()}catch(x){console.error(x)}}
+document.addEventListener("visibilitychange",()=>{if(!document.hidden)wgApply()});
+setTimeout(wgApply,2500);
 (()=>{const g=save;save=function(){const r=g.apply(this,arguments);try{pwPush()}catch(x){}return r}})();
 (()=>{const g=go;go=function(){const r=g.apply(this,arguments);try{pwPush()}catch(x){}return r}})();
 
@@ -2369,8 +2410,7 @@ const offOf=(k,a)=>{const t=D0(TD()),x=D0(a);if(k=="day")return dBt(TD(),a);if(k
 function eStat(a,e){const m=hbMap(),c={},cat={water:0,waste:0,energy:0};let tot=0,days=0;recs().filter(r=>r.d>=a&&r.d<=e).forEach(r=>{const A=(r.acts||[]).filter(k=>m[k]);if(A.length||r.km||r.w)days++;A.forEach(k=>{c[k]=(c[k]||0)+1;tot++;for(const x in cat)if(inCat(m[k],x))cat[x]++})});return{c,cat,tot,days}}
 const topK=c=>Object.entries(c).sort((a,b)=>b[1]-a[1]);
 function rIx(){const box=$("#i-body");if(!box)return;const{k,o}=IP,t=TD(),R=iRange(k,o),e=R.b<t?R.b:t,len=dBt(R.a,e)+1,P=iRange(k,o-1),pe0=addD(P.a,len-1),pe=pe0<P.b?pe0:P.b,s=eStat(R.a,e),p=eStat(P.a,pe),m=hbMap(),ev=eco(),u={day:"day",week:"week",month:"month",year:"year"}[k],lb=x=>esc(m[x]?m[x][1]:"");
-let ch=false;["day","week","month","year"].forEach(kk=>{const r=iRange(kk,-1),st=eStat(r.a,r.b),key=kk+":"+r.a;if(st.tot&&!ev.reps[key]){ev.reps[key]={k:kk,a:r.a,b:r.b,tot:st.tot,days:st.days,top:topK(st.c).slice(0,3).map(x=>x[0])};ch=true}});
-if(ch)try{save()}catch(x){}
+
 const top=topK(s.c),all=eStat("0000-01-01",t).c,low=Object.keys(all).filter(x=>m[x]&&(s.c[x]||0)<(top[0]?top[0][1]:0)).sort((a,b)=>(s.c[a]||0)-(s.c[b]||0)).slice(0,2);
 const J=ev.j.filter(x=>x.d>=R.a&&x.d<=e).length,RF=Object.keys(ev.rf).filter(d=>d>=R.a&&d<=e);
 const rec=[];if(top[0])rec.push(`You completed \u201c${lb(top[0][0])}\u201d most often (${top[0][1]} time${top[0][1]>1?"s":""}).`);
@@ -2382,10 +2422,111 @@ ${top.length?`<h4 style="margin:.5rem 0 .2rem">Most often</h4><ul class="ec-ul">
 ${RF.length?`<h4 style="margin:.5rem 0 .2rem">${k=="day"?"Reflection":"Reflections written"}</h4>${k=="day"?["a","b","c"].map((q,i)=>ev.rf[RF[0]][q]?`<p class="sm" style="margin:.2rem 0"><span class="mu">${["Best action","Hard habit","Improve tomorrow"][i]}:</span> ${esc(ev.rf[RF[0]][q])}</p>`:"").join(""):`<p class="mu sm" style="margin:0">${RF.length} day${RF.length>1?"s":""}</p>`}`:""}
 ${o==0?`<h4 style="margin:.5rem 0 .2rem">Personal goals</h4>${ev.g.filter(gOk).map(g=>{const q=gProg(g);return`<p class="sm" style="margin:.2rem 0">${gLab(g)}: ${Math.min(q.c,q.tg)}/${q.tg}${q.done?" (done)":""}</p>`}).join("")||'<p class="mu sm" style="margin:0">No goals set.</p>'}`:""}
 <h4 style="margin:.5rem 0 .2rem">Observations</h4><ul class="ec-ul">${rec.map(x=>`<li>${x}</li>`).join("")}</ul></div>`;
-const R2=Object.values(ev.reps).sort((a,b)=>a.a<b.a?1:-1).slice(0,8);
-if(R2.length)h+=`<div class="card"><h3 style="margin:0 0 .4rem">Saved reports</h3><p class="mu sm" style="margin:0 0 .4rem">Finished periods are saved once. Tap to open.</p>${R2.map(r=>`<div class="ec-row"><span>${r.k[0].toUpperCase()+r.k.slice(1)}: ${fShort(r.a)}${r.a!=r.b?" to "+fShort(r.b):""}<br><small class="mu">${r.tot} activities, ${r.days} days</small></span><button type="button" class="btn s" data-x="rep" data-k="${r.k}" data-v="${r.a}">Open</button></div>`).join("")}</div>`;
 box.insertAdjacentHTML("beforeend",h)}
 const _rI=rI;rI=function(){const r=_rI.apply(this,arguments);try{rIx()}catch(x){console.error(x)}return r};
+/* ---- EcoInsights pro: overview, categories, habits, calendar, insights, achievements, reflections, reports ---- */
+const EI={cat:"waste",rf:"all",q:"",ro:null,cm:0,sd:null};
+const EIC=[["waste","Waste reduction","#16a34a"],["water","Water conservation","#0ea5e9"],["energy","Energy conservation","#f59e0b"],["transport","Sustainable transport","#8b5cf6"],["other","Other eco-friendly actions","#14b8a6"]];
+const EIT={waste:"Carry a reusable bag or bottle for one day this week.",water:"Turn off the tap while you brush your teeth.",energy:"Switch off the lights in a room you are not using.",transport:"Walk or use public transport for one short trip.",other:"Pick up a few pieces of litter or water a plant."};
+const EIS=new Set("about after again also been before being could does doing every from have just more much need really should some than that their them then there they this today tomorrow very want were what when where which while with would your into because".split(" "));
+const eiPct=(a,b)=>b?Math.round(a/b*100):0;
+/* each activity belongs to ONE category so nothing is counted twice */
+const eiCat=(k,m)=>{const h=m[k];if(!h)return null;if(k===3)return"transport";const c=String(h[2]).split(" ");for(const x of["waste","water","energy"])if(c.includes(x))return x;return"other"};
+function eiStat(a,e){const m=hbMap(),c={waste:0,water:0,energy:0,transport:0,other:0},cd={waste:0,water:0,energy:0,transport:0,other:0},hc={};let tot=0,days=0;
+recs().filter(r=>r.d>=a&&r.d<=e).forEach(r=>{const A=[...new Set((r.acts||[]).filter(k=>m[k]))],seen={};if(A.length||r.km||r.w)days++;
+A.forEach(k=>{const x=eiCat(k,m);c[x]++;hc[k]=(hc[k]||0)+1;tot++;if(!seen[x]){seen[x]=1;cd[x]++}})});return{c,cd,hc,tot,days}}
+function eiAch(){const m=hbMap(),ev=eco(),rs=recs().slice().sort((a,b)=>a.d<b.d?-1:1),ds=rs.filter(r=>(r.acts||[]).length||r.km||r.w).map(r=>r.d);
+const run=n=>{let c=0,p=null;for(const d of ds){c=p&&addD(p,1)==d?c+1:1;p=d;if(c>=n)return d}return null};
+const catN=(x,n)=>{let c=0;for(const r of rs)for(const k of new Set(r.acts||[]))if(eiCat(k,m)==x&&++c>=n)return r.d;return null};
+const byM={};ds.forEach(d=>(byM[d.slice(0,7)]=byM[d.slice(0,7)]||[]).push(d));const mo=Object.values(byM).filter(a=>a.length>=20).map(a=>a[19]).sort()[0]||null;
+ev.ach=ev.ach||{};if(!ev.ach.goal&&ev.g.filter(gOk).some(g=>gProg(g).done)){ev.ach.goal=TD();try{save()}catch(x){}}
+return[["first","habit","First activity recorded","Record your first activity.",ds[0]||null],["r3","streak","3-day consistency","Record 3 days in a row.",run(3)],["r7","streak","7-day streak","Record 7 days in a row.",run(7)],["a30","cal","30 active days","Record activities on 30 different days.",ds[29]||null],
+["goal","goals","First goal completed","Complete a personal goal.",ev.ach.goal||null],["waste","waste","Waste reduction milestone","Record 10 waste-reduction activities.",catN("waste",10)],["water","water","Water conservation milestone","Record 10 water-saving activities.",catN("water",10)],["energy","energy","Energy-saving milestone","Record 10 energy-saving activities.",catN("energy",10)],["mo","cal","Monthly consistency","Record 20 days in one calendar month.",mo]]}
+function eiHist(cat,k,o,t){let h="",mx=1;const v=[];for(let i=5;i>=0;i--){const R=iRange(k,o-i);v.push([R,R.a>t?null:eiStat(R.a,R.b<t?R.b:t).c[cat]])}
+v.forEach(x=>{if(x[1]>mx)mx=x[1]});
+v.forEach(x=>{const R=x[0],lb=k=="day"?D0(R.a).toLocaleDateString(undefined,{weekday:"narrow"}):k=="week"?fShort(R.a):k=="month"?D0(R.a).toLocaleDateString(undefined,{month:"short"}):D0(R.a).getFullYear();
+h+=`<span title="${lb}: ${x[1]===null?"not yet":x[1]}"><i style="height:${x[1]?Math.max(6,x[1]/mx*100):0}%"></i><small>${lb}</small></span>`});return`<div class="ei-bars" role="img" aria-label="Recorded activities over the last 6 periods">${h}</div>`}
+function eiCal(){const t=TD(),n=new Date(),M=new Date(n.getFullYear(),n.getMonth()+EI.cm,1),a=ymd(M),b=ymd(new Date(M.getFullYear(),M.getMonth()+1,0)),by={},m=hbMap(),ev=eco();recs().forEach(r=>by[r.d]=r);
+let g="MTWTFSS".split("").map(x=>`<span class="ic-h">${x}</span>`).join("")+'<span></span>'.repeat((D0(a).getDay()+6)%7),on=0;
+for(let d=a;d<=b;d=addD(d,1)){const r=by[d],A=r?[...new Set((r.acts||[]).filter(x=>m[x]))]:[],has=r&&(A.length||r.km||r.w);if(has)on++;g+=`<button type="button" class="ic${d>t?" fut":""}${has?" has":""}${EI.sd==d?" sel":""}" style="--l:${Math.min(5,A.length)}" data-ei="day" data-v="${d}" aria-label="${fLong(d)}">${D0(d).getDate()}</button>`}
+let det="";if(EI.sd){const r=by[EI.sd],A=r?[...new Set((r.acts||[]).filter(x=>m[x]))]:[],J=ev.j.filter(x=>x.d==EI.sd).length;
+det=`<div class="ei-sec"><h4>${fLong(EI.sd)}</h4>${A.length||(r&&(r.km||r.w))||J?`<ul>${A.map(x=>`<li>${esc(m[x][1])}</li>`).join("")}${r&&r.km?`<li>${+(+r.km).toFixed(1)} km not driven (entered by you)</li>`:""}${r&&r.w?`<li>${+(+r.w).toFixed(1)} kg waste sorted (entered by you)</li>`:""}${J?`<li>${J} journal entr${J>1?"ies":"y"}</li>`:""}</ul>`:'<p class="mu sm">A day without recorded activity.</p>'}</div>`}
+return`<div class="card"><div class="ia-h"><h4>Habit consistency calendar</h4><span class="mu sm">${on} active day${on==1?"":"s"}</span></div><div class="ih" style="display:flex;justify-content:space-between;align-items:center;margin:.3rem 0"><button type="button" class="btn s" data-ei="cm" data-v="-1" aria-label="Previous month">Previous</button><strong>${M.toLocaleDateString(undefined,{month:"long",year:"numeric"})}</strong><button type="button" class="btn s" data-ei="cm" data-v="1" aria-label="Next month"${EI.cm>=0?" disabled":""}>Next</button></div><div class="ical">${g}</div><p class="mu sm">Darker days have more activities. Tap a day to see its records. Days without a record are shown as days without recorded activity.</p>${det}</div>`}
+function eiRfList(){const ev=eco(),q=EI.q.trim().toLowerCase(),L=["Best action","Hard habit","Improve tomorrow"];
+const ds=Object.keys(ev.rf).filter(d=>{const r=ev.rf[d];return r&&(!q||[r.a,r.b,r.c].join(" ").toLowerCase().includes(q))}).sort().reverse().slice(0,30);
+if(!ds.length)return`<p class="mu sm">${q?"No reflections match your search.":"No reflections yet."}</p>`;
+return ds.map(d=>{const r=ev.rf[d],op=EI.ro==d;return`<div class="ec-row"><span>${fLong(d)}<br><small class="mu">${esc((r.a||r.b||r.c||"").slice(0,60))}</small></span><button type="button" class="btn s" data-ei="rfo" data-v="${d}">${op?"Hide":"Read"}</button></div>${op?`<div class="sm" style="padding:.3rem .2rem .6rem">${[r.a,r.b,r.c].map((x,i)=>x?`<p style="margin:.2rem 0"><span class="mu">${L[i]}:</span> ${esc(x)}</p>`:"").join("")}</div>`:""}`}).join("")}
+function eiRepGen(){const ev=eco(),t=TD(),ds=recs().map(r=>r.d).sort();if(!ds.length)return false;let ch=false;
+[["day",14],["week",12],["month",12],["year",20]].forEach(([kk,cap])=>{for(let o=-1,n=0;n<cap;o--,n++){const R=iRange(kk,o);if(R.b<ds[0])break;const key=kk+":"+R.a,old=ev.reps[key];if(old&&old.cat)continue;const s=eiStat(R.a,R.b);if(!s.tot&&!old)continue;
+ev.reps[key]={k:kk,a:R.a,b:R.b,tot:s.tot,days:s.days,top:Object.entries(s.hc).sort((x,y)=>y[1]-x[1]).slice(0,3).map(x=>x[0]),cat:s.c};ch=true}});return ch}
+function eiRepCard(){const ev=eco(),m=hbMap(),f=EI.rf,L=[["all","All"],["day","Daily"],["week","Weekly"],["month","Monthly"],["year","Yearly"]];
+const R=Object.values(ev.reps).filter(r=>f=="all"||r.k==f).sort((a,b)=>a.a<b.a?1:-1).slice(0,24);
+return`<div class="card" id="ei-reps"><h3 style="margin:0 0 .3rem">Saved reports</h3><p class="mu sm" style="margin:0 0 .4rem">A report is saved once for each finished day, week, month and year that has records. Missed periods are filled in when you open the app.</p><div class="seg" style="flex-wrap:wrap">${L.map(x=>`<button type="button" data-ei="rf" data-v="${x[0]}" aria-selected="${f==x[0]}">${x[1]}</button>`).join("")}</div>
+${R.length?R.map(r=>{const cs=r.cat?EIC.filter(c=>r.cat[c[0]]).map(c=>c[1].split(" ")[0]+" "+r.cat[c[0]]).join(", "):"";return`<div class="ec-row"><span>${r.k[0].toUpperCase()+r.k.slice(1)}: ${fShort(r.a)}${r.a!=r.b?" to "+fShort(r.b):""}<br><small class="mu">${r.tot} activit${r.tot==1?"y":"ies"}, ${r.days} day${r.days==1?"":"s"}${cs?" · "+esc(cs):""}</small></span><button type="button" class="btn s" data-x="rep" data-k="${r.k}" data-v="${r.a}">Open</button></div>`}).join(""):'<p class="mu sm">No saved reports for this filter yet. They appear after a period with records has finished.</p>'}</div>`}
+function eiInsights(s,p,u,k,A,si){const m=hbMap(),ev=eco(),lab=x=>esc(m[x]?m[x][1]:""),hasP=p.tot>0,gs=ev.g.filter(gOk),
+topH=Object.entries(s.hc).sort((a,b)=>b[1]-a[1]),topA=Object.entries(A.hc).sort((a,b)=>b[1]-a[1]),good=[],imp=[],rec=[],nx=[];
+const tc=EIC.slice().sort((a,b)=>s.c[b[0]]-s.c[a[0]])[0],low=EIC.filter(c=>!s.c[c[0]]),lowA=EIC.slice().sort((a,b)=>A.c[a[0]]-A.c[b[0]])[0];
+if(topH[0])good.push(`\u201c${lab(topH[0][0])}\u201d was your most recorded habit (${topH[0][1]} time${topH[0][1]>1?"s":""}).`);
+if(s.tot>=3&&s.c[tc[0]]/s.tot>=.4)good.push(`${tc[1]} is your strongest category (${eiPct(s.c[tc[0]],s.tot)}% of recorded activities).`);
+if(si.n>=3)good.push(`You have recorded ${si.n} days in a row.`);
+if(hasP&&s.tot>p.tot)good.push(`You recorded ${s.tot-p.tot} more activities than the previous ${u}.`);
+const up=Object.keys(s.hc).filter(x=>p.hc[x]&&s.hc[x]>p.hc[x]);if(up[0])good.push(`\u201c${lab(up[0])}\u201d is becoming more regular.`);
+const gd=gs.filter(g=>gProg(g).done);if(gd[0])good.push(`Goal reached: ${esc(gLab(gd[0]))}.`);
+if(!good.length)good.push("Every recorded activity counts. Keep recording to see your strengths.");
+low.slice(0,2).forEach(c=>imp.push(`${c[1]}: no activity recorded in this ${u} yet.`));
+const down=Object.keys(p.hc).filter(x=>(s.hc[x]||0)<p.hc[x]);if(down[0])imp.push(`\u201c${lab(down[0])}\u201d was recorded less often than in the previous ${u}.`);
+const gl=gs.filter(g=>!gProg(g).done)[0];if(gl){const q=gProg(gl);imp.push(`Goal in progress: ${esc(gLab(gl))} (${Math.min(q.c,q.tg)} of ${q.tg}).`)}
+if(!imp.length)imp.push("Nothing stands out. Keep your current rhythm.");
+if(low[0])rec.push(EIT[low[0][0]]+" It is a small way to start "+low[0][1].toLowerCase()+".");
+if(down[0])rec.push(`Try a smaller target for \u201c${lab(down[0])}\u201d: do it on just 1 day next ${k=="day"?"day":k}.`);
+if(tc&&s.c[tc[0]]>=3&&tc[0]=="waste")rec.push("You record waste habits often. A water or energy habit could be your next addition.");
+if(s.tot<3)rec.push("Record a few more days so suggestions can match your habits.");if(!rec.length)rec.push("Choose one habit and record it on one more day than last "+u+".");
+nx.push(["One improvement",EIT[lowA[0]]]);
+const mt=topH[0]||topA[0];nx.push(["One habit to keep",mt?`Keep up \u201c${lab(mt[0])}\u201d.`:"Keep recording each day."]);
+const nw=HB0.find(h=>!A.hc[h[0]]);nx.push(["One new activity",nw?`Try \u201c${esc(nw[1])}\u201d.`:"Add your own habit in the Daily Habit Tracker."]);
+nx.push(["One goal to consider",gl?`Finish: ${esc(gLab(gl))}.`:gs.length?"All goals are done. Set a new one in the Goals tracker.":(mt?`Do \u201c${lab(mt[0])}\u201d on 3 days this week.`:"Set a goal in the Goals tracker.")]);
+const ul=a=>`<ul>${a.map(x=>`<li class="sm">${x}</li>`).join("")}</ul>`;
+return`<div class="card ei-sec"><h3 style="margin:0">Personal insights</h3><h4>What you are doing well</h4>${ul(good)}<h4>What you can improve</h4>${ul(imp)}<h4>Recommendations</h4>${ul(rec)}<h4>Next steps</h4>${ul(nx.map(x=>`<b>${x[0]}:</b> ${x[1]}`))}<p><button type="button" class="btn s" data-go="widgets">Open My Eco Widgets</button></p></div>`}
+function rIy(){const box=$("#i-body");if(!box)return;const{k,o}=IP,t=TD(),R=iRange(k,o),e=R.b<t?R.b:t,len=dBt(R.a,e)+1,P=iRange(k,o-1),pe0=addD(P.a,len-1),pe=pe0<P.b?pe0:P.b,s=eiStat(R.a,e),p=eiStat(P.a,pe),A=eiStat("0000-01-01",t),m=hbMap(),ev=eco(),
+u={day:"day",week:"week",month:"month",year:"year"}[k],si=streakInfo(),any=A.tot>0||recs().some(r=>r.km||r.w),lab=x=>esc(m[x]?m[x][1]:"");
+[...box.querySelectorAll(":scope>.card")].forEach(c=>{const h=c.querySelector("h4");if(h&&/^(What you did well|What you can improve|Your eco tips|Your next goals|Your achievements)$/.test(h.textContent.trim()))c.remove()});
+const nav=box.firstElementChild,tl=box.querySelector(":scope>.itiles");
+[...box.querySelectorAll(":scope>p")].forEach(x=>{if(/^(Compared with the previous|No records in the previous)/.test(x.textContent.trim()))x.remove()});
+{const bd=box.querySelector(".ia-p");if(bd){const pl=p.tot>0?Math.round((s.tot-p.tot)/p.tot*100):null;if(pl===null)bd.remove();else{bd.className="ia-p"+(pl<0?" dn":"");bd.textContent=(pl>0?"+":"")+pl+"% "+(pl<0?"\u2193":"\u2191")}}}
+if(!navigator.onLine)nav.insertAdjacentHTML("afterend",'<p class="mu sm ei-off">You are offline. Insights use the records saved on this device.</p>');
+if(!any){const w=`<div class="card ei-sec"><h3 style="margin:0">Welcome to EcoInsights</h3><p class="sm">This page turns the days you record into simple pictures of your habits: your activities, streaks, categories, goals and reflections. Nothing is shown until you record something, so every number here will be real.</p><ul><li class="sm">${EIT.waste}</li><li class="sm">${EIT.water}</li><li class="sm">${EIT.transport}</li></ul><p><button type="button" class="btn" data-go="track">Log your eco day</button></p></div>`;if(tl)tl.outerHTML=w;else nav.insertAdjacentHTML("afterend",w);return}
+const gs=ev.g.filter(gOk),gd=gs.filter(g=>gProg(g).done).length,dif=(p.days||p.tot)?s.tot-p.tot:null,cons=k=="day"?null:eiPct(s.days,len);
+const kc=(ic,v,l,sub,btn)=>`<div class="card ei-k"><span class="ei-i">${svg(ic,20)}</span><b>${v}</b><span class="sm">${l}</span><span class="mu sm">${sub}</span>${btn||""}</div>`;
+const ov=`<div class="ei-ov">${kc("habit",s.tot,"Activities recorded",dif===null?"No earlier records to compare":dif==0?"Same as the previous "+u:Math.abs(dif)+(dif>0?" more":" fewer")+" than the previous "+u)}${kc("streak",si.n,"Day streak","Longest: "+si.best+" day"+(si.best==1?"":"s"),'<button type="button" class="btn s" data-hw="streak">Streak tracker</button>')}${kc("cal",k=="day"?(s.days?"Yes":"No"):s.days+" of "+len,k=="day"?"Recorded this day":"Active days",cons===null?"A day without a record is not counted as zero":cons+"% of days had a record")}${kc("goals",gs.length?gd+" of "+gs.length:"None","Personal goals",gs.length?"Goals reached right now":"No active goals yet",'<button type="button" class="btn s" data-hw="goals">Goals</button>')}</div><p style="margin:-.2rem .3rem .8rem"><button type="button" class="btn s" data-ei="toreps">Saved reports</button></p>`;
+if(tl)tl.outerHTML=ov;else nav.insertAdjacentHTML("afterend",ov);
+let h="";
+/* categories */
+{const sel=EI.cat,cd=EIC.find(c=>c[0]==sel),n=s.c[sel];let acc=0;const st=EIC.map(c=>{const f=s.tot?s.c[c[0]]/s.tot*100:0,r=`${c[2]} ${acc}% ${acc+f}%`;acc+=f;return r});
+const hl=Object.keys(s.hc).filter(x=>eiCat(x,m)==sel).sort((a,b)=>s.hc[b]-s.hc[a]),gc=gs.filter(g=>g.k!="any"&&eiCat(g.k,m)==sel),ac=eiAch().filter(a=>a[0]==sel&&a[4]);
+h+=`<div class="card"><h4 style="margin:0 0 .5rem">Activity categories</h4><div class="ei-row"><div class="ei-dn" style="background:${s.tot?`conic-gradient(${st.join(",")})`:"var(--ln)"}" role="img" aria-label="Share of activities by category"><span><b>${s.tot}</b><small>activities</small></span></div><div class="ei-lgs">${EIC.map(c=>`<button type="button" class="ei-lg${c[0]==sel?" on":""}" data-ei="cat" data-v="${c[0]}"><i style="background:${c[2]}"></i>${c[1]}<b>${s.c[c[0]]}</b><small>${eiPct(s.c[c[0]],s.tot)}%</small></button>`).join("")}</div></div>
+<div class="ei-sec"><h4>${cd[1]}</h4><p class="sm">${n} of ${s.tot} activities (${eiPct(n,s.tot)}%) on ${s.cd[sel]} of ${s.days} recorded day${s.days==1?"":"s"}. ${p.tot?`Previous ${u}: ${p.c[sel]}.`:""}</p>${eiHist(sel,k,o,t)}<p class="mu sm" style="margin:0">Last 6 ${u}s</p>${hl.length?`<ul>${hl.slice(0,5).map(x=>`<li class="sm">${lab(x)}: ${s.hc[x]}</li>`).join("")}</ul>`:""}${gc.map(g=>{const q=gProg(g);return`<p class="sm">Goal: ${esc(gLab(g))} (${Math.min(q.c,q.tg)} of ${q.tg})</p><div class="ei-pb"><i style="width:${eiPct(Math.min(q.c,q.tg),q.tg)}%"></i></div>`}).join("")}${ac.map(a=>`<p class="sm">Milestone unlocked: ${a[2]}</p>`).join("")}</div></div>`}
+/* habit performance */
+if(s.tot||p.tot){const ks=Object.keys(Object.assign({},s.hc,p.hc)).filter(x=>m[x]),mo=ks.filter(x=>s.hc[x]).sort((a,b)=>s.hc[b]-s.hc[a]).slice(0,3),le=ks.filter(x=>s.hc[x]).sort((a,b)=>s.hc[a]-s.hc[b]).slice(0,3),im=p.tot?ks.filter(x=>(s.hc[x]||0)>(p.hc[x]||0)).slice(0,3):[],dn=p.tot?ks.filter(x=>(s.hc[x]||0)<(p.hc[x]||0)).slice(0,3):[];
+const L=(t0,a)=>a.length?`<h4>${t0}</h4><ul>${a.map(x=>`<li class="sm">${lab(x)} (${s.hc[x]||0}${p.tot?", before "+(p.hc[x]||0):""})</li>`).join("")}</ul>`:"";
+h+=`<div class="card ei-sec"><h3 style="margin:0">Habit performance</h3><p class="mu sm" style="margin:.2rem 0">${s.tot} activit${s.tot==1?"y":"ies"} on ${s.days} day${s.days==1?"":"s"}${s.days?" (about "+(s.tot/s.days).toFixed(1)+" per active day)":""}. Current streak ${si.n}, longest ${si.best}.</p>${L("Most consistent",mo)}${le.length>1?L("Least consistent",le):""}${L("Improving",im)}${L("Less frequent than before",dn)}${p.tot?"":'<p class="mu sm">Comparisons appear once the previous '+u+' has records.</p>'}</div>`}
+h+=eiCal();
+h+=eiInsights(s,p,u,k,A,si);
+/* achievements */
+{const L=eiAch(),n=L.filter(a=>a[4]).length;h+=`<div class="card"><div class="ia-h"><h4>Achievements</h4><span class="mu sm">${n} of ${L.length} unlocked</span></div><div class="ei-ach">${L.map(a=>`<div class="ei-b ${a[4]?"on":"lock"}"><span class="ei-i">${svg(a[1],22)}</span><b class="sm">${a[2]}</b><span class="mu sm">${a[3]}</span><span class="sm">${a[4]?"Unlocked "+fLong(a[4]):"Locked"}</span></div>`).join("")}</div></div>`}
+/* reflections */
+{const ent=Object.keys(ev.rf).filter(d=>d>=R.a&&d<=e&&ev.rf[d]),w={};ent.forEach(d=>[ev.rf[d].a,ev.rf[d].b,ev.rf[d].c].join(" ").toLowerCase().split(/[^a-z\u00c0-\u024f]+/).forEach(x=>{if(x.length>=5&&!EIS.has(x))w[x]=(w[x]||0)+1}));
+const th=Object.entries(w).filter(x=>x[1]>=2).sort((a,b)=>b[1]-a[1]).slice(0,4).map(x=>x[0]),all=Object.keys(ev.rf).sort(),hard=all.length&&ev.rf[all[all.length-1]].b;
+h+=`<div class="card"><h4 style="margin:0 0 .3rem">Reflections</h4><p class="mu sm" style="margin:0 0 .4rem">Only you can see these. ${ent.length?ent.length+" reflection"+(ent.length==1?"":"s")+" in this "+u+".":"None written in this "+u+"."}${th.length?" Words that came up more than once: "+th.map(esc).join(", ")+".":""}</p>${hard?`<p class="sm">Your latest \u201chard habit\u201d note: ${esc(String(hard).slice(0,80))}. A smaller step can help.</p>`:""}<input id="ei-q" class="ei-q" type="search" placeholder="Search your reflections" value="${esc(EI.q)}" aria-label="Search reflections"><div id="ei-rl">${eiRfList()}</div><p><button type="button" class="btn s" data-hw="reflect">Open Daily Reflection</button></p></div>`}
+if(eiRepGen())try{save()}catch(x){}
+h+=eiRepCard();
+box.insertAdjacentHTML("beforeend",h)}
+{const _r=rI;rI=function(){const r=_r.apply(this,arguments);try{rIy()}catch(x){console.error(x);const b=$("#i-body");if(b)b.insertAdjacentHTML("beforeend",'<div class="card"><h4>Some insights could not load</h4><p class="sm">Your records are safe. Close and reopen the app to try again.</p></div>')}return r}}
+document.addEventListener("click",ev=>{const b=ev.target.closest("#i-body [data-ei]");if(!b)return;const x=b.dataset.ei,v=b.dataset.v;
+if(x=="toreps"){const r=$("#ei-reps");if(r)r.scrollIntoView({behavior:"smooth"});return}
+if(x=="cat")EI.cat=v;else if(x=="rf")EI.rf=v;else if(x=="cm")EI.cm=Math.min(0,EI.cm+(+v));else if(x=="day")EI.sd=EI.sd==v?null:v;else if(x=="rfo"){EI.ro=EI.ro==v?null:v;const l=$("#ei-rl");if(l){l.innerHTML=eiRfList();return}}
+rI()});
+document.addEventListener("input",ev=>{if(ev.target.id=="ei-q"){EI.q=ev.target.value;const l=$("#ei-rl");if(l)l.innerHTML=eiRfList()}});
+
 document.addEventListener("change",ev=>{const t=ev.target;if(t.id=="ec-d"&&t.value&&t.value<=TD()){EC.d=t.value;EC.ed=null;rEc()}if(t.id=="ec-dg"){eco().dg=+t.value||5;save();rEc()}});
 document.addEventListener("click",ev=>{const hw=ev.target.closest("[data-hw]");if(hw){EC.lib=false;EC.v=hw.dataset.hw;EC.go=true;EC.ed=null;go("track");return}
 const b=ev.target.closest("[data-x]");if(!b)return;const x=b.dataset.x,e=eco(),k=b.dataset.k!=null?kOf(b.dataset.k):null,val=id=>($(id)||{}).value||"",T=TD();
